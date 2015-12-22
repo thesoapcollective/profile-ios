@@ -74,6 +74,7 @@
                         <outlet property="contentView" destination="a7z-s1-1ab" id="AVu-Cq-tji"/>
                         <outlet property="indexView" destination="kdA-sB-O3b" id="iSH-1W-Ap7"/>
                         <outlet property="indexViewLeadingConstraint" destination="2O0-W2-QGJ" id="BKV-S6-9dU"/>
+                        <outlet property="scrollView" destination="Nkz-v4-tph" id="hWH-Cb-Hvn"/>
                         <outlet property="scrollViewLeadingConstraint" destination="beS-cu-DEE" id="Hl9-Na-98C"/>
                         <outlet property="scrollViewTrailingConstraint" destination="KJy-s6-zED" id="Vx5-Ge-CGE"/>
                     </connections>
