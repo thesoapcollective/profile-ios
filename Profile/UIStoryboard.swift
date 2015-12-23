@@ -14,6 +14,10 @@ extension UIStoryboard {
     return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
   }
 
+  class func homeViewController() -> UIViewController {
+    return mainStoryboard().instantiateViewControllerWithIdentifier("HomeViewController")
+  }
+
   class func itemViewController() -> ItemViewController {
     return mainStoryboard().instantiateViewControllerWithIdentifier("ItemViewController") as! ItemViewController
   }

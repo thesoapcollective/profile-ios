@@ -10,6 +10,24 @@ import UIKit
 
 class ItemViewController: UIViewController {
 
+  // ==================================================
+  // PROPERTIES
+  // ==================================================
+
   @IBOutlet weak var label: UILabel!
+
+  var data: [String: String]! {
+    didSet {
+      setupData()
+    }
+  }
+
+  // ==================================================
+  // METHODS
+  // ==================================================
+
+  func setupData() {
+    label.text = data["title"]
+  }
 
 }

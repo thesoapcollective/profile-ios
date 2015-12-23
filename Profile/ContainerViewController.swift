@@ -37,11 +37,10 @@ class ContainerViewController: UIViewController {
   var panDx: CGFloat = 0
   var panDy: CGFloat = 0
 
-  var items: [ItemViewController] = [
-    UIStoryboard.itemViewController(),
-    UIStoryboard.itemViewController(),
-    UIStoryboard.itemViewController()
+  var items = [
+    ["title": "Home"]
   ]
+  var itemViewControllers = [UIViewController]()
 
   // ==================================================
   // METHODS
@@ -53,8 +52,14 @@ class ContainerViewController: UIViewController {
     contactViewTrailingConstraint.constant = isContactOpen ? 0 : -contactView.frame.width
     indexViewLeadingConstraint.constant = isIndexOpen ? 0 : -indexView.frame.width
 
+    setupData()
     setupInitialViewControllers()
     setupGestures()
+  }
+
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    snapContent(false)
   }
 
   override func viewDidLayoutSubviews() {
@@ -63,7 +68,7 @@ class ContainerViewController: UIViewController {
     if UIDevice.currentDevice().orientation == .Portrait || UIDevice.currentDevice().orientation == .PortraitUpsideDown {
       contentHeightConstraint.constant = view.frame.height * CGFloat(items.count)
       view.layoutIfNeeded()
-      for (i, itemViewController) in items.enumerate() {
+      for (i, itemViewController) in itemViewControllers.enumerate() {
         itemViewController.view.frame = CGRect(x: 0, y: view.frame.height * CGFloat(i), width: view.frame.width, height: view.frame.height)
       }
     }
@@ -78,18 +83,48 @@ class ContainerViewController: UIViewController {
            UIDevice.currentDevice().orientation == .PortraitUpsideDown
   }
 
+  func setupData() {
+    setupWorkData()
+    setupTeamData()
+  }
+
+  func setupWorkData() {
+    guard let path = NSBundle.mainBundle().pathForResource("WorkData", ofType: "plist") else { return }
+    guard let dataArray = NSArray(contentsOfFile: path) else { return }
+
+    for d in dataArray {
+      let data = d as! NSDictionary
+      items.insert(data as! [String: String], atIndex: 0)
+    }
+
+    currentIndex = dataArray.count
+  }
+
+  func setupTeamData() {
+    guard let path = NSBundle.mainBundle().pathForResource("TeamData", ofType: "plist") else { return }
+    guard let dataArray = NSArray(contentsOfFile: path) else { return }
+
+    for d in dataArray {
+      let data = d as! NSDictionary
+      items.append(data as! [String: String])
+    }
+  }
+
   func setupInitialViewControllers() {
-    for (i, itemViewController) in items.enumerate() {
-      contentView.addSubview(itemViewController.view)
-      addChildViewController(itemViewController)
-      itemViewController.didMoveToParentViewController(self)
-      itemViewController.label.text = "Item #\(i)"
-      if i == 0 {
-        itemViewController.view.backgroundColor = UIColor.redColor()
-      } else if i == 1 {
-        itemViewController.view.backgroundColor = UIColor.greenColor()
+    for item in items {
+      if item["title"] != "Home" {
+        let itemViewController = UIStoryboard.itemViewController()
+        contentView.addSubview(itemViewController.view)
+        addChildViewController(itemViewController)
+        itemViewController.didMoveToParentViewController(self)
+        itemViewController.data = item
+        itemViewControllers.append(itemViewController)
       } else {
-        itemViewController.view.backgroundColor = UIColor.blueColor()
+        let itemViewController = UIStoryboard.homeViewController()
+        contentView.addSubview(itemViewController.view)
+        addChildViewController(itemViewController)
+        itemViewController.didMoveToParentViewController(self)
+        itemViewControllers.append(itemViewController)
       }
     }
   }
@@ -165,7 +200,7 @@ class ContainerViewController: UIViewController {
         }
         break
       case .Up, .Down:
-        isPanningContent = true
+        isPanningContent = !isIndexOpen && !isContactOpen
       default:
         break
       }

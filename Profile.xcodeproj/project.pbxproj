@@ -15,6 +15,8 @@
 		656A3FD51C24EDE800A1948B /* ProfileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656A3FD41C24EDE800A1948B /* ProfileUITests.swift */; };
 		657CB42B1C29CA3B008E8F0D /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB42A1C29CA3B008E8F0D /* ContactViewController.swift */; };
 		657CB42D1C29CA53008E8F0D /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB42C1C29CA53008E8F0D /* IndexViewController.swift */; };
+		657CB4301C2A546A008E8F0D /* WorkData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 657CB42F1C2A546A008E8F0D /* WorkData.plist */; };
+		657CB4321C2A551A008E8F0D /* TeamData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 657CB4311C2A551A008E8F0D /* TeamData.plist */; };
 		658673991C28C1A900B82CD7 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658673981C28C1A900B82CD7 /* Global.swift */; };
 		6586739B1C28C2E200B82CD7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6586739A1C28C2E200B82CD7 /* UIColor.swift */; };
 		6586739D1C28CBA300B82CD7 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6586739C1C28CBA300B82CD7 /* ItemViewController.swift */; };
@@ -55,6 +57,8 @@
 		656A3FD61C24EDE800A1948B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		657CB42A1C29CA3B008E8F0D /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		657CB42C1C29CA53008E8F0D /* IndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
+		657CB42F1C2A546A008E8F0D /* WorkData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WorkData.plist; sourceTree = "<group>"; };
+		657CB4311C2A551A008E8F0D /* TeamData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TeamData.plist; sourceTree = "<group>"; };
 		658673981C28C1A900B82CD7 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		6586739A1C28C2E200B82CD7 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		6586739C1C28CBA300B82CD7 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 		656A3FB31C24EDE800A1948B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				657CB42E1C2A5424008E8F0D /* Data */,
 				65F645241C2880CE00D21E47 /* Extensions */,
 				65F645211C28804800D21E47 /* ViewControllers */,
 				656A3FB41C24EDE800A1948B /* AppDelegate.swift */,
@@ -139,6 +144,15 @@
 				656A3FD61C24EDE800A1948B /* Info.plist */,
 			);
 			path = ProfileUITests;
+			sourceTree = "<group>";
+		};
+		657CB42E1C2A5424008E8F0D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				657CB42F1C2A546A008E8F0D /* WorkData.plist */,
+				657CB4311C2A551A008E8F0D /* TeamData.plist */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 		65F645211C28804800D21E47 /* ViewControllers */ = {
@@ -267,7 +281,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				656A3FBF1C24EDE800A1948B /* LaunchScreen.storyboard in Resources */,
+				657CB4301C2A546A008E8F0D /* WorkData.plist in Resources */,
 				656A3FBC1C24EDE800A1948B /* Assets.xcassets in Resources */,
+				657CB4321C2A551A008E8F0D /* TeamData.plist in Resources */,
 				656A3FBA1C24EDE800A1948B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

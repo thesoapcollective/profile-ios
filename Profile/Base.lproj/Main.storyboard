@@ -95,7 +95,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item #0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7f-yW-Ns7">
-                                <rect key="frame" x="271" y="290" width="59" height="21"/>
+                                <rect key="frame" x="270.5" y="290" width="59" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -112,7 +112,34 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l92-pX-d2s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1150" y="1035"/>
+            <point key="canvasLocation" x="1864" y="1035"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Bor-jF-2sW">
+            <objects>
+                <viewController storyboardIdentifier="HomeViewController" id="7X3-0Y-J7Q" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DoL-OU-1td"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cdk-tx-w7e"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gFa-hb-b4T">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoBlack" translatesAutoresizingMaskIntoConstraints="NO" id="Y5r-de-PYV">
+                                <rect key="frame" x="217.5" y="275" width="165" height="50"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Y5r-de-PYV" firstAttribute="centerY" secondItem="gFa-hb-b4T" secondAttribute="centerY" id="hEm-Bw-sSg"/>
+                            <constraint firstItem="Y5r-de-PYV" firstAttribute="centerX" secondItem="gFa-hb-b4T" secondAttribute="centerX" id="mzl-CI-VrO"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HH7-Li-hAD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1155" y="1035"/>
         </scene>
         <!--Index View Controller-->
         <scene sceneID="Kbh-kZ-cKz">
@@ -143,4 +170,7 @@
             <point key="canvasLocation" x="637" y="1802"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LogoBlack" width="165" height="50"/>
+    </resources>
 </document>
