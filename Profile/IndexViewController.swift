@@ -8,6 +8,14 @@
 
 import UIKit
 
-class IndexViewController: UIViewController {
+class IndexViewController: PROViewController {
+
+  // ==================================================
+  // METHODS
+  // ==================================================
+
+  override func updateColors() {
+    view.backgroundColor = UIColor.appInvertedPrimaryBackgroundColor()
+  }
 
 }

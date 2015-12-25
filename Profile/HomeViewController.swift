@@ -1,37 +1,32 @@
 //
-//  ItemViewController.swift
+//  HomeViewController.swift
 //  Profile
 //
-//  Created by Ian Hirschfeld on 12/21/15.
+//  Created by Ian Hirschfeld on 12/23/15.
 //  Copyright © 2015 The Soap Collective. All rights reserved.
 //
 
 import UIKit
 
-class ItemViewController: PROViewController {
+class HomeViewController: PROViewController {
 
   // ==================================================
   // PROPERTIES
   // ==================================================
 
-  @IBOutlet weak var label: UILabel!
-
-  var data: [String: String]! {
-    didSet {
-      setupData()
-    }
-  }
+  @IBOutlet weak var logoImageView: UIImageView!
 
   // ==================================================
   // METHODS
   // ==================================================
 
-  func setupData() {
-    label.text = data["title"]
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    logoImageView.image = logoImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
   }
 
   override func updateColors() {
-    view.backgroundColor = UIColor.appPrimaryBackgroundColor()
+    logoImageView.tintColor = UIColor.appPrimaryTextColor()
   }
 
 }

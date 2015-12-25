@@ -3,6 +3,16 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FuturaPT-Book.otf">
+            <string>FuturaPT-Book</string>
+            <string>FuturaPT-Book</string>
+            <string>FuturaPT-Book</string>
+            <string>FuturaPT-Book</string>
+            <string>FuturaPT-Book</string>
+            <string>FuturaPT-Book</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Container View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -81,6 +91,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="455" y="1035"/>
         </scene>
         <!--Item View Controller-->
         <scene sceneID="BOL-IW-JmR">
@@ -94,8 +105,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item #0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7f-yW-Ns7">
-                                <rect key="frame" x="270.5" y="290" width="59" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7f-yW-Ns7">
+                                <rect key="frame" x="278" y="290" width="45" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -114,10 +125,10 @@
             </objects>
             <point key="canvasLocation" x="1864" y="1035"/>
         </scene>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="Bor-jF-2sW">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="7X3-0Y-J7Q" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="7X3-0Y-J7Q" customClass="HomeViewController" customModule="Profile" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DoL-OU-1td"/>
                         <viewControllerLayoutGuide type="bottom" id="Cdk-tx-w7e"/>
@@ -126,16 +137,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoBlack" translatesAutoresizingMaskIntoConstraints="NO" id="Y5r-de-PYV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Y5r-de-PYV">
                                 <rect key="frame" x="217.5" y="275" width="165" height="50"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Y5r-de-PYV" firstAttribute="centerY" secondItem="gFa-hb-b4T" secondAttribute="centerY" id="hEm-Bw-sSg"/>
                             <constraint firstItem="Y5r-de-PYV" firstAttribute="centerX" secondItem="gFa-hb-b4T" secondAttribute="centerX" id="mzl-CI-VrO"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="logoImageView" destination="Y5r-de-PYV" id="bda-Ce-YtH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HH7-Li-hAD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -148,7 +161,7 @@
                     <view key="view" contentMode="scaleToFill" id="e5n-gM-WIh">
                         <rect key="frame" x="0.0" y="0.0" width="236" height="580"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NeL-Fl-IAK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -162,8 +175,81 @@
                     <view key="view" contentMode="scaleToFill" id="LLU-pv-gdx">
                         <rect key="frame" x="0.0" y="0.0" width="236" height="580"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Soap Collective" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rE-h7-MOt">
+                                <rect key="frame" x="24" y="318.5" width="188" height="23.5"/>
+                                <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="18"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fm-3y-rti">
+                                <rect key="frame" x="24" y="342" width="188" height="54"/>
+                                <string key="text">2618B Sacramento St.
+San Francisco, CA94115</string>
+                                <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="14"/>
+                                <color key="textColor" red="0.27058823529411763" green="0.27058823529411763" blue="0.27058823529411763" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Us" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5m8-1g-QcA">
+                                <rect key="frame" x="24" y="540" width="188" height="18"/>
+                                <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="14"/>
+                                <color key="textColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5a-wr-QFL">
+                                <rect key="frame" x="24" y="498" width="188" height="24"/>
+                                <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="14"/>
+                                <inset key="titleEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="857.203.1004" image="phoneIcon">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vkI-lW-f9W">
+                                <rect key="frame" x="24" y="456" width="188" height="24"/>
+                                <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="14"/>
+                                <inset key="titleEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="info@thesoapcollective.com" image="emailIcon">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mG3-FF-0Vi">
+                                <rect key="frame" x="24" y="414" width="188" height="24"/>
+                                <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="14"/>
+                                <inset key="titleEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="@SoapCollective" image="twitterIcon">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mG3-FF-0Vi" firstAttribute="leading" secondItem="LLU-pv-gdx" secondAttribute="leading" constant="24" id="0Ob-ok-0lz"/>
+                            <constraint firstAttribute="bottom" secondItem="5m8-1g-QcA" secondAttribute="bottom" constant="22" id="2P7-3d-Zly"/>
+                            <constraint firstAttribute="trailing" secondItem="1rE-h7-MOt" secondAttribute="trailing" constant="24" id="FDg-JS-bvi"/>
+                            <constraint firstItem="u5a-wr-QFL" firstAttribute="leading" secondItem="LLU-pv-gdx" secondAttribute="leading" constant="24" id="GQT-r2-0Nh"/>
+                            <constraint firstItem="u5a-wr-QFL" firstAttribute="top" secondItem="vkI-lW-f9W" secondAttribute="bottom" constant="18" id="HAB-oE-RvU"/>
+                            <constraint firstItem="5m8-1g-QcA" firstAttribute="top" secondItem="u5a-wr-QFL" secondAttribute="bottom" constant="18" id="J1u-Rb-MO4"/>
+                            <constraint firstAttribute="trailing" secondItem="vkI-lW-f9W" secondAttribute="trailing" constant="24" id="Jlw-Od-Ts9"/>
+                            <constraint firstAttribute="trailing" secondItem="5m8-1g-QcA" secondAttribute="trailing" constant="24" id="KsV-ex-JzE"/>
+                            <constraint firstAttribute="trailing" secondItem="mG3-FF-0Vi" secondAttribute="trailing" constant="24" id="NQ6-Ex-GMp"/>
+                            <constraint firstItem="5m8-1g-QcA" firstAttribute="leading" secondItem="LLU-pv-gdx" secondAttribute="leading" constant="24" id="P4N-GV-Sgx"/>
+                            <constraint firstItem="mG3-FF-0Vi" firstAttribute="top" secondItem="5fm-3y-rti" secondAttribute="bottom" constant="18" id="Wym-tt-o0P"/>
+                            <constraint firstItem="5fm-3y-rti" firstAttribute="top" secondItem="1rE-h7-MOt" secondAttribute="bottom" id="XDX-0U-S9x"/>
+                            <constraint firstItem="vkI-lW-f9W" firstAttribute="leading" secondItem="LLU-pv-gdx" secondAttribute="leading" constant="24" id="XYj-Rj-aip"/>
+                            <constraint firstAttribute="trailing" secondItem="u5a-wr-QFL" secondAttribute="trailing" constant="24" id="XuH-f2-9KI"/>
+                            <constraint firstAttribute="trailing" secondItem="5fm-3y-rti" secondAttribute="trailing" constant="24" id="Y3d-Hz-JlB"/>
+                            <constraint firstItem="vkI-lW-f9W" firstAttribute="top" secondItem="mG3-FF-0Vi" secondAttribute="bottom" constant="18" id="ch9-rt-Woj"/>
+                            <constraint firstItem="1rE-h7-MOt" firstAttribute="leading" secondItem="LLU-pv-gdx" secondAttribute="leading" constant="24" id="eMW-ZF-k2x"/>
+                            <constraint firstItem="5fm-3y-rti" firstAttribute="leading" secondItem="LLU-pv-gdx" secondAttribute="leading" constant="24" id="xTn-4a-DTs"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addressLabel" destination="5fm-3y-rti" id="DCF-SU-ey2"/>
+                        <outlet property="companyLabel" destination="1rE-h7-MOt" id="yDo-En-nt1"/>
+                        <outlet property="contactUsLabel" destination="5m8-1g-QcA" id="Jne-he-pFJ"/>
+                        <outlet property="emailButton" destination="vkI-lW-f9W" id="1VT-7w-s8E"/>
+                        <outlet property="phoneButton" destination="u5a-wr-QFL" id="un5-5l-O8q"/>
+                        <outlet property="twitterButton" destination="mG3-FF-0Vi" id="dyx-50-POH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i5T-dm-YFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -171,6 +257,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LogoBlack" width="165" height="50"/>
+        <image name="emailIcon" width="24" height="24"/>
+        <image name="logo" width="165" height="50"/>
+        <image name="phoneIcon" width="24" height="24"/>
+        <image name="twitterIcon" width="24" height="24"/>
     </resources>
 </document>

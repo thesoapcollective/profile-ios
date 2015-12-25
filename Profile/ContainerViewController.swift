@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContainerViewController: UIViewController {
+class ContainerViewController: PROViewController {
 
   // ==================================================
   // PROPERTIES
@@ -55,6 +55,7 @@ class ContainerViewController: UIViewController {
     setupData()
     setupInitialViewControllers()
     setupGestures()
+    setupNotifcations()
   }
 
   override func viewDidAppear(animated: Bool) {
@@ -127,6 +128,10 @@ class ContainerViewController: UIViewController {
         itemViewControllers.append(itemViewController)
       }
     }
+  }
+
+  override func updateColors() {
+    view.backgroundColor = UIColor.appPrimaryBackgroundColor()
   }
 
   // ==================================================
@@ -302,6 +307,28 @@ class ContainerViewController: UIViewController {
       indexViewLeadingConstraint.constant += dx
       scrollViewLeadingConstraint.constant += dx
       scrollViewTrailingConstraint.constant -= dx
+    }
+  }
+
+  // ==================================================
+  // NOTIFICATIONS
+  // ==================================================
+
+  override func setupNotifcations() {
+    super.setupNotifcations()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
+  }
+
+  func orientationChanged(notification: NSNotification) {
+    switch UIDevice.currentDevice().orientation {
+    case .Portrait:
+      Global.mode = .Light
+      break
+    case .PortraitUpsideDown:
+      Global.mode = .Dark
+      break
+    default:
+      break
     }
   }
 

@@ -8,8 +8,21 @@
 
 import UIKit
 
+enum ProfileMode {
+  case Light
+  case Dark
+}
+
 struct Global {
 
+  static let ProfileModeChangedNotification = "ProfileModeChangedNotification"
+
   static var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+
+  static var mode: ProfileMode = .Light {
+    didSet {
+      NSNotificationCenter.defaultCenter().postNotificationName(ProfileModeChangedNotification, object: nil)
+    }
+  }
 
 }

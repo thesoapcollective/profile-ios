@@ -10,19 +10,47 @@ import UIKit
 
 extension UIColor {
 
-  class func profilePrimaryBlackColor() -> UIColor {
+  // Color Selectors
+
+  class func appPrimaryBackgroundColor() -> UIColor {
+    return Global.mode == .Light ? UIColor.appPrimaryWhiteColor() : UIColor.appPrimaryBlackColor()
+  }
+
+  class func appInvertedPrimaryBackgroundColor() -> UIColor {
+    return Global.mode == .Light ? UIColor.appPrimaryBlackColor() : UIColor.appPrimaryWhiteColor()
+  }
+
+  class func appPrimaryTextColor() -> UIColor {
+    return Global.mode == .Light ? UIColor.appPrimaryBlackColor() : UIColor.appPrimaryWhiteColor()
+  }
+
+  class func appInvertedPrimaryTextColor() -> UIColor {
+    return Global.mode == .Light ? UIColor.appPrimaryWhiteColor() : UIColor.appPrimaryBlackColor()
+  }
+
+  class func appSecondaryTextColor() -> UIColor {
+    return Global.mode == .Light ? UIColor.appSecondaryBlackColor() : UIColor.appSecondaryWhiteColor()
+  }
+
+  class func appInvertedSecondaryTextColor() -> UIColor {
+    return Global.mode == .Light ? UIColor.appSecondaryWhiteColor() : UIColor.appSecondaryBlackColor()
+  }
+
+  // Colors
+
+  class func appPrimaryBlackColor() -> UIColor {
     return UIColor.blackColor()
   }
 
-  class func profileSecondaryBlackColor() -> UIColor {
+  class func appSecondaryBlackColor() -> UIColor {
     return UIColor(red: 69.0/255.0, green: 69.0/255.0, blue: 69.0/255.0, alpha: 1.0) // #454545
   }
 
-  class func profilePrimaryWhiteColor() -> UIColor {
+  class func appPrimaryWhiteColor() -> UIColor {
     return UIColor.whiteColor()
   }
 
-  class func profileSecondaryWhiteColor() -> UIColor {
+  class func appSecondaryWhiteColor() -> UIColor {
     return UIColor(red: 211.0/255.0, green: 211.0/255.0, blue: 211.0/255.0, alpha: 1.0) // #d3d3d3
   }
 
