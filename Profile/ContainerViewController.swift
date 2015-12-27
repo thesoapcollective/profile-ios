@@ -316,7 +316,9 @@ class ContainerViewController: PROViewController {
   override func setupNotifcations() {
     super.setupNotifcations()
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeContact:", name: Global.CloseContactNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeIndex:", name: Global.CloseIndexNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "openContact:", name: Global.OpenContactNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "openIndex:", name: Global.OpenIndexNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
   }
 
@@ -324,8 +326,16 @@ class ContainerViewController: PROViewController {
     openCloseContact(false, animated: true)
   }
 
+  func closeIndex(notification: NSNotification) {
+    openCloseIndex(false, animated: true)
+  }
+
   func openContact(notification: NSNotification) {
     openCloseContact(true, animated: true)
+  }
+
+  func openIndex(notification: NSNotification) {
+    openCloseIndex(true, animated: true)
   }
 
   func orientationChanged(notification: NSNotification) {
