@@ -8,29 +8,54 @@
 
 import UIKit
 
+@IBDesignable
 class DottedBorderImageView: UIImageView {
 
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+  // ==================================================
+  // PROPERTIES
+  // ==================================================
+
+  @IBInspectable var dotSize: CGFloat = 5 {
+    didSet { updateImage() }
   }
 
-  init(size: CGFloat, num: CGFloat, color: UIColor) {
-    let dashes: [CGFloat] = [0, size * 2]
+  @IBInspectable var dotColor: UIColor = UIColor.blackColor() {
+    didSet { updateImage() }
+  }
+
+  @IBInspectable var dotCount: CGFloat = 5 {
+    didSet { updateImage() }
+  }
+
+  // ==================================================
+  // METHODS
+  // ==================================================
+
+  func updateImage() {
+    let dottedImage = createDottedImage(dotSize, num: dotCount, color: dotColor)
+    image = dottedImage
+//    frame = CGRect(x: 0, y: 0, width: image!.size.width, height: image!.size.height)
+  }
+
+  func createDottedImage(size: CGFloat, num: CGFloat, color: UIColor) -> UIImage {
+    let dotHalfSize: CGFloat = size / 2
+    let dotDoubleSize: CGFloat = size * 2
+    let dashes: [CGFloat] = [0, dotDoubleSize]
 
     let path = UIBezierPath()
-    path.moveToPoint(CGPointMake(size, size / 2))
-    path.addLineToPoint(CGPointMake(size * num * 2, size / 2))
+    path.moveToPoint(CGPointMake(size, dotHalfSize))
+    path.addLineToPoint(CGPointMake(dotDoubleSize * num, dotHalfSize))
     path.lineWidth = size
     path.setLineDash(dashes, count: dashes.count, phase: 0)
     path.lineCapStyle = CGLineCap.Round
 
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(size * num * 2, size), false, 0)
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(dotDoubleSize * num, size), false, 0)
     color.setStroke()
     path.stroke()
-    let image = UIGraphicsGetImageFromCurrentImageContext()
+    let dottedImage = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
 
-    super.init(image: image)
+    return dottedImage
   }
 
 }

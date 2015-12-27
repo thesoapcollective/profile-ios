@@ -15,6 +15,9 @@ class HomeViewController: PROViewController {
   // ==================================================
 
   @IBOutlet weak var logoImageView: UIImageView!
+  @IBOutlet weak var mailIconContainerView: UIView!
+  @IBOutlet weak var mailIconImageView: UIImageView!
+  @IBOutlet weak var mailIconDottedBorderImageView: DottedBorderImageView!
 
   // ==================================================
   // METHODS
@@ -22,11 +25,52 @@ class HomeViewController: PROViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
     logoImageView.image = logoImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+    mailIconImageView.image = mailIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+
+    setupGestures()
   }
 
   override func updateColors() {
     logoImageView.tintColor = UIColor.appPrimaryTextColor()
+    mailIconImageView.tintColor = UIColor.appPrimaryTextColor()
+    mailIconDottedBorderImageView.dotColor = UIColor.appPrimaryTextColor()
+  }
+
+  // ==================================================
+  // GESTURES
+  // ==================================================
+
+  func setupGestures() {
+    let contactTapGesture = UITapGestureRecognizer(target: self, action: "contactTapped:")
+    mailIconContainerView.addGestureRecognizer(contactTapGesture)
+  }
+
+  func contactTapped(notification: NSNotification) {
+    let notificationName = Global.isContactOpen ? Global.CloseContactNotification : Global.OpenContactNotification
+    NSNotificationCenter.defaultCenter().postNotificationName(notificationName, object: nil)
+  }
+
+  // ==================================================
+  // NOTIFICATIONS
+  // ==================================================
+
+  override func setupNotifcations() {
+    super.setupNotifcations()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "contactStateChanged:", name: Global.ContactStateChanged, object: nil)
+  }
+
+  func contactStateChanged(notification: NSNotification) {
+    let newImageIcon = Global.isContactOpen ? UIImage(named: "closeIcon") : UIImage(named: "mailIcon")
+    UIView.animateWithDuration(0.5, animations: { () -> Void in
+      self.mailIconImageView.alpha = 0
+    }) { (completed) -> Void in
+      self.mailIconImageView.image = newImageIcon
+      UIView.animateWithDuration(0.5, animations: { () -> Void in
+        self.mailIconImageView.alpha = 1
+      })
+    }
   }
 
 }

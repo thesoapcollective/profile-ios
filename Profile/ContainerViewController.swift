@@ -25,10 +25,9 @@ class ContainerViewController: PROViewController {
   @IBOutlet weak var scrollViewLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var scrollViewTrailingConstraint: NSLayoutConstraint!
 
-  var currentIndex = 0
+  let SideMenuOffset: CGFloat = 10
 
-  var isContactOpen = false
-  var isIndexOpen = false
+  var currentIndex = 0
 
   var isPanningContact = false
   var isPanningContent = false
@@ -49,8 +48,8 @@ class ContainerViewController: PROViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    contactViewTrailingConstraint.constant = isContactOpen ? 0 : -contactView.frame.width
-    indexViewLeadingConstraint.constant = isIndexOpen ? 0 : -indexView.frame.width
+    contactViewTrailingConstraint.constant = Global.isContactOpen ? 0 : -contactView.frame.width
+    indexViewLeadingConstraint.constant = Global.isIndexOpen ? 0 : -indexView.frame.width
 
     setupData()
     setupInitialViewControllers()
@@ -140,31 +139,31 @@ class ContainerViewController: PROViewController {
 
   func snapContent(animated: Bool) {
     let duration = animated ? 0.3 : 0
-    UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
+    UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
       self.scrollView.setContentOffset(CGPoint(x: 0, y: self.view.frame.height * CGFloat(self.currentIndex)), animated: false)
     }, completion: nil)
   }
 
   func openCloseContact(open: Bool, animated: Bool) {
     let duration = animated ? 0.3 : 0
-    isContactOpen = open
+    Global.isContactOpen = open
     view.layoutIfNeeded()
-    UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
-      self.contactViewTrailingConstraint.constant = open ? 0 : -self.contactView.frame.width
-      self.scrollViewLeadingConstraint.constant = open ? -self.contactView.frame.width : 0
-      self.scrollViewTrailingConstraint.constant = open ? self.contactView.frame.width : 0
+    UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
+      self.contactViewTrailingConstraint.constant = open ? -self.SideMenuOffset : -self.contactView.frame.width
+      self.scrollViewLeadingConstraint.constant = open ? -self.contactView.frame.width + self.SideMenuOffset : 0
+      self.scrollViewTrailingConstraint.constant = open ? self.contactView.frame.width - self.SideMenuOffset : 0
       self.view.layoutIfNeeded()
     }, completion: nil)
   }
 
   func openCloseIndex(open: Bool, animated: Bool) {
     let duration = animated ? 0.3 : 0
-    isIndexOpen = open
+    Global.isIndexOpen = open
     view.layoutIfNeeded()
-    UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
-      self.indexViewLeadingConstraint.constant = open ? 0 : -self.indexView.frame.width
-      self.scrollViewLeadingConstraint.constant = open ? self.indexView.frame.width : 0
-      self.scrollViewTrailingConstraint.constant = open ? -self.indexView.frame.width : 0
+    UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
+      self.indexViewLeadingConstraint.constant = open ? -self.SideMenuOffset : -self.indexView.frame.width
+      self.scrollViewLeadingConstraint.constant = open ? self.indexView.frame.width - self.SideMenuOffset : 0
+      self.scrollViewTrailingConstraint.constant = open ? -self.indexView.frame.width + self.SideMenuOffset : 0
       self.view.layoutIfNeeded()
     }, completion: nil)
   }
@@ -174,11 +173,11 @@ class ContainerViewController: PROViewController {
   // ==================================================
 
   func setupGestures() {
-    let panGesture = UIPanGestureRecognizer(target: self, action: "handlePan:")
+    let panGesture = UIPanGestureRecognizer(target: self, action: "panned:")
     view.addGestureRecognizer(panGesture)
   }
 
-  func handlePan(gesture: UIPanGestureRecognizer) {
+  func panned(gesture: UIPanGestureRecognizer) {
     let translation = gesture.translationInView(view)
     let dx = translation.x
     let dy = translation.y
@@ -191,21 +190,21 @@ class ContainerViewController: PROViewController {
 
       switch gesture.direction(view) {
       case .Left:
-        if isIndexOpen {
+        if Global.isIndexOpen {
           isPanningIndex = true
         } else {
           isPanningContact = true
         }
         break
       case .Right:
-        if isContactOpen {
+        if Global.isContactOpen {
           isPanningContact = true
         } else {
           isPanningIndex = true
         }
         break
       case .Up, .Down:
-        isPanningContent = !isIndexOpen && !isContactOpen
+        isPanningContent = !Global.isIndexOpen && !Global.isContactOpen
       default:
         break
       }
@@ -246,10 +245,10 @@ class ContainerViewController: PROViewController {
           }
         }
       } else if isPanningContact {
-        let open = dxThreshold ? !isContactOpen : isContactOpen
+        let open = dxThreshold ? !Global.isContactOpen : Global.isContactOpen
         openCloseContact(open, animated: true)
       } else if isPanningIndex {
-        let open = dxThreshold ? !isIndexOpen : isIndexOpen
+        let open = dxThreshold ? !Global.isIndexOpen : Global.isIndexOpen
         openCloseIndex(open, animated: true)
       }
 
@@ -316,7 +315,17 @@ class ContainerViewController: PROViewController {
 
   override func setupNotifcations() {
     super.setupNotifcations()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeContact:", name: Global.CloseContactNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "openContact:", name: Global.OpenContactNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
+  }
+
+  func closeContact(notification: NSNotification) {
+    openCloseContact(false, animated: true)
+  }
+
+  func openContact(notification: NSNotification) {
+    openCloseContact(true, animated: true)
   }
 
   func orientationChanged(notification: NSNotification) {
