@@ -16,11 +16,14 @@ class ContainerViewController: PROViewController {
 
   @IBOutlet weak var contactView: UIView!
   @IBOutlet weak var contentView: UIView!
+  @IBOutlet weak var gradientView: RadialGradientView!
   @IBOutlet weak var indexView: UIView!
   @IBOutlet weak var scrollView: UIScrollView!
 
   @IBOutlet weak var contactViewTrailingConstraint: NSLayoutConstraint!
   @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var gradientTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var gradientTrailingConstraint: NSLayoutConstraint!
   @IBOutlet weak var indexViewLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var scrollViewLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var scrollViewTrailingConstraint: NSLayoutConstraint!
@@ -49,6 +52,8 @@ class ContainerViewController: PROViewController {
     super.viewDidLoad()
 
     contactViewTrailingConstraint.constant = Global.isContactOpen ? 0 : -contactView.frame.width
+    gradientTopConstraint.constant = -view.frame.height * 0.9
+    gradientTrailingConstraint.constant = -view.frame.width * 0.9
     indexViewLeadingConstraint.constant = Global.isIndexOpen ? 0 : -indexView.frame.width
 
     setupData()
@@ -67,6 +72,9 @@ class ContainerViewController: PROViewController {
 
     if UIDevice.currentDevice().orientation == .Portrait || UIDevice.currentDevice().orientation == .PortraitUpsideDown {
       contentHeightConstraint.constant = view.frame.height * CGFloat(items.count)
+      let gradientOffset: CGFloat = -view.frame.width * 0.9
+      gradientTopConstraint.constant = gradientOffset
+      gradientTrailingConstraint.constant = gradientOffset
       view.layoutIfNeeded()
       for (i, itemViewController) in itemViewControllers.enumerate() {
         itemViewController.view.frame = CGRect(x: 0, y: view.frame.height * CGFloat(i), width: view.frame.width, height: view.frame.height)
@@ -131,6 +139,8 @@ class ContainerViewController: PROViewController {
 
   override func updateColors() {
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
+    gradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
+    gradientView.toColor = Global.mode == .Light ? UIColor(white: 0, alpha: 0) : UIColor(white: 1, alpha: 0)
   }
 
   // ==================================================

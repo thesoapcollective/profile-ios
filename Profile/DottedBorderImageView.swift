@@ -34,7 +34,6 @@ class DottedBorderImageView: UIImageView {
   func updateImage() {
     let dottedImage = createDottedImage(dotSize, num: dotCount, color: dotColor)
     image = dottedImage
-//    frame = CGRect(x: 0, y: 0, width: image!.size.width, height: image!.size.height)
   }
 
   func createDottedImage(size: CGFloat, num: CGFloat, color: UIColor) -> UIImage {

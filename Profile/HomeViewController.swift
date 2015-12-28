@@ -30,6 +30,7 @@ class HomeViewController: PROViewController {
     super.viewDidLoad()
 
     logoImageView.image = logoImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+    indexIconImageView.image = indexIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
     mailIconImageView.image = mailIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
 
     setupGestures()
@@ -80,7 +81,7 @@ class HomeViewController: PROViewController {
     UIView.animateWithDuration(0.5, animations: { () -> Void in
       self.mailIconImageView.alpha = 0
     }) { (completed) -> Void in
-      self.mailIconImageView.image = newImageIcon
+      self.mailIconImageView.image = newImageIcon?.imageWithRenderingMode(.AlwaysTemplate)
       UIView.animateWithDuration(0.5, animations: { () -> Void in
         self.mailIconImageView.alpha = 1
       })
@@ -92,7 +93,7 @@ class HomeViewController: PROViewController {
     UIView.animateWithDuration(0.5, animations: { () -> Void in
       self.indexIconImageView.alpha = 0
     }) { (completed) -> Void in
-      self.indexIconImageView.image = newImageIcon
+      self.indexIconImageView.image = newImageIcon?.imageWithRenderingMode(.AlwaysTemplate)
       UIView.animateWithDuration(0.5, animations: { () -> Void in
         self.indexIconImageView.alpha = 1
       })

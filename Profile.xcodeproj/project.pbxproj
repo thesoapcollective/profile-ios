@@ -22,6 +22,7 @@
 		657CB43E1C2B7BB4008E8F0D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB43D1C2B7BB4008E8F0D /* HomeViewController.swift */; };
 		657CB4421C2B868C008E8F0D /* PROViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB4411C2B868C008E8F0D /* PROViewController.swift */; };
 		657CB4461C2CC5A0008E8F0D /* DottedBorderImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB4451C2CC5A0008E8F0D /* DottedBorderImageView.swift */; };
+		657CB44A1C30978D008E8F0D /* RadialGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB4491C30978D008E8F0D /* RadialGradientView.swift */; };
 		658673991C28C1A900B82CD7 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658673981C28C1A900B82CD7 /* Global.swift */; };
 		6586739B1C28C2E200B82CD7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6586739A1C28C2E200B82CD7 /* UIColor.swift */; };
 		6586739D1C28CBA300B82CD7 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6586739C1C28CBA300B82CD7 /* ItemViewController.swift */; };
@@ -69,6 +70,7 @@
 		657CB43D1C2B7BB4008E8F0D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		657CB4411C2B868C008E8F0D /* PROViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PROViewController.swift; sourceTree = "<group>"; };
 		657CB4451C2CC5A0008E8F0D /* DottedBorderImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DottedBorderImageView.swift; sourceTree = "<group>"; };
+		657CB4491C30978D008E8F0D /* RadialGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadialGradientView.swift; sourceTree = "<group>"; };
 		658673981C28C1A900B82CD7 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		6586739A1C28C2E200B82CD7 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		6586739C1C28CBA300B82CD7 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				657CB4451C2CC5A0008E8F0D /* DottedBorderImageView.swift */,
+				657CB4491C30978D008E8F0D /* RadialGradientView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				657CB4421C2B868C008E8F0D /* PROViewController.swift in Sources */,
 				658673991C28C1A900B82CD7 /* Global.swift in Sources */,
 				65F6452E1C28900100D21E47 /* UIPanGestureRecognizer.swift in Sources */,
+				657CB44A1C30978D008E8F0D /* RadialGradientView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
