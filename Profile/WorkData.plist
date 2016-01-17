@@ -5,9 +5,13 @@
 	<dict>
 		<key>title</key>
 		<string>Role</string>
+		<key>short_title</key>
+		<string>Role</string>
 	</dict>
 	<dict>
 		<key>title</key>
+		<string>Weird Catalog</string>
+		<key>short_title</key>
 		<string>Weird Catalog</string>
 	</dict>
 </array>

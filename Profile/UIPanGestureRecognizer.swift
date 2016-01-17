@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum UIPanGestureRecognizerDirection {
+enum UIPanGestureRecognizerDirection: Int {
   case None
   case Left
   case Right

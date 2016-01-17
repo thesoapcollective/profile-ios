@@ -14,13 +14,20 @@ class HomeViewController: PROViewController {
   // PROPERTIES
   // ==================================================
 
-  @IBOutlet weak var logoImageView: UIImageView!
+  @IBOutlet weak var gradientContainerView: UIView!
+  @IBOutlet weak var gradientView: RadialGradientView!
   @IBOutlet weak var indexIconContainerView: UIView!
   @IBOutlet weak var indexIconImageView: UIImageView!
   @IBOutlet weak var indexIconDottedBorderImageView: DottedBorderImageView!
+  @IBOutlet weak var logoImageView: UIImageView!
   @IBOutlet weak var mailIconContainerView: UIView!
   @IBOutlet weak var mailIconImageView: UIImageView!
   @IBOutlet weak var mailIconDottedBorderImageView: DottedBorderImageView!
+
+  @IBOutlet weak var gradientTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var gradientTrailingConstraint: NSLayoutConstraint!
+
+  var index = 0
 
   // ==================================================
   // METHODS
@@ -36,12 +43,25 @@ class HomeViewController: PROViewController {
     setupGestures()
   }
 
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+
+    if UIDevice.currentDevice().orientation == .Portrait || UIDevice.currentDevice().orientation == .PortraitUpsideDown {
+      let gradientOffset: CGFloat = -view.frame.width * 0.9
+      gradientTopConstraint.constant = gradientOffset
+      gradientTrailingConstraint.constant = gradientOffset
+      view.layoutIfNeeded()
+    }
+  }
+
   override func updateColors() {
     logoImageView.tintColor = UIColor.appPrimaryTextColor()
     indexIconImageView.tintColor = UIColor.appPrimaryTextColor()
     indexIconDottedBorderImageView.dotColor = UIColor.appPrimaryTextColor()
     mailIconImageView.tintColor = UIColor.appPrimaryTextColor()
     mailIconDottedBorderImageView.dotColor = UIColor.appPrimaryTextColor()
+    gradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
+    gradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
   }
 
   // ==================================================
@@ -74,6 +94,8 @@ class HomeViewController: PROViewController {
     super.setupNotifcations()
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "contactStateChanged:", name: Global.ContactStateChanged, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "indexStateChanged:", name: Global.IndexStateChanged, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollChanged:", name: Global.ScrollChangedNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollEnded:", name: Global.ScrollEndedNotification, object: nil)
   }
 
   func contactStateChanged(notification: NSNotification) {
@@ -98,6 +120,40 @@ class HomeViewController: PROViewController {
         self.indexIconImageView.alpha = 1
       })
     }
+  }
+
+  func scrollChanged(notification: NSNotification) {
+    guard let userInfo = notification.userInfo else { return }
+    let panDy = userInfo["panDy"] as! CGFloat
+    let currentIndex = userInfo["currentIndex"] as! Int
+    var threshold: CGFloat = 0
+    var alpha: CGFloat = 0
+
+    if currentIndex == index {
+      threshold = view.frame.height / 2
+      alpha = (threshold - abs(panDy)) / threshold
+    } else {
+      threshold = view.frame.height
+      alpha = 1 - (threshold - abs(panDy)) / threshold
+    }
+
+    gradientContainerView.alpha = alpha
+    indexIconContainerView.alpha = alpha
+    logoImageView.alpha = alpha
+    mailIconContainerView.alpha = alpha
+  }
+
+  func scrollEnded(notification: NSNotification) {
+    guard let userInfo = notification.userInfo else { return }
+    let currentIndex = userInfo["currentIndex"] as! Int
+    let alpha: CGFloat =  currentIndex == index ? 1 : 0
+
+    UIView.animateWithDuration(0.3, animations: { () -> Void in
+      self.gradientContainerView.alpha = alpha
+      self.indexIconContainerView.alpha = alpha
+      self.logoImageView.alpha = alpha
+      self.mailIconContainerView.alpha = alpha
+    })
   }
 
 }

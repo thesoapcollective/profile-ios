@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		654D0A371C3A47E7000B1B50 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654D0A361C3A47E7000B1B50 /* UIImage.swift */; };
 		656A3FB51C24EDE800A1948B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656A3FB41C24EDE800A1948B /* AppDelegate.swift */; };
 		656A3FBA1C24EDE800A1948B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 656A3FB81C24EDE800A1948B /* Main.storyboard */; };
 		656A3FBC1C24EDE800A1948B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 656A3FBB1C24EDE800A1948B /* Assets.xcassets */; };
@@ -23,6 +24,9 @@
 		657CB4421C2B868C008E8F0D /* PROViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB4411C2B868C008E8F0D /* PROViewController.swift */; };
 		657CB4461C2CC5A0008E8F0D /* DottedBorderImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB4451C2CC5A0008E8F0D /* DottedBorderImageView.swift */; };
 		657CB44A1C30978D008E8F0D /* RadialGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB4491C30978D008E8F0D /* RadialGradientView.swift */; };
+		657F038F1C39F5EF00513ACB /* WorkItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F038E1C39F5EF00513ACB /* WorkItemViewController.swift */; };
+		657F03911C39F60B00513ACB /* TeamItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F03901C39F60B00513ACB /* TeamItemViewController.swift */; };
+		657F03951C39FDAE00513ACB /* LinearGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657F03941C39FDAE00513ACB /* LinearGradientView.swift */; };
 		658673991C28C1A900B82CD7 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658673981C28C1A900B82CD7 /* Global.swift */; };
 		6586739B1C28C2E200B82CD7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6586739A1C28C2E200B82CD7 /* UIColor.swift */; };
 		6586739D1C28CBA300B82CD7 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6586739C1C28CBA300B82CD7 /* ItemViewController.swift */; };
@@ -49,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		654D0A361C3A47E7000B1B50 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		656A3FB11C24EDE800A1948B /* Profile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Profile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		656A3FB41C24EDE800A1948B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		656A3FB91C24EDE800A1948B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,6 +76,9 @@
 		657CB4411C2B868C008E8F0D /* PROViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PROViewController.swift; sourceTree = "<group>"; };
 		657CB4451C2CC5A0008E8F0D /* DottedBorderImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DottedBorderImageView.swift; sourceTree = "<group>"; };
 		657CB4491C30978D008E8F0D /* RadialGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadialGradientView.swift; sourceTree = "<group>"; };
+		657F038E1C39F5EF00513ACB /* WorkItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkItemViewController.swift; sourceTree = "<group>"; };
+		657F03901C39F60B00513ACB /* TeamItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamItemViewController.swift; sourceTree = "<group>"; };
+		657F03941C39FDAE00513ACB /* LinearGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearGradientView.swift; sourceTree = "<group>"; };
 		658673981C28C1A900B82CD7 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		6586739A1C28C2E200B82CD7 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		6586739C1C28CBA300B82CD7 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				657CB4411C2B868C008E8F0D /* PROViewController.swift */,
+				6586739C1C28CBA300B82CD7 /* ItemViewController.swift */,
 			);
 			name = Subclasses;
 			sourceTree = "<group>";
@@ -200,6 +209,7 @@
 			children = (
 				657CB4451C2CC5A0008E8F0D /* DottedBorderImageView.swift */,
 				657CB4491C30978D008E8F0D /* RadialGradientView.swift */,
+				657F03941C39FDAE00513ACB /* LinearGradientView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -211,7 +221,8 @@
 				65F645221C28806700D21E47 /* ContainerViewController.swift */,
 				657CB43D1C2B7BB4008E8F0D /* HomeViewController.swift */,
 				657CB42C1C29CA53008E8F0D /* IndexViewController.swift */,
-				6586739C1C28CBA300B82CD7 /* ItemViewController.swift */,
+				657F03901C39F60B00513ACB /* TeamItemViewController.swift */,
+				657F038E1C39F5EF00513ACB /* WorkItemViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -222,6 +233,7 @@
 				6586739A1C28C2E200B82CD7 /* UIColor.swift */,
 				65F6452D1C28900100D21E47 /* UIPanGestureRecognizer.swift */,
 				65F645251C28811000D21E47 /* UIStoryboard.swift */,
+				654D0A361C3A47E7000B1B50 /* UIImage.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -366,13 +378,17 @@
 				657CB42D1C29CA53008E8F0D /* IndexViewController.swift in Sources */,
 				65F645261C28811000D21E47 /* UIStoryboard.swift in Sources */,
 				6586739B1C28C2E200B82CD7 /* UIColor.swift in Sources */,
+				657F03911C39F60B00513ACB /* TeamItemViewController.swift in Sources */,
+				654D0A371C3A47E7000B1B50 /* UIImage.swift in Sources */,
 				657CB43E1C2B7BB4008E8F0D /* HomeViewController.swift in Sources */,
+				657F03951C39FDAE00513ACB /* LinearGradientView.swift in Sources */,
 				657CB4461C2CC5A0008E8F0D /* DottedBorderImageView.swift in Sources */,
 				65F645231C28806700D21E47 /* ContainerViewController.swift in Sources */,
 				656A3FB51C24EDE800A1948B /* AppDelegate.swift in Sources */,
 				657CB4421C2B868C008E8F0D /* PROViewController.swift in Sources */,
 				658673991C28C1A900B82CD7 /* Global.swift in Sources */,
 				65F6452E1C28900100D21E47 /* UIPanGestureRecognizer.swift in Sources */,
+				657F038F1C39F5EF00513ACB /* WorkItemViewController.swift in Sources */,
 				657CB44A1C30978D008E8F0D /* RadialGradientView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

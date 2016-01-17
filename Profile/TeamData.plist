@@ -5,14 +5,44 @@
 	<dict>
 		<key>title</key>
 		<string>Logan Dwight</string>
+		<key>short_title</key>
+		<string>Logan</string>
+		<key>photo</key>
+		<string>logan_day_01</string>
+		<key>description</key>
+		<string>Curabitur blandit tempus porttitor. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Sed posuere consectetur est at lobortis. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Logan Dwight</string>
+		<key>short_title</key>
+		<string>Logan</string>
+		<key>photo</key>
+		<string>logan_day_02</string>
+		<key>description</key>
+		<string>Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Logan Dwight</string>
+		<key>short_title</key>
+		<string>Logan</string>
+		<key>photo</key>
+		<string>logan_day_03</string>
+		<key>description</key>
+		<string>Donec id elit non mi porta gravida at eget metus. Cras mattis consectetur purus sit amet fermentum. Maecenas sed diam eget risus varius blandit sit amet non magna. Sed posuere consectetur est at lobortis.</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>Ian Hirschfeld</string>
+		<key>short_title</key>
+		<string>Ian</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>Jarreau Bowen</string>
+		<key>short_title</key>
+		<string>Jarreau</string>
 	</dict>
 </array>
 </plist>

@@ -22,6 +22,10 @@ struct Global {
   static let OpenContactNotification = "OpenContactNotification"
   static let OpenIndexNotification = "OpenIndexNotification"
   static let ProfileModeChangedNotification = "ProfileModeChangedNotification"
+  static let ScrollChangedNotification = "ScrollChangedNotification"
+  static let ScrollEndedNotification = "ScrollEndedNotification"
+
+  static let PhotoGrayscaleOpacity: CGFloat = 0.1
 
   static var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
 

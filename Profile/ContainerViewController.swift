@@ -14,23 +14,25 @@ class ContainerViewController: PROViewController {
   // PROPERTIES
   // ==================================================
 
+  @IBOutlet weak var bottomGradientView: LinearGradientView!
   @IBOutlet weak var contactView: UIView!
   @IBOutlet weak var contentView: UIView!
-  @IBOutlet weak var gradientView: RadialGradientView!
   @IBOutlet weak var indexView: UIView!
+  @IBOutlet weak var topGradientView: LinearGradientView!
   @IBOutlet weak var scrollView: UIScrollView!
 
   @IBOutlet weak var contactViewTrailingConstraint: NSLayoutConstraint!
   @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
-  @IBOutlet weak var gradientTopConstraint: NSLayoutConstraint!
-  @IBOutlet weak var gradientTrailingConstraint: NSLayoutConstraint!
   @IBOutlet weak var indexViewLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var scrollViewLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var scrollViewTrailingConstraint: NSLayoutConstraint!
 
   let SideMenuOffset: CGFloat = 10
 
+  var currentDirection: UIPanGestureRecognizerDirection = .None
   var currentIndex = 0
+  var currentStage = 0
+  var homeIndex = 0
 
   var isPanningContact = false
   var isPanningContent = false
@@ -52,8 +54,6 @@ class ContainerViewController: PROViewController {
     super.viewDidLoad()
 
     contactViewTrailingConstraint.constant = Global.isContactOpen ? 0 : -contactView.frame.width
-    gradientTopConstraint.constant = -view.frame.height * 0.9
-    gradientTrailingConstraint.constant = -view.frame.width * 0.9
     indexViewLeadingConstraint.constant = Global.isIndexOpen ? 0 : -indexView.frame.width
 
     setupData()
@@ -65,6 +65,18 @@ class ContainerViewController: PROViewController {
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
     snapContent(false)
+    NSNotificationCenter.defaultCenter().postNotificationName(
+      Global.ScrollEndedNotification,
+      object: nil,
+      userInfo: [
+        "dy": CGFloat(0),
+        "panDy": CGFloat(0),
+        "dyThreshold": false,
+        "currentDirection": currentDirection.rawValue,
+        "currentIndex": currentIndex,
+        "currentStage": currentStage
+      ]
+    )
   }
 
   override func viewDidLayoutSubviews() {
@@ -72,9 +84,6 @@ class ContainerViewController: PROViewController {
 
     if UIDevice.currentDevice().orientation == .Portrait || UIDevice.currentDevice().orientation == .PortraitUpsideDown {
       contentHeightConstraint.constant = view.frame.height * CGFloat(items.count)
-      let gradientOffset: CGFloat = -view.frame.width * 0.9
-      gradientTopConstraint.constant = gradientOffset
-      gradientTrailingConstraint.constant = gradientOffset
       view.layoutIfNeeded()
       for (i, itemViewController) in itemViewControllers.enumerate() {
         itemViewController.view.frame = CGRect(x: 0, y: view.frame.height * CGFloat(i), width: view.frame.width, height: view.frame.height)
@@ -105,7 +114,8 @@ class ContainerViewController: PROViewController {
       items.insert(data as! [String: String], atIndex: 0)
     }
 
-    currentIndex = dataArray.count
+    homeIndex = dataArray.count
+    currentIndex = homeIndex
   }
 
   func setupTeamData() {
@@ -119,19 +129,21 @@ class ContainerViewController: PROViewController {
   }
 
   func setupInitialViewControllers() {
-    for item in items {
+    for (i, item) in items.enumerate() {
       if item["title"] != "Home" {
-        let itemViewController = UIStoryboard.itemViewController()
+        let itemViewController = i < homeIndex ? UIStoryboard.workItemViewController() : UIStoryboard.teamItemViewController()
         contentView.addSubview(itemViewController.view)
         addChildViewController(itemViewController)
         itemViewController.didMoveToParentViewController(self)
         itemViewController.data = item
+        itemViewController.index = i
         itemViewControllers.append(itemViewController)
       } else {
         let itemViewController = UIStoryboard.homeViewController()
         contentView.addSubview(itemViewController.view)
         addChildViewController(itemViewController)
         itemViewController.didMoveToParentViewController(self)
+        itemViewController.index = homeIndex
         itemViewControllers.append(itemViewController)
       }
     }
@@ -139,8 +151,10 @@ class ContainerViewController: PROViewController {
 
   override func updateColors() {
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
-    gradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
-    gradientView.toColor = Global.mode == .Light ? UIColor(white: 0, alpha: 0) : UIColor(white: 1, alpha: 0)
+    bottomGradientView.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
+    bottomGradientView.toColor = UIColor.appPrimaryBackgroundColor()
+    topGradientView.fromColor = UIColor.appPrimaryBackgroundColor()
+    topGradientView.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
   }
 
   // ==================================================
@@ -152,6 +166,11 @@ class ContainerViewController: PROViewController {
     UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
       self.scrollView.setContentOffset(CGPoint(x: 0, y: self.view.frame.height * CGFloat(self.currentIndex)), animated: false)
     }, completion: nil)
+
+    UIView.animateWithDuration(duration) { () -> Void in
+      self.topGradientView.alpha = self.currentIndex < self.homeIndex && (self.currentIndex > 0 || self.currentIndex == 0 && self.currentStage == 0) ? 1 : 0
+      self.bottomGradientView.alpha = self.currentIndex > self.homeIndex && (self.currentIndex < self.items.count-1 || self.currentIndex == self.items.count-1 && self.currentStage == 0) ? 1 : 0
+    }
   }
 
   func openCloseContact(open: Bool, animated: Bool) {
@@ -191,6 +210,7 @@ class ContainerViewController: PROViewController {
     let translation = gesture.translationInView(view)
     let dx = translation.x
     let dy = translation.y
+    let direction: UIPanGestureRecognizerDirection = gesture.direction(view)
     gesture.setTranslation(CGPointZero, inView: view)
 
     switch gesture.state {
@@ -198,7 +218,7 @@ class ContainerViewController: PROViewController {
       panDx = 0
       panDy = 0
 
-      switch gesture.direction(view) {
+      switch direction {
       case .Left:
         if Global.isIndexOpen {
           isPanningIndex = true
@@ -213,8 +233,14 @@ class ContainerViewController: PROViewController {
           isPanningIndex = true
         }
         break
-      case .Up, .Down:
+      case .Up, .RightUp, .LeftUp:
+        currentDirection = .Up
         isPanningContent = !Global.isIndexOpen && !Global.isContactOpen
+        break
+      case .Down, .RightDown, .LeftDown:
+        currentDirection = .Down
+        isPanningContent = !Global.isIndexOpen && !Global.isContactOpen
+        break
       default:
         break
       }
@@ -227,6 +253,17 @@ class ContainerViewController: PROViewController {
 
       if isPanningContent {
         panContentView(dy)
+        NSNotificationCenter.defaultCenter().postNotificationName(
+          Global.ScrollChangedNotification,
+          object: nil,
+          userInfo: [
+            "dy": dy,
+            "panDy": panDy,
+            "currentDirection": currentDirection.rawValue,
+            "currentIndex": currentIndex,
+            "currentStage": currentStage
+          ]
+        )
       } else if isPanningContact {
         panContactView(dx)
       } else if isPanningIndex {
@@ -236,24 +273,65 @@ class ContainerViewController: PROViewController {
       break
 
     case .Ended:
-      let dxThreshold = abs(panDx) >= view.frame.width / 4
-      let dyThreshold = abs(panDy) >= view.frame.height / 4
+      let dxThreshold = abs(panDx) >= view.frame.width / 3
+      let dyThreshold = abs(panDy) >= view.frame.height / 3
 
       if isPanningContent {
-        if !dyThreshold {
-          snapContent(true)
-        } else {
-          let direction: UIPanGestureRecognizerDirection = gesture.direction(view)
-          if direction == .Up || direction == .LeftUp || direction == .RightUp {
-            let nextIndex = currentIndex + 1
-            currentIndex = nextIndex >= items.count ? items.count - 1 : nextIndex
-            snapContent(true)
-          } else {
-            let previousIndex = currentIndex - 1
-            currentIndex = previousIndex <= 0 ? 0 : previousIndex
-            snapContent(true)
+        if dyThreshold {
+          if currentDirection == .Up {
+            if currentIndex == homeIndex ||
+              (currentIndex < homeIndex && currentStage == 0) ||
+              (currentIndex > homeIndex && currentStage == 1) {
+                let nextIndex = currentIndex + 1
+                if nextIndex >= items.count {
+                  currentIndex = items.count - 1
+                  currentStage = 1
+                } else {
+                  currentIndex = nextIndex
+                  currentStage = currentIndex < homeIndex ? 1 : 0
+                }
+            } else if currentIndex != homeIndex {
+              if currentIndex < homeIndex && currentStage == 1 {
+                currentStage = 0
+              } else if currentIndex > homeIndex && currentStage == 0 {
+                currentStage = 1
+              }
+            }
+          } else if currentDirection == .Down {
+            if currentIndex == homeIndex ||
+              (currentIndex < homeIndex && currentStage == 1) ||
+              (currentIndex > homeIndex && currentStage == 0) {
+                let previousIndex = currentIndex - 1
+                if previousIndex <= 0 {
+                  currentIndex = 0
+                  currentStage = 1
+                } else {
+                  currentIndex = previousIndex
+                  currentStage = currentIndex <= homeIndex ? 0 : 1
+                }
+            } else if currentIndex != homeIndex {
+              if currentIndex < homeIndex && currentStage == 0 {
+                currentStage = 1
+              } else if currentIndex > homeIndex && currentStage == 1 {
+                currentStage = 0
+              }
+            }
           }
         }
+        snapContent(true)
+        NSNotificationCenter.defaultCenter().postNotificationName(
+          Global.ScrollEndedNotification,
+          object: nil,
+          userInfo: [
+            "dy": dy,
+            "panDy": panDy,
+            "dyThreshold": dyThreshold,
+            "currentDirection": currentDirection.rawValue,
+            "currentIndex": currentIndex,
+            "currentStage": currentStage
+          ]
+        )
+        print("currentDirection: \(currentDirection)", "currentIndex: \(currentIndex)", "currentStage: \(currentStage)")
       } else if isPanningContact {
         let open = dxThreshold ? !Global.isContactOpen : Global.isContactOpen
         openCloseContact(open, animated: true)
@@ -265,6 +343,7 @@ class ContainerViewController: PROViewController {
       isPanningContent = false
       isPanningContact = false
       isPanningIndex = false
+      currentDirection = .None
 
       break
 
@@ -274,14 +353,20 @@ class ContainerViewController: PROViewController {
   }
 
   func panContentView(dy: CGFloat) {
-    let newOffsetY: CGFloat = scrollView.contentOffset.y - dy
-    let endOffsetY = contentView.frame.height - view.frame.height
-    if newOffsetY <= 0 {
-      scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-    } else if newOffsetY >= endOffsetY {
-      scrollView.setContentOffset(CGPoint(x: 0, y: endOffsetY), animated: false)
-    } else {
-      scrollView.setContentOffset(CGPoint(x: 0, y: newOffsetY), animated: false)
+    if currentIndex == homeIndex ||
+      (currentIndex < homeIndex && currentStage == 0 && currentDirection == .Up) ||
+      (currentIndex < homeIndex && currentStage == 1 && currentDirection == .Down) ||
+      (currentIndex > homeIndex && currentStage == 0 && currentDirection == .Down) ||
+      (currentIndex > homeIndex && currentStage == 1 && currentDirection == .Up) {
+        let newOffsetY: CGFloat = scrollView.contentOffset.y - dy
+        let endOffsetY = contentView.frame.height - view.frame.height
+        if newOffsetY <= 0 {
+          scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        } else if newOffsetY >= endOffsetY {
+          scrollView.setContentOffset(CGPoint(x: 0, y: endOffsetY), animated: false)
+        } else {
+          scrollView.setContentOffset(CGPoint(x: 0, y: newOffsetY), animated: false)
+        }
     }
   }
 
