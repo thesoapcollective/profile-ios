@@ -217,6 +217,7 @@ class ContainerViewController: PROViewController {
     case .Began:
       panDx = 0
       panDy = 0
+      currentDirection = direction
 
       switch direction {
       case .Left:
@@ -233,12 +234,10 @@ class ContainerViewController: PROViewController {
           isPanningIndex = true
         }
         break
-      case .Up, .RightUp, .LeftUp:
-        currentDirection = .Up
+      case .Up:
         isPanningContent = !Global.isIndexOpen && !Global.isContactOpen
         break
-      case .Down, .RightDown, .LeftDown:
-        currentDirection = .Down
+      case .Down:
         isPanningContent = !Global.isIndexOpen && !Global.isContactOpen
         break
       default:

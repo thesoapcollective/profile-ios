@@ -25,29 +25,31 @@ extension UIPanGestureRecognizer {
   func direction(view: UIView?) -> UIPanGestureRecognizerDirection {
     let velocity = velocityInView(view)
 
-    if velocity.x == 0 {
+    if abs(velocity.x) > abs(velocity.y) { // Horizontal pan
+      if velocity.x < 0 {
+        return .Left
+      } else if velocity.x > 0 {
+        return .Right
+      }
+    } else if abs(velocity.y) > abs(velocity.x) { // Veritcal pan
       if velocity.y < 0 {
         return .Up
       } else if velocity.y > 0 {
         return .Down
       }
-    }
-
-    if velocity.x < 0 {
+    } else if abs(velocity.x) == abs(velocity.y) && velocity.x != 0 && velocity.y != 0 { // Diagonal pan
       if velocity.y < 0 {
-        return .LeftUp
+        if velocity.x < 0 {
+          return .LeftUp
+        } else if velocity.x > 0 {
+          return .RightUp
+        }
       } else if velocity.y > 0 {
-        return .LeftDown
-      } else {
-        return .Left
-      }
-    } else if velocity.x > 0 {
-      if velocity.y < 0 {
-        return .RightUp
-      } else if velocity.y > 0 {
-        return .RightDown
-      } else {
-        return .Right
+        if velocity.x < 0 {
+          return .LeftDown
+        } else if velocity.x > 0 {
+          return .RightDown
+        }
       }
     }
 
