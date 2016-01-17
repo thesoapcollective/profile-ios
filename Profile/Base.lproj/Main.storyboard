@@ -140,8 +140,11 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hU0-yM-XLx">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fA4-Z8-GUg">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHORT TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIE-vN-CZq">
-                                <rect key="frame" x="50" y="170" width="78" height="18"/>
+                                <rect key="frame" x="50" y="170" width="77.5" height="18"/>
                                 <fontDescription key="fontDescription" name="FuturaPT-Heavy" family="Futura PT" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -227,6 +230,7 @@
                             <constraint firstItem="2gi-qx-Jbn" firstAttribute="top" secondItem="hU0-yM-XLx" secondAttribute="bottom" id="753-Qy-2HJ"/>
                             <constraint firstItem="2gi-qx-Jbn" firstAttribute="top" secondItem="psi-UM-vrq" secondAttribute="bottom" id="ALA-jX-DFS"/>
                             <constraint firstAttribute="trailing" secondItem="psi-UM-vrq" secondAttribute="trailing" id="IkM-QF-PeZ"/>
+                            <constraint firstItem="fA4-Z8-GUg" firstAttribute="leading" secondItem="1I5-Sk-VIg" secondAttribute="leading" id="K5Q-DQ-Agm"/>
                             <constraint firstItem="RIE-vN-CZq" firstAttribute="leading" secondItem="1I5-Sk-VIg" secondAttribute="leading" constant="50" id="KdF-0Q-B1f"/>
                             <constraint firstItem="hU0-yM-XLx" firstAttribute="top" secondItem="u3b-ds-zKI" secondAttribute="bottom" id="Nbj-QJ-Opn"/>
                             <constraint firstAttribute="trailing" secondItem="Sg7-qG-Czy" secondAttribute="trailing" id="Qe3-9S-AGJ"/>
@@ -235,9 +239,12 @@
                             <constraint firstItem="RIE-vN-CZq" firstAttribute="top" secondItem="u3b-ds-zKI" secondAttribute="bottom" constant="150" id="XSY-cx-k9r"/>
                             <constraint firstItem="psi-UM-vrq" firstAttribute="top" secondItem="u3b-ds-zKI" secondAttribute="bottom" id="YCT-wL-mhh"/>
                             <constraint firstItem="Sg7-qG-Czy" firstAttribute="top" secondItem="u3b-ds-zKI" secondAttribute="bottom" id="YX8-bd-Uuy"/>
+                            <constraint firstItem="fA4-Z8-GUg" firstAttribute="top" secondItem="u3b-ds-zKI" secondAttribute="bottom" id="ap8-gH-4WF"/>
+                            <constraint firstAttribute="trailing" secondItem="fA4-Z8-GUg" secondAttribute="trailing" id="ghK-JT-Yo2"/>
                             <constraint firstItem="hU0-yM-XLx" firstAttribute="leading" secondItem="1I5-Sk-VIg" secondAttribute="leading" id="k0S-kq-d14"/>
                             <constraint firstItem="Sg7-qG-Czy" firstAttribute="leading" secondItem="1I5-Sk-VIg" secondAttribute="leading" id="lyQ-Ye-5U9"/>
                             <constraint firstAttribute="trailing" secondItem="hU0-yM-XLx" secondAttribute="trailing" id="t9G-ic-5Sg"/>
+                            <constraint firstAttribute="bottom" secondItem="fA4-Z8-GUg" secondAttribute="bottom" id="yBh-u8-pKh"/>
                         </constraints>
                     </view>
                     <connections>
@@ -248,6 +255,7 @@
                         <outlet property="gradientTopConstraint" destination="hjI-qs-IxU" id="lbW-s6-9GN"/>
                         <outlet property="gradientTrailingConstraint" destination="DsP-2Q-5HO" id="tCL-9j-gID"/>
                         <outlet property="gradientView" destination="nvi-Hx-HCg" id="fiW-pd-hG3"/>
+                        <outlet property="photoGrayscaleImageView" destination="fA4-Z8-GUg" id="QwK-U3-eY1"/>
                         <outlet property="photoImageView" destination="hU0-yM-XLx" id="GBD-lv-UF8"/>
                         <outlet property="shortTitleLabel" destination="RIE-vN-CZq" id="UDr-dI-1KC"/>
                         <outlet property="titleLabel" destination="g1p-vt-D6f" id="RMX-yG-TyF"/>
@@ -515,7 +523,7 @@ San Francisco, CA
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHORT TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LEf-c9-J2k">
-                                <rect key="frame" x="50" y="170" width="78" height="18"/>
+                                <rect key="frame" x="50" y="170" width="77.5" height="18"/>
                                 <fontDescription key="fontDescription" name="FuturaPT-Heavy" family="Futura PT" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>

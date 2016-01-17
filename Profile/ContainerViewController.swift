@@ -277,42 +277,57 @@ class ContainerViewController: PROViewController {
 
       if isPanningContent {
         if dyThreshold {
-          if currentDirection == .Up {
-            if currentIndex == homeIndex ||
-              (currentIndex < homeIndex && currentStage == 0) ||
-              (currentIndex > homeIndex && currentStage == 1) {
+          if currentIndex == homeIndex {
+            if currentDirection == .Up {
+              let nextIndex = currentIndex + 1
+              currentIndex = nextIndex >= items.count ? items.count - 1 : nextIndex
+            } else if currentDirection == .Down {
+              let previousIndex = currentIndex - 1
+              currentIndex = previousIndex <= 0 ? 0 : previousIndex
+            }
+            currentStage = 0
+          } else if currentIndex < homeIndex {
+            if currentDirection == .Up {
+              if currentStage == 0 {
+                currentIndex++
+                currentStage = currentIndex == homeIndex ? 0 : 1
+              } else {
+                currentStage--
+              }
+            } else if currentDirection == .Down {
+              if currentStage == 0 {
+                currentStage++
+              } else {
+                let previousIndex = currentIndex - 1
+                if previousIndex < 0 {
+                  currentIndex = 0
+                  currentStage = 1
+                } else {
+                  currentIndex = previousIndex
+                  currentStage = 0
+                }
+              }
+            }
+          } else {
+            if currentDirection == .Up {
+              if currentStage == 0 {
+                currentStage++
+              } else {
                 let nextIndex = currentIndex + 1
                 if nextIndex >= items.count {
                   currentIndex = items.count - 1
                   currentStage = 1
                 } else {
                   currentIndex = nextIndex
-                  currentStage = currentIndex < homeIndex ? 1 : 0
+                  currentStage = 0
                 }
-            } else if currentIndex != homeIndex {
-              if currentIndex < homeIndex && currentStage == 1 {
-                currentStage = 0
-              } else if currentIndex > homeIndex && currentStage == 0 {
-                currentStage = 1
               }
-            }
-          } else if currentDirection == .Down {
-            if currentIndex == homeIndex ||
-              (currentIndex < homeIndex && currentStage == 1) ||
-              (currentIndex > homeIndex && currentStage == 0) {
-                let previousIndex = currentIndex - 1
-                if previousIndex <= 0 {
-                  currentIndex = 0
-                  currentStage = 1
-                } else {
-                  currentIndex = previousIndex
-                  currentStage = currentIndex <= homeIndex ? 0 : 1
-                }
-            } else if currentIndex != homeIndex {
-              if currentIndex < homeIndex && currentStage == 0 {
-                currentStage = 1
-              } else if currentIndex > homeIndex && currentStage == 1 {
-                currentStage = 0
+            } else if currentDirection == .Down {
+              if currentStage == 0 {
+                currentIndex--
+                currentStage = currentIndex == homeIndex ? 0 : 1
+              } else {
+                currentStage--
               }
             }
           }
