@@ -84,11 +84,50 @@ class ContainerViewController: PROViewController {
     if UIDevice.currentDevice().orientation == .Portrait || UIDevice.currentDevice().orientation == .PortraitUpsideDown {
       contentHeightConstraint.constant = view.frame.height * CGFloat(items.count)
       view.layoutIfNeeded()
+
+      let arrowWidth: CGFloat = 40
+      let arrowHeight: CGFloat = 55
+      let arrowOffset: CGFloat = 25
+      let arrowMargin: CGFloat = 17
       for (i, itemViewController) in itemViewControllers.enumerate() {
         itemViewController.view.frame = CGRect(x: 0, y: view.frame.height * CGFloat(i), width: view.frame.width, height: view.frame.height)
 
-        if let continueArrowView = continueArrowViews["itemView-\(i)"] {
-          continueArrowView.frame = CGRect(x: 17, y: view.frame.height * CGFloat(i), width: 40, height: 55)
+        if i == homeIndex { continue }
+
+        if let continueArrowView = continueArrowViews["itemViewStage0-\(i)"] {
+          if i < homeIndex {
+            continueArrowView.frame = CGRect(
+              x: view.frame.width - arrowWidth - arrowMargin,
+              y: view.frame.height * CGFloat(i + 1) - arrowOffset,
+              width: arrowWidth,
+              height: arrowHeight
+            )
+          } else {
+            continueArrowView.frame = CGRect(
+              x: arrowMargin,
+              y: view.frame.height * CGFloat(i) - arrowOffset,
+              width: arrowWidth,
+              height: arrowHeight
+            )
+          }
+        }
+
+        if let continueArrowView = continueArrowViews["itemViewStage1-\(i)"] {
+          if i < homeIndex {
+            continueArrowView.frame = CGRect(
+              x: arrowMargin,
+              y: view.frame.height * CGFloat(i) - arrowOffset,
+              width: arrowWidth,
+              height: arrowHeight
+            )
+          } else {
+            continueArrowView.frame = CGRect(
+              x: view.frame.width - arrowWidth - arrowMargin,
+              y: view.frame.height * CGFloat(i + 1) - arrowOffset,
+              width: arrowWidth,
+              height: arrowHeight
+            )
+          }
         }
       }
     }
@@ -152,14 +191,25 @@ class ContainerViewController: PROViewController {
       }
     }
 
-    let itemsLastIndex = items.count - 1
     for i in 0..<items.count {
-      if i > 0 && i < itemsLastIndex && i != homeIndex {
-        let continueArrowView = NSBundle.mainBundle().loadNibNamed("ContinueArrowView", owner: self, options: nil).last as! ContinueArrowView
-        continueArrowView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(continueArrowView)
-        continueArrowViews["itemView-\(i)"] = continueArrowView
+      if i == homeIndex { continue }
+      let stage0ContinueArrowView = NSBundle.mainBundle().loadNibNamed("ContinueArrowView", owner: self, options: nil).last as! ContinueArrowView
+      stage0ContinueArrowView.translatesAutoresizingMaskIntoConstraints = false
+//      stage0ContinueArrowView.backgroundColor = UIColor.redColor()
+      continueArrowViews["itemViewStage0-\(i)"] = stage0ContinueArrowView
+
+      let stage1ContinueArrowView = NSBundle.mainBundle().loadNibNamed("ContinueArrowView", owner: self, options: nil).last as! ContinueArrowView
+      stage1ContinueArrowView.translatesAutoresizingMaskIntoConstraints = false
+//      stage1ContinueArrowView.backgroundColor = UIColor.greenColor()
+      continueArrowViews["itemViewStage1-\(i)"] = stage1ContinueArrowView
+
+      if (i < homeIndex) {
+        stage0ContinueArrowView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+        stage1ContinueArrowView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
       }
+
+      contentView.addSubview(stage0ContinueArrowView)
+      contentView.addSubview(stage1ContinueArrowView)
     }
   }
 
