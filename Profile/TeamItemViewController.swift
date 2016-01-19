@@ -16,7 +16,28 @@ class TeamItemViewController: ItemViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    if index < delegate.items.count - 1 {
+      gradientView = LinearGradientView(frame: CGRectZero)
+      gradientView?.backgroundColor = UIColor.clearColor()
+      view.addSubview(gradientView!)
+    }
+
     itemView.descriptionTopConstraint.constant = view.frame.height
+  }
+
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+
+    let gradientHeight: CGFloat = view.frame.height * 173 / 667
+    gradientView?.frame = CGRect(x: 0, y: view.frame.height - gradientHeight, width: view.frame.width, height: gradientHeight)
+  }
+
+  override func updateColors() {
+    super.updateColors()
+
+    gradientView?.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
+    gradientView?.toColor = UIColor.appPrimaryBackgroundColor()
   }
 
   func panDescriptionView(dy: CGFloat) {

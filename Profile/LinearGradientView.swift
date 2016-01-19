@@ -30,13 +30,22 @@ class LinearGradientView: UIView {
 
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    layer.addSublayer(gradientLayer)
-    setGradientLayerColors()
+    setupView()
+  }
+
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    setupView()
   }
 
   override func layoutSubviews() {
     super.layoutSubviews()
     gradientLayer.frame = bounds
+  }
+
+  func setupView() {
+    layer.addSublayer(gradientLayer)
+    setGradientLayerColors()
   }
 
   func setGradientLayerColors() {

@@ -14,14 +14,15 @@ class ItemViewController: PROViewController {
   // PROPERTIES
   // ==================================================
 
-  var itemView: ItemView!
-
   var data: [String: String]! {
     didSet {
       setupData()
     }
   }
+  weak var delegate: ContainerViewController!
+  var gradientView: LinearGradientView?
   var index = 0
+  var itemView: ItemView!
   var photoImage: UIImage?
 
   // ==================================================
@@ -29,13 +30,13 @@ class ItemViewController: PROViewController {
   // ==================================================
 
   override func viewDidLoad() {
+    super.viewDidLoad()
+
     itemView = NSBundle.mainBundle().loadNibNamed("ItemView", owner: self, options: nil).last as? ItemView
     itemView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(itemView)
     view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[subview]|", options: [], metrics: nil, views: ["subview": itemView]))
     view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[subview]|", options: [], metrics: nil, views: ["subview": itemView]))
-
-    super.viewDidLoad()
   }
 
   override func viewDidLayoutSubviews() {

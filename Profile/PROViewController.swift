@@ -16,9 +16,12 @@ class PROViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    updateColors()
     setupNotifcations()
+  }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    updateColors()
   }
 
   func updateColors() {

@@ -14,11 +14,9 @@ class ContainerViewController: PROViewController {
   // PROPERTIES
   // ==================================================
 
-  @IBOutlet weak var bottomGradientView: LinearGradientView!
   @IBOutlet weak var contactView: UIView!
   @IBOutlet weak var contentView: UIView!
   @IBOutlet weak var indexView: UIView!
-  @IBOutlet weak var topGradientView: LinearGradientView!
   @IBOutlet weak var scrollView: UIScrollView!
 
   @IBOutlet weak var contactViewTrailingConstraint: NSLayoutConstraint!
@@ -137,18 +135,19 @@ class ContainerViewController: PROViewController {
     for (i, item) in items.enumerate() {
       if item["title"] != "Home" {
         let itemViewController = i < homeIndex ? UIStoryboard.workItemViewController() : UIStoryboard.teamItemViewController()
+        itemViewController.delegate = self
+        itemViewController.index = i
         contentView.addSubview(itemViewController.view)
         addChildViewController(itemViewController)
         itemViewController.didMoveToParentViewController(self)
         itemViewController.data = item
-        itemViewController.index = i
         itemViewControllers.append(itemViewController)
       } else {
         let itemViewController = UIStoryboard.homeViewController()
+        itemViewController.index = homeIndex
         contentView.addSubview(itemViewController.view)
         addChildViewController(itemViewController)
         itemViewController.didMoveToParentViewController(self)
-        itemViewController.index = homeIndex
         itemViewControllers.append(itemViewController)
       }
     }
@@ -166,10 +165,6 @@ class ContainerViewController: PROViewController {
 
   override func updateColors() {
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
-    bottomGradientView.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
-    bottomGradientView.toColor = UIColor.appPrimaryBackgroundColor()
-    topGradientView.fromColor = UIColor.appPrimaryBackgroundColor()
-    topGradientView.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
   }
 
   // ==================================================
@@ -181,11 +176,6 @@ class ContainerViewController: PROViewController {
     UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
       self.scrollView.setContentOffset(CGPoint(x: 0, y: self.view.frame.height * CGFloat(self.currentIndex)), animated: false)
     }, completion: nil)
-
-    UIView.animateWithDuration(duration) { () -> Void in
-      self.topGradientView.alpha = self.currentIndex < self.homeIndex && (self.currentIndex > 0 || self.currentIndex == 0 && self.currentStage == 0) ? 1 : 0
-      self.bottomGradientView.alpha = self.currentIndex > self.homeIndex && (self.currentIndex < self.items.count-1 || self.currentIndex == self.items.count-1 && self.currentStage == 0) ? 1 : 0
-    }
   }
 
   func openCloseContact(open: Bool, animated: Bool) {

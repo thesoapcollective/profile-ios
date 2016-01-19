@@ -16,7 +16,28 @@ class WorkItemViewController: ItemViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    if index > 0 {
+      gradientView = LinearGradientView(frame: CGRectZero)
+      gradientView?.backgroundColor = UIColor.clearColor()
+      view.addSubview(gradientView!)
+    }
+
     itemView.descriptionTopConstraint.constant = -view.frame.height
+  }
+
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+
+    let gradientHeight: CGFloat = view.frame.height * 173 / 667
+    gradientView?.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: gradientHeight)
+  }
+
+  override func updateColors() {
+    super.updateColors()
+
+    gradientView?.fromColor = UIColor.appPrimaryBackgroundColor()
+    gradientView?.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
   }
 
   func panDescriptionView(dy: CGFloat) {
