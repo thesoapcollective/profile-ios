@@ -14,18 +14,7 @@ class ItemViewController: PROViewController {
   // PROPERTIES
   // ==================================================
 
-  @IBOutlet weak var descriptionContainerView: UIView!
-  @IBOutlet weak var descriptionLabel: UILabel!
-  @IBOutlet weak var gradientContainerView: UIView!
-  @IBOutlet weak var gradientView: RadialGradientView!
-  @IBOutlet weak var photoGrayscaleImageView: UIImageView!
-  @IBOutlet weak var photoImageView: UIImageView!
-  @IBOutlet weak var shortTitleLabel: UILabel!
-  @IBOutlet weak var titleLabel: UILabel!
-
-  @IBOutlet weak var descriptionTopConstraint: NSLayoutConstraint!
-  @IBOutlet weak var gradientTopConstraint: NSLayoutConstraint!
-  @IBOutlet weak var gradientTrailingConstraint: NSLayoutConstraint!
+  var itemView: ItemView!
 
   var data: [String: String]! {
     didSet {
@@ -40,8 +29,13 @@ class ItemViewController: PROViewController {
   // ==================================================
 
   override func viewDidLoad() {
+    itemView = NSBundle.mainBundle().loadNibNamed("ItemView", owner: self, options: nil).last as? ItemView
+    itemView.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(itemView)
+    view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[subview]|", options: [], metrics: nil, views: ["subview": itemView]))
+    view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[subview]|", options: [], metrics: nil, views: ["subview": itemView]))
+
     super.viewDidLoad()
-    descriptionContainerView.layer.borderWidth = 1
   }
 
   override func viewDidLayoutSubviews() {
@@ -49,8 +43,8 @@ class ItemViewController: PROViewController {
 
     if UIDevice.currentDevice().orientation == .Portrait || UIDevice.currentDevice().orientation == .PortraitUpsideDown {
       let gradientOffset: CGFloat = -view.frame.width * 0.9
-      gradientTopConstraint.constant = gradientOffset
-      gradientTrailingConstraint.constant = gradientOffset
+      itemView.gradientTopConstraint.constant = gradientOffset
+      itemView.gradientTrailingConstraint.constant = gradientOffset
       view.layoutIfNeeded()
     }
   }
@@ -58,28 +52,28 @@ class ItemViewController: PROViewController {
   func setupData() {
     let shortTitleText = NSMutableAttributedString(string: data["short_title"]!.uppercaseString)
     shortTitleText.addAttribute(NSKernAttributeName, value: 5, range: NSMakeRange(0, shortTitleText.length))
-    shortTitleLabel.attributedText = shortTitleText
+    itemView.shortTitleLabel.attributedText = shortTitleText
 
     let titleText = NSMutableAttributedString(string: data["title"]!.uppercaseString)
     titleText.addAttribute(NSKernAttributeName, value: 5, range: NSMakeRange(0, titleText.length))
-    titleLabel.attributedText = titleText
+    itemView.titleLabel.attributedText = titleText
 
-    descriptionLabel.text = data["description"]
+    itemView.descriptionLabel.text = data["description"]
     if let image = data["photo"] {
       photoImage = UIImage(named: image)
-      photoImageView.image = photoImage
-      photoGrayscaleImageView.image = photoImage?.tintedImage(UIColor.appPrimaryTextColor(), tintAlpha: 1, tintBlendMode: .Color)
+      itemView.photoImageView.image = photoImage
+      itemView.photoGrayscaleImageView.image = photoImage?.tintedImage(UIColor.appPrimaryTextColor(), tintAlpha: 1, tintBlendMode: .Color)
     }
   }
 
   override func updateColors() {
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
-    descriptionContainerView.layer.borderColor = UIColor.appPrimaryTextColor().colorWithAlphaComponent(0.75).CGColor
-    descriptionLabel.textColor = UIColor.appPrimaryTextColor()
-    gradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
-    gradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
-    shortTitleLabel.textColor = UIColor.appPrimaryTextColor()
-    titleLabel.textColor = UIColor.appPrimaryTextColor()
+    itemView.descriptionContainerView.layer.borderColor = UIColor.appPrimaryTextColor().colorWithAlphaComponent(0.75).CGColor
+    itemView.descriptionLabel.textColor = UIColor.appPrimaryTextColor()
+    itemView.gradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
+    itemView.gradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
+    itemView.shortTitleLabel.textColor = UIColor.appPrimaryTextColor()
+    itemView.titleLabel.textColor = UIColor.appPrimaryTextColor()
   }
 
   // ==================================================

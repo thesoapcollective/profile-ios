@@ -16,17 +16,17 @@ class TeamItemViewController: ItemViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    descriptionTopConstraint.constant = view.frame.height
+    itemView.descriptionTopConstraint.constant = view.frame.height
   }
 
   func panDescriptionView(dy: CGFloat) {
-    let newOffsetY: CGFloat = descriptionTopConstraint.constant + dy
+    let newOffsetY: CGFloat = itemView.descriptionTopConstraint.constant + dy
     if newOffsetY <= 0 {
-      descriptionTopConstraint.constant = 0
+      itemView.descriptionTopConstraint.constant = 0
     } else if newOffsetY >= view.frame.height {
-      descriptionTopConstraint.constant = view.frame.height
+      itemView.descriptionTopConstraint.constant = view.frame.height
     } else {
-      descriptionTopConstraint.constant = newOffsetY
+      itemView.descriptionTopConstraint.constant = newOffsetY
     }
     view.layoutIfNeeded()
   }
@@ -48,16 +48,16 @@ class TeamItemViewController: ItemViewController {
 
     if currentDirection == .Up {
       if currentIndex + 1 == index { // Panning up to this index
-        gradientContainerView.alpha = fadingInAlpha
-        photoImageView.alpha = fadingInAlpha
-        shortTitleLabel.alpha = fadingInAlpha
+        itemView.gradientContainerView.alpha = fadingInAlpha
+        itemView.photoImageView.alpha = fadingInAlpha
+        itemView.shortTitleLabel.alpha = fadingInAlpha
       } else if currentIndex == index { // Panning up on this index
         if currentStage == 0 { // Panning up on this index to stage 1
           panDescriptionView(dy)
-          descriptionContainerView.alpha = fadingInAlpha
-          photoGrayscaleImageView.alpha = Global.PhotoGrayscaleOpacity * fadingInAlpha
-          photoImageView.alpha = fadingOutAlpha
-          shortTitleLabel.alpha = fadingOutAlpha
+          itemView.descriptionContainerView.alpha = fadingInAlpha
+          itemView.photoGrayscaleImageView.alpha = Global.PhotoGrayscaleOpacity * fadingInAlpha
+          itemView.photoImageView.alpha = fadingOutAlpha
+          itemView.shortTitleLabel.alpha = fadingOutAlpha
         } else { // Panning up on this index to next index
           // Do nothing.
         }
@@ -67,15 +67,15 @@ class TeamItemViewController: ItemViewController {
         // Do nothing.
       } else if currentIndex == index { // Panning down on this index
         if currentStage == 0 { // Panning down on this index to previous index
-          gradientContainerView.alpha = fadingOutAlpha
-          photoImageView.alpha = fadingOutAlpha
-          shortTitleLabel.alpha = fadingOutAlpha
+          itemView.gradientContainerView.alpha = fadingOutAlpha
+          itemView.photoImageView.alpha = fadingOutAlpha
+          itemView.shortTitleLabel.alpha = fadingOutAlpha
         } else { // Panning down on this index to stage 0
           panDescriptionView(dy)
-          descriptionContainerView.alpha = fadingOutAlpha
-          photoGrayscaleImageView.alpha = Global.PhotoGrayscaleOpacity * fadingOutAlpha
-          photoImageView.alpha = fadingInAlpha
-          shortTitleLabel.alpha = fadingInAlpha
+          itemView.descriptionContainerView.alpha = fadingOutAlpha
+          itemView.photoGrayscaleImageView.alpha = Global.PhotoGrayscaleOpacity * fadingOutAlpha
+          itemView.photoImageView.alpha = fadingInAlpha
+          itemView.shortTitleLabel.alpha = fadingInAlpha
         }
       }
     }
@@ -108,16 +108,16 @@ class TeamItemViewController: ItemViewController {
     }
 
     UIView.animateWithDuration(0.3, animations: { () -> Void in
-      self.descriptionContainerView.alpha = alpha
-      self.gradientContainerView.alpha = alpha
-      self.photoGrayscaleImageView.alpha = stage1Alpha
-      self.photoImageView.alpha = stage0Alpha
-      self.shortTitleLabel.alpha = stage0Alpha
+      self.itemView.descriptionContainerView.alpha = alpha
+      self.itemView.gradientContainerView.alpha = alpha
+      self.itemView.photoGrayscaleImageView.alpha = stage1Alpha
+      self.itemView.photoImageView.alpha = stage0Alpha
+      self.itemView.shortTitleLabel.alpha = stage0Alpha
     })
 
     view.layoutIfNeeded()
     UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
-      self.descriptionTopConstraint.constant = descriptionTopConstraint
+      self.itemView.descriptionTopConstraint.constant = descriptionTopConstraint
       self.view.layoutIfNeeded()
     }, completion: nil)
   }
