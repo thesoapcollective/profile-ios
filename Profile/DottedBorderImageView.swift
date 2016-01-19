@@ -27,6 +27,10 @@ class DottedBorderImageView: UIImageView {
     didSet { updateImage() }
   }
 
+  @IBInspectable var isVertical: Bool = false {
+    didSet { updateImage() }
+  }
+
   // ==================================================
   // METHODS
   // ==================================================
@@ -42,13 +46,22 @@ class DottedBorderImageView: UIImageView {
     let dashes: [CGFloat] = [0, dotDoubleSize]
 
     let path = UIBezierPath()
-    path.moveToPoint(CGPointMake(size, dotHalfSize))
-    path.addLineToPoint(CGPointMake(dotDoubleSize * num, dotHalfSize))
+    if isVertical {
+      path.moveToPoint(CGPointMake(dotHalfSize, size))
+      path.addLineToPoint(CGPointMake(dotHalfSize, dotDoubleSize * num))
+    } else {
+      path.moveToPoint(CGPointMake(size, dotHalfSize))
+      path.addLineToPoint(CGPointMake(dotDoubleSize * num, dotHalfSize))
+    }
     path.lineWidth = size
     path.setLineDash(dashes, count: dashes.count, phase: 0)
     path.lineCapStyle = CGLineCap.Round
 
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(dotDoubleSize * num, size), false, 0)
+    if isVertical {
+      UIGraphicsBeginImageContextWithOptions(CGSizeMake(size, dotDoubleSize * num), false, 0)
+    } else {
+      UIGraphicsBeginImageContextWithOptions(CGSizeMake(dotDoubleSize * num, size), false, 0)
+    }
     color.setStroke()
     path.stroke()
     let dottedImage = UIGraphicsGetImageFromCurrentImageContext()

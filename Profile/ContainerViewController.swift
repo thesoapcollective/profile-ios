@@ -45,6 +45,7 @@ class ContainerViewController: PROViewController {
     ["title": "Home"]
   ]
   var itemViewControllers = [UIViewController]()
+  var continueArrowViews = [String: ContinueArrowView]()
 
   // ==================================================
   // METHODS
@@ -87,6 +88,10 @@ class ContainerViewController: PROViewController {
       view.layoutIfNeeded()
       for (i, itemViewController) in itemViewControllers.enumerate() {
         itemViewController.view.frame = CGRect(x: 0, y: view.frame.height * CGFloat(i), width: view.frame.width, height: view.frame.height)
+
+        if let continueArrowView = continueArrowViews["itemView-\(i)"] {
+          continueArrowView.frame = CGRect(x: 17, y: view.frame.height * CGFloat(i), width: 40, height: 55)
+        }
       }
     }
   }
@@ -145,6 +150,16 @@ class ContainerViewController: PROViewController {
         itemViewController.didMoveToParentViewController(self)
         itemViewController.index = homeIndex
         itemViewControllers.append(itemViewController)
+      }
+    }
+
+    let itemsLastIndex = items.count - 1
+    for i in 0..<items.count {
+      if i > 0 && i < itemsLastIndex && i != homeIndex {
+        let continueArrowView = NSBundle.mainBundle().loadNibNamed("ContinueArrowView", owner: self, options: nil).last as! ContinueArrowView
+        continueArrowView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(continueArrowView)
+        continueArrowViews["itemView-\(i)"] = continueArrowView
       }
     }
   }
