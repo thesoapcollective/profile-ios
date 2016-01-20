@@ -20,7 +20,6 @@ class ContainerViewController: PROViewController {
   @IBOutlet weak var scrollView: UIScrollView!
 
   @IBOutlet weak var contactViewTrailingConstraint: NSLayoutConstraint!
-  @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var indexViewLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var scrollViewLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var scrollViewTrailingConstraint: NSLayoutConstraint!
@@ -76,15 +75,6 @@ class ContainerViewController: PROViewController {
         "currentStage": currentStage
       ]
     )
-  }
-
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-
-    if UIDevice.currentDevice().orientation == .Portrait || UIDevice.currentDevice().orientation == .PortraitUpsideDown {
-      contentHeightConstraint.constant = view.frame.height * CGFloat(items.count)
-      view.layoutIfNeeded()
-    }
   }
 
   override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
@@ -173,11 +163,14 @@ class ContainerViewController: PROViewController {
       }
     }
 
+    contentView.translatesAutoresizingMaskIntoConstraints = false
+    scrollView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[subview(height)]", options: [], metrics: ["height": view.frame.height * CGFloat(items.count)], views: ["subview": contentView]))
+
+    // Setup arrow contraints
     let arrowWidth: CGFloat = 40
     let arrowHeight: CGFloat = 55
     let arrowOffset: CGFloat = 25
     let arrowMargin: CGFloat = 17
-
     for i in 0..<items.count {
       if i == homeIndex { continue }
       let stage0ContinueArrowView = NSBundle.mainBundle().loadNibNamed("ContinueArrowView", owner: self, options: nil).last as! ContinueArrowView

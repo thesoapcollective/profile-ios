@@ -34,7 +34,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7z-s1-1ab">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="600" id="YJ3-Jt-odc"/>
+                                            <constraint firstAttribute="height" constant="600" placeholder="YES" id="YJ3-Jt-odc"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -82,7 +82,6 @@
                     <connections>
                         <outlet property="contactView" destination="lYe-vb-7tD" id="eQo-fN-HUB"/>
                         <outlet property="contactViewTrailingConstraint" destination="0Zb-HD-ZU8" id="wZ9-Uw-Vm9"/>
-                        <outlet property="contentHeightConstraint" destination="YJ3-Jt-odc" id="kKz-N6-llk"/>
                         <outlet property="contentView" destination="a7z-s1-1ab" id="AVu-Cq-tji"/>
                         <outlet property="indexView" destination="kdA-sB-O3b" id="iSH-1W-Ap7"/>
                         <outlet property="indexViewLeadingConstraint" destination="2O0-W2-QGJ" id="BKV-S6-9dU"/>
