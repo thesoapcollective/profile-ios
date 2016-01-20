@@ -84,9 +84,6 @@ class ContainerViewController: PROViewController {
     if UIDevice.currentDevice().orientation == .Portrait || UIDevice.currentDevice().orientation == .PortraitUpsideDown {
       contentHeightConstraint.constant = view.frame.height * CGFloat(items.count)
       view.layoutIfNeeded()
-      for (i, itemViewController) in itemViewControllers.enumerate() {
-        itemViewController.view.frame = CGRect(x: 0, y: view.frame.height * CGFloat(i), width: view.frame.width, height: view.frame.height)
-      }
     }
   }
 
@@ -138,6 +135,20 @@ class ContainerViewController: PROViewController {
         itemViewController.didMoveToParentViewController(self)
         itemViewController.data = item
         itemViewControllers.append(itemViewController)
+
+        itemViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+          "H:|[subview(width)]",
+          options: [],
+          metrics: ["width": view.frame.width],
+          views: ["subview": itemViewController.view])
+        )
+        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+          "V:|-padding-[subview(height)]",
+          options: [],
+          metrics: ["height": view.frame.height, "padding": view.frame.height * CGFloat(itemViewController.index)],
+          views: ["subview": itemViewController.view])
+        )
       } else {
         let itemViewController = UIStoryboard.homeViewController()
         itemViewController.index = homeIndex
@@ -145,6 +156,20 @@ class ContainerViewController: PROViewController {
         addChildViewController(itemViewController)
         itemViewController.didMoveToParentViewController(self)
         itemViewControllers.append(itemViewController)
+
+        itemViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+          "H:|[subview(width)]",
+          options: [],
+          metrics: ["width": view.frame.width],
+          views: ["subview": itemViewController.view])
+        )
+        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+          "V:|-padding-[subview(height)]",
+          options: [],
+          metrics: ["height": view.frame.height, "padding": view.frame.height * CGFloat(itemViewController.index)],
+          views: ["subview": itemViewController.view])
+        )
       }
     }
 
