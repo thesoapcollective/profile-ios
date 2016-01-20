@@ -98,7 +98,6 @@
         <!--Work Item View Controller-->
         <scene sceneID="BOL-IW-JmR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="l92-pX-d2s" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="WorkItemViewController" id="OHM-dJ-Exu" customClass="WorkItemViewController" customModule="Profile" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u3b-ds-zKI"/>
@@ -109,6 +108,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l92-pX-d2s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1864" y="1035"/>
         </scene>
