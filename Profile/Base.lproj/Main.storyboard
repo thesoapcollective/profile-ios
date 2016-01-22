@@ -144,13 +144,13 @@
                                 <rect key="frame" x="218" y="275" width="165" height="50"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UdF-st-ED4">
-                                <rect key="frame" x="0.0" y="47" width="35" height="10"/>
+                                <rect key="frame" x="0.0" y="32" width="35" height="40"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="hamburgerIcon" translatesAutoresizingMaskIntoConstraints="NO" id="NyE-9l-Tui">
-                                        <rect key="frame" x="26" y="0.0" width="9" height="10"/>
+                                        <rect key="frame" x="26" y="0.0" width="9" height="40"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ITL-Rq-etR" customClass="DottedBorderImageView" customModule="Profile" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="4" width="20" height="1"/>
+                                        <rect key="frame" x="0.0" y="19" width="20" height="1"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="dotColor">
                                                 <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -167,7 +167,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="NyE-9l-Tui" secondAttribute="trailing" id="0jl-Ph-boj"/>
                                     <constraint firstItem="NyE-9l-Tui" firstAttribute="top" secondItem="UdF-st-ED4" secondAttribute="top" id="6aK-b1-lP6"/>
-                                    <constraint firstAttribute="height" constant="10" id="NSz-19-0I8"/>
+                                    <constraint firstAttribute="height" constant="40" id="NSz-19-0I8"/>
                                     <constraint firstAttribute="bottom" secondItem="NyE-9l-Tui" secondAttribute="bottom" id="NaD-FD-mJh"/>
                                     <constraint firstItem="ITL-Rq-etR" firstAttribute="leading" secondItem="UdF-st-ED4" secondAttribute="leading" id="f4J-pL-ON7"/>
                                     <constraint firstItem="ITL-Rq-etR" firstAttribute="centerY" secondItem="UdF-st-ED4" secondAttribute="centerY" id="m2m-vD-qIn"/>
@@ -175,13 +175,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cwS-Ww-8vs">
-                                <rect key="frame" x="565" y="563" width="35" height="10"/>
+                                <rect key="frame" x="565" y="548" width="35" height="40"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="mailIcon" translatesAutoresizingMaskIntoConstraints="NO" id="wJg-gx-y45">
-                                        <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="10" height="40"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DEn-ob-0fk" customClass="DottedBorderImageView" customModule="Profile" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="4" width="20" height="1"/>
+                                        <rect key="frame" x="15" y="19" width="20" height="1"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="dotColor">
                                                 <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -202,17 +202,17 @@
                                     <constraint firstItem="wJg-gx-y45" firstAttribute="leading" secondItem="cwS-Ww-8vs" secondAttribute="leading" id="d1D-ot-xV1"/>
                                     <constraint firstItem="DEn-ob-0fk" firstAttribute="centerY" secondItem="cwS-Ww-8vs" secondAttribute="centerY" id="kqj-b8-rp6"/>
                                     <constraint firstItem="wJg-gx-y45" firstAttribute="top" secondItem="cwS-Ww-8vs" secondAttribute="top" id="oJ8-nA-1Ts"/>
-                                    <constraint firstAttribute="height" constant="10" id="qh2-7m-dhU"/>
+                                    <constraint firstAttribute="height" constant="40" id="qh2-7m-dhU"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="UdF-st-ED4" firstAttribute="top" secondItem="DoL-OU-1td" secondAttribute="bottom" constant="27" id="1Iy-IW-Xb4"/>
+                            <constraint firstItem="UdF-st-ED4" firstAttribute="top" secondItem="DoL-OU-1td" secondAttribute="bottom" constant="12" id="1Iy-IW-Xb4"/>
                             <constraint firstAttribute="trailing" secondItem="8Fl-WL-qpH" secondAttribute="trailing" id="1jo-Rw-slR"/>
                             <constraint firstAttribute="trailing" secondItem="cwS-Ww-8vs" secondAttribute="trailing" id="6yr-Zr-EmR"/>
                             <constraint firstItem="8Fl-WL-qpH" firstAttribute="leading" secondItem="gFa-hb-b4T" secondAttribute="leading" id="DwX-g1-pve"/>
                             <constraint firstItem="8Fl-WL-qpH" firstAttribute="top" secondItem="DoL-OU-1td" secondAttribute="bottom" id="Kca-mV-RrU"/>
-                            <constraint firstItem="Cdk-tx-w7e" firstAttribute="top" secondItem="cwS-Ww-8vs" secondAttribute="bottom" constant="27" id="cu7-UR-NWL"/>
+                            <constraint firstItem="Cdk-tx-w7e" firstAttribute="top" secondItem="cwS-Ww-8vs" secondAttribute="bottom" constant="12" id="cu7-UR-NWL"/>
                             <constraint firstItem="Y5r-de-PYV" firstAttribute="centerY" secondItem="gFa-hb-b4T" secondAttribute="centerY" id="hEm-Bw-sSg"/>
                             <constraint firstItem="Cdk-tx-w7e" firstAttribute="top" secondItem="8Fl-WL-qpH" secondAttribute="bottom" id="jFT-31-0oL"/>
                             <constraint firstItem="Y5r-de-PYV" firstAttribute="centerX" secondItem="gFa-hb-b4T" secondAttribute="centerX" id="mzl-CI-VrO"/>
