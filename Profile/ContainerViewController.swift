@@ -86,6 +86,17 @@ class ContainerViewController: PROViewController {
            UIDevice.currentDevice().orientation == .PortraitUpsideDown
   }
 
+  override func updateColors() {
+    view.backgroundColor = UIColor.appPrimaryBackgroundColor()
+  }
+
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "ContainerToIndex" {
+      let vc = segue.destinationViewController as! IndexViewController
+      vc.delegate = self
+    }
+  }
+
   func setupData() {
     setupWorkData()
     setupTeamData()
@@ -273,10 +284,6 @@ class ContainerViewController: PROViewController {
         )
       }
     }
-  }
-
-  override func updateColors() {
-    view.backgroundColor = UIColor.appPrimaryBackgroundColor()
   }
 
   // ==================================================
@@ -475,7 +482,6 @@ class ContainerViewController: PROViewController {
       isPanningContact = false
       isPanningIndex = false
       currentDirection = .None
-
       break
 
     default:

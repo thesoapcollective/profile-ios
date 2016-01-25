@@ -7,30 +7,36 @@
 		<string>Logan Dwight</string>
 		<key>short_title</key>
 		<string>Logan</string>
-		<key>photo</key>
-		<string>logan_day_01</string>
 		<key>description</key>
 		<string>Curabitur blandit tempus porttitor. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Sed posuere consectetur est at lobortis. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</string>
+		<key>photo</key>
+		<string>logan_day_01</string>
+		<key>icon</key>
+		<string>role_icon</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>Logan Dwight</string>
 		<key>short_title</key>
 		<string>Logan</string>
-		<key>photo</key>
-		<string>logan_day_02</string>
 		<key>description</key>
 		<string>Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</string>
+		<key>photo</key>
+		<string>logan_day_02</string>
+		<key>icon</key>
+		<string>role_icon</string>
 	</dict>
 	<dict>
 		<key>title</key>
 		<string>Logan Dwight</string>
 		<key>short_title</key>
 		<string>Logan</string>
-		<key>photo</key>
-		<string>logan_day_03</string>
 		<key>description</key>
 		<string>Donec id elit non mi porta gravida at eget metus. Cras mattis consectetur purus sit amet fermentum. Maecenas sed diam eget risus varius blandit sit amet non magna. Sed posuere consectetur est at lobortis.</string>
+		<key>photo</key>
+		<string>logan_day_03</string>
+		<key>icon</key>
+		<string>role_icon</string>
 	</dict>
 	<dict>
 		<key>title</key>
@@ -38,7 +44,11 @@
 		<key>short_title</key>
 		<string>Ian</string>
 		<key>description</key>
-		<string>Curabitur blandit tempus porttitor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Maecenas sed diam eget risus varius blandit sit amet non magna. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</string>
+		<string>Curabitur blandit tempus porttitor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+
+Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Maecenas sed diam eget risus varius blandit sit amet non magna. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</string>
+		<key>icon</key>
+		<string>role_icon</string>
 	</dict>
 	<dict>
 		<key>title</key>
@@ -46,7 +56,11 @@
 		<key>short_title</key>
 		<string>Jarreau</string>
 		<key>description</key>
-		<string>Curabitur blandit tempus porttitor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Maecenas sed diam eget risus varius blandit sit amet non magna. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</string>
+		<string>Curabitur blandit tempus porttitor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+
+Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis interdum. Maecenas sed diam eget risus varius blandit sit amet non magna. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</string>
+		<key>icon</key>
+		<string>role_icon</string>
 	</dict>
 </array>
 </plist>
