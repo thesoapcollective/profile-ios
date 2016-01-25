@@ -6,6 +6,7 @@
 //  Copyright © 2015 The Soap Collective. All rights reserved.
 //
 
+import SwiftyJSON
 import UIKit
 
 class ItemViewController: PROViewController {
@@ -14,7 +15,7 @@ class ItemViewController: PROViewController {
   // PROPERTIES
   // ==================================================
 
-  var data: [String: String]! {
+  var data: JSON! {
     didSet {
       setupData()
     }
@@ -51,16 +52,16 @@ class ItemViewController: PROViewController {
   }
 
   func setupData() {
-    let shortTitleText = NSMutableAttributedString(string: data["short_title"]!.uppercaseString)
+    let shortTitleText = NSMutableAttributedString(string: data["short_title"].stringValue.uppercaseString)
     shortTitleText.addAttribute(NSKernAttributeName, value: 5, range: NSMakeRange(0, shortTitleText.length))
     itemView.shortTitleLabel.attributedText = shortTitleText
 
-    let titleText = NSMutableAttributedString(string: data["title"]!.uppercaseString)
+    let titleText = NSMutableAttributedString(string: data["title"].stringValue.uppercaseString)
     titleText.addAttribute(NSKernAttributeName, value: 5, range: NSMakeRange(0, titleText.length))
     itemView.titleLabel.attributedText = titleText
 
-    itemView.descriptionLabel.text = data["description"]
-    if let image = data["photo"] {
+    itemView.descriptionLabel.text = data["description"].stringValue
+    if let image = data["photo"].string {
       photoImage = UIImage(named: image)
       itemView.photoImageView.image = photoImage
       itemView.photoGrayscaleImageView.image = photoImage?.tintedImage(UIColor.appPrimaryTextColor(), tintAlpha: 1, tintBlendMode: .Color)

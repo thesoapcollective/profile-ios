@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class IndexViewController: PROViewController {
 
@@ -22,18 +23,7 @@ class IndexViewController: PROViewController {
 
   weak var delegate: ContainerViewController!
 
-  var items: [[String: String]] {
-    var uniqueItems = [[String: String]]()
-    for (i, item) in delegate.items.enumerate() {
-      let index = uniqueItems.indexOf({ $0["title"] == item["title"] })
-      if index == nil {
-        var indexedItem = item
-        indexedItem["index"] = String(i)
-        uniqueItems.append(indexedItem)
-      }
-    }
-    return uniqueItems
-  }
+  var items = [JSON]()
 
   // ==================================================
   // METHODS
@@ -43,6 +33,33 @@ class IndexViewController: PROViewController {
     view.backgroundColor = UIColor.appInvertedPrimaryBackgroundColor()
     teamLabel.textColor = UIColor.appInvertedSecondaryTextColor()
     workLabel.textColor = UIColor.appInvertedSecondaryTextColor()
+    tableView.reloadData()
+  }
+
+  // ==================================================
+  // NOTIFICATIONS
+  // ==================================================
+
+  override func setupNotifcations() {
+    super.setupNotifcations()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataLoaded:", name: Global.DataLoaded, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollEnded:", name: Global.ScrollEndedNotification, object: nil)
+  }
+
+  func dataLoaded(notification: NSNotification) {
+    for (i, item) in delegate.items.enumerate() {
+      if let index = items.indexOf({ $0["title"].stringValue == item["title"].stringValue }) {
+        items[index]["indexes"].arrayObject = items[index]["indexes"].arrayObject! + [i]
+      } else {
+        var indexedItem = item
+        indexedItem["indexes"].arrayObject = [i]
+        items.append(indexedItem)
+      }
+    }
+    tableView.reloadData()
+  }
+
+  func scrollEnded(notification: NSNotification) {
     tableView.reloadData()
   }
 
@@ -64,14 +81,14 @@ extension IndexViewController: UITableViewDataSource {
     let cell = tableView.dequeueReusableCellWithIdentifier("IndexTableViewCell", forIndexPath: indexPath) as! IndexTableViewCell
     let item = items[indexPath.row]
 
-    cell.titleLabel.text = item["title"]
+    cell.titleLabel.text = item["title"].stringValue
     if indexPath.row == delegate.homeIndex {
       cell.iconImageView.image = UIImage(named: "homeIcon")?.imageWithRenderingMode(.AlwaysTemplate)
-    } else if let iconName = item["icon"] {
+    } else if let iconName = item["icon"].string {
       cell.iconImageView.image = UIImage(named: iconName)
     }
-    cell.iconDottedBorderView.hidden = item["index"] != String(delegate.currentIndex)
-    cell.bottomDottedBorderView.hidden = item["index"] == String(delegate.items.count - 1)
+    cell.iconDottedBorderView.hidden = !item["indexes"].arrayValue.contains(JSON(delegate.currentIndex))
+    cell.bottomDottedBorderView.hidden = item["indexes"].arrayValue.contains(JSON(delegate.items.count - 1))
 
     cell.tintColor = UIColor.appInvertedPrimaryTextColor()
     cell.titleLabel.textColor = UIColor.appInvertedPrimaryTextColor()

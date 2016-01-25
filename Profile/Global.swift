@@ -18,6 +18,7 @@ struct Global {
   static let CloseContactNotification = "CloseContactNotification"
   static let CloseIndexNotification = "CloseIndexNotification"
   static let ContactStateChanged = "ContactStatedChanged"
+  static let DataLoaded = "DataLoaded"
   static let IndexStateChanged = "IndexStateChanged"
   static let OpenContactNotification = "OpenContactNotification"
   static let OpenIndexNotification = "OpenIndexNotification"

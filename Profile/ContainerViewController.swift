@@ -6,6 +6,7 @@
 //  Copyright © 2015 The Soap Collective. All rights reserved.
 //
 
+import SwiftyJSON
 import UIKit
 
 class ContainerViewController: PROViewController {
@@ -38,7 +39,7 @@ class ContainerViewController: PROViewController {
   var panDx: CGFloat = 0
   var panDy: CGFloat = 0
 
-  var items = [
+  var items: [JSON] = [
     ["title": "Home"]
   ]
   var itemViewControllers = [UIViewController]()
@@ -100,15 +101,15 @@ class ContainerViewController: PROViewController {
   func setupData() {
     setupWorkData()
     setupTeamData()
+    NSNotificationCenter.defaultCenter().postNotificationName(Global.DataLoaded, object: nil)
   }
 
   func setupWorkData() {
     guard let path = NSBundle.mainBundle().pathForResource("WorkData", ofType: "plist") else { return }
     guard let dataArray = NSArray(contentsOfFile: path) else { return }
 
-    for d in dataArray {
-      let data = d as! NSDictionary
-      items.insert(data as! [String: String], atIndex: 0)
+    for data in dataArray {
+      items.insert(JSON(data), atIndex: 0)
     }
 
     homeIndex = dataArray.count
@@ -119,15 +120,14 @@ class ContainerViewController: PROViewController {
     guard let path = NSBundle.mainBundle().pathForResource("TeamData", ofType: "plist") else { return }
     guard let dataArray = NSArray(contentsOfFile: path) else { return }
 
-    for d in dataArray {
-      let data = d as! NSDictionary
-      items.append(data as! [String: String])
+    for data in dataArray {
+      items.append(JSON(data))
     }
   }
 
   func setupInitialViewControllers() {
     for (i, item) in items.enumerate() {
-      if item["title"] != "Home" {
+      if item["title"].stringValue != "Home" {
         let itemViewController = i < homeIndex ? UIStoryboard.workItemViewController() : UIStoryboard.teamItemViewController()
         itemViewController.delegate = self
         itemViewController.index = i
