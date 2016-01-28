@@ -21,9 +21,6 @@ class ItemViewController: PROViewController {
     }
   }
   weak var delegate: ContainerViewController!
-  var topGradientView: LinearGradientView?
-  var bottomGradientView: LinearGradientView?
-  var descriptionGradientView: LinearGradientView?
   var index = 0
   var itemView: ItemView!
   var photoImage: UIImage?
@@ -73,6 +70,7 @@ class ItemViewController: PROViewController {
   override func updateColors() {
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
     itemView.descriptionContainerView.layer.borderColor = UIColor.appPrimaryTextColor().colorWithAlphaComponent(0.75).CGColor
+    itemView.descriptionPositionView.backgroundColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0.9)
     itemView.descriptionLabel.textColor = UIColor.appPrimaryTextColor()
     itemView.radialGradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
     itemView.radialGradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)

@@ -17,37 +17,37 @@ class WorkItemViewController: ItemViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    if index > 0 {
-      topGradientView = LinearGradientView(frame: CGRectZero)
-      topGradientView?.backgroundColor = UIColor.clearColor()
-      view.addSubview(topGradientView!)
-    }
-
+    itemView.topGradientView.hidden = index <= 0
     itemView.descriptionTopConstraint.constant = -view.frame.height
-  }
-
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-
-    let gradientHeight: CGFloat = view.frame.height * 173 / 667
-    topGradientView?.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: gradientHeight)
+    itemView.descriptionGradientBottomConstraint.constant = view.frame.height - itemView.descriptionGradientView.frame.height
+    itemView.topGradientTopConstraint.constant = -view.frame.height
   }
 
   override func updateColors() {
     super.updateColors()
 
-    topGradientView?.fromColor = UIColor.appPrimaryBackgroundColor()
-    topGradientView?.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
+    itemView.topGradientView.fromColor = UIColor.appPrimaryBackgroundColor()
+    itemView.topGradientView.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
+    itemView.bottomGradientView.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
+    itemView.bottomGradientView.toColor = UIColor.appPrimaryBackgroundColor()
+    itemView.descriptionGradientView.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0.9)
+    itemView.descriptionGradientView.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
   }
 
   func panDescriptionView(dy: CGFloat) {
     let newOffsetY: CGFloat = itemView.descriptionTopConstraint.constant + dy
     if newOffsetY >= 0 {
+      itemView.descriptionGradientBottomConstraint.constant = -itemView.descriptionGradientView.frame.height
       itemView.descriptionTopConstraint.constant = 0
+      itemView.topGradientTopConstraint.constant = -view.frame.height
     } else if newOffsetY <= -view.frame.height {
+      itemView.descriptionGradientBottomConstraint.constant = view.frame.height - itemView.descriptionGradientView.frame.height
       itemView.descriptionTopConstraint.constant = -view.frame.height
+      itemView.topGradientTopConstraint.constant = 0
     } else {
+      itemView.descriptionGradientBottomConstraint.constant = itemView.descriptionGradientBottomConstraint.constant - dy
       itemView.descriptionTopConstraint.constant = newOffsetY
+      itemView.topGradientTopConstraint.constant = itemView.topGradientTopConstraint.constant + dy
     }
     view.layoutIfNeeded()
   }
@@ -75,10 +75,13 @@ class WorkItemViewController: ItemViewController {
           itemView.radialGradientContainerView.alpha = fadingOutAlpha
           itemView.photoImageView.alpha = fadingOutAlpha
           itemView.shortTitleLabel.alpha = fadingOutAlpha
+          UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.itemView.bottomGradientView.alpha = 1
+          })
         } else { // Panning up on this index to stage 0
           panDescriptionView(dy)
           itemView.descriptionContainerView.alpha = fadingOutAlpha
-          itemView.photoGrayscaleImageView.alpha = Global.PhotoGrayscaleOpacity * fadingOutAlpha
+          itemView.photoGrayscaleImageView.alpha = fadingOutAlpha
           itemView.photoImageView.alpha = fadingInAlpha
           itemView.shortTitleLabel.alpha = fadingInAlpha
         }
@@ -92,7 +95,7 @@ class WorkItemViewController: ItemViewController {
         if currentStage == 0 { // Panning down on this index to stage 1
           panDescriptionView(dy)
           itemView.descriptionContainerView.alpha = fadingInAlpha
-          itemView.photoGrayscaleImageView.alpha = Global.PhotoGrayscaleOpacity * fadingInAlpha
+          itemView.photoGrayscaleImageView.alpha = fadingInAlpha
           itemView.photoImageView.alpha = fadingOutAlpha
           itemView.shortTitleLabel.alpha = fadingOutAlpha
         } else { // Panning down on this index to previous index
@@ -109,23 +112,35 @@ class WorkItemViewController: ItemViewController {
     var alpha: CGFloat!
     var stage0Alpha: CGFloat!
     var stage1Alpha: CGFloat!
+    var bottomGradientAlpha: CGFloat!
     var descriptionTopConstraint: CGFloat!
+    var descriptionGradientBottomConstraint: CGFloat!
+    var topGradientConstraint: CGFloat!
 
     if currentIndex + 1 == index {
       alpha = 1
+      bottomGradientAlpha = 0
       stage0Alpha = 0
-      stage1Alpha = Global.PhotoGrayscaleOpacity
+      stage1Alpha = 1
       descriptionTopConstraint = 0
+      descriptionGradientBottomConstraint = -itemView.descriptionGradientView.frame.height
+      topGradientConstraint = 0
     } else if currentIndex - 1 == index {
       alpha = 0
+      bottomGradientAlpha = 1
       stage0Alpha = 0
       stage1Alpha = 0
-      descriptionTopConstraint = 0
+      descriptionTopConstraint = -view.frame.height
+      descriptionGradientBottomConstraint = view.frame.height - itemView.descriptionGradientView.frame.height
+      topGradientConstraint = -view.frame.height
     } else {
       alpha = 1
+      bottomGradientAlpha = 0
       stage0Alpha = currentStage == 0 ? 1 : 0
-      stage1Alpha = currentStage == 1 ? Global.PhotoGrayscaleOpacity : 0
+      stage1Alpha = currentStage == 1 ? 1 : 0
       descriptionTopConstraint = currentStage == 0 ? -view.frame.height : 0
+      descriptionGradientBottomConstraint = currentStage == 0 ? view.frame.height - itemView.descriptionGradientView.frame.height : -itemView.descriptionGradientView.frame.height
+      topGradientConstraint = currentStage == 0 ? -view.frame.height : 0
     }
 
     UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -134,11 +149,14 @@ class WorkItemViewController: ItemViewController {
       self.itemView.photoGrayscaleImageView.alpha = stage1Alpha
       self.itemView.photoImageView.alpha = stage0Alpha
       self.itemView.shortTitleLabel.alpha = stage0Alpha
+      self.itemView.bottomGradientView.alpha = bottomGradientAlpha
     })
 
     view.layoutIfNeeded()
     UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
       self.itemView.descriptionTopConstraint.constant = descriptionTopConstraint
+      self.itemView.descriptionGradientBottomConstraint.constant = descriptionGradientBottomConstraint
+      self.itemView.topGradientTopConstraint.constant = topGradientConstraint
       self.view.layoutIfNeeded()
       }, completion: nil)
   }
