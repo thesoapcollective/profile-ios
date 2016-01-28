@@ -65,7 +65,35 @@ class IndexViewController: PROViewController {
 
 }
 
-extension IndexViewController: UITableViewDelegate {}
+extension IndexViewController: UITableViewDelegate {
+
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let item = items[indexPath.row]
+    for (i, delegateItem) in delegate.items.enumerate() {
+      if delegateItem["title"].stringValue == item["title"].stringValue {
+        delegate.openCloseIndex(false, animated: true, completion: { [unowned self] () -> Void in
+          self.delegate.currentIndex = i
+          self.delegate.currentStage = 0
+          self.delegate.snapContent(true)
+          NSNotificationCenter.defaultCenter().postNotificationName(
+            Global.ScrollEndedNotification,
+            object: nil,
+            userInfo: [
+              "dy": 0,
+              "panDy": 0,
+              "dyThreshold": 0,
+              "currentDirection": 0,
+              "currentIndex": i,
+              "currentStage": 0
+            ]
+          )
+        })
+        break
+      }
+    }
+  }
+
+}
 
 extension IndexViewController: UITableViewDataSource {
 
@@ -81,7 +109,7 @@ extension IndexViewController: UITableViewDataSource {
     let cell = tableView.dequeueReusableCellWithIdentifier("IndexTableViewCell", forIndexPath: indexPath) as! IndexTableViewCell
     let item = items[indexPath.row]
 
-    cell.titleLabel.text = item["title"].stringValue
+    cell.titleLabel.text = item["index_title"].stringValue
     if indexPath.row == delegate.homeIndex {
       cell.iconImageView.image = UIImage(named: "homeIcon")?.imageWithRenderingMode(.AlwaysTemplate)
     } else if let iconName = item["icon"].string {

@@ -7,6 +7,8 @@
 		<string>Role - A Storytelling Party Game!</string>
 		<key>short_title</key>
 		<string>Role</string>
+		<key>index_title</key>
+		<string>Role</string>
 		<key>description</key>
 		<string>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</string>
 		<key>photo</key>
@@ -18,6 +20,8 @@
 		<key>title</key>
 		<string>Weird Catalog</string>
 		<key>short_title</key>
+		<string>Weird Catalog</string>
+		<key>index_title</key>
 		<string>Weird Catalog</string>
 		<key>description</key>
 		<string>Curabitur blandit tempus porttitor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.

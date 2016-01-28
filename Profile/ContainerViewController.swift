@@ -309,7 +309,7 @@ class ContainerViewController: PROViewController {
     }, completion: nil)
   }
 
-  func openCloseIndex(open: Bool, animated: Bool) {
+  func openCloseIndex(open: Bool, animated: Bool, completion: (() -> Void)? = nil) {
     let duration = animated ? 0.3 : 0
     Global.isIndexOpen = open
     view.layoutIfNeeded()
@@ -318,7 +318,9 @@ class ContainerViewController: PROViewController {
       self.scrollViewLeadingConstraint.constant = open ? self.indexView.frame.width - self.SideMenuOffset : 0
       self.scrollViewTrailingConstraint.constant = open ? -self.indexView.frame.width + self.SideMenuOffset : 0
       self.view.layoutIfNeeded()
-    }, completion: nil)
+    }, completion: { (completed) -> Void in
+      completion?()
+    })
   }
 
   // ==================================================

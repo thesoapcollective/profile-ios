@@ -7,6 +7,8 @@
 		<string>Logan Dwight</string>
 		<key>short_title</key>
 		<string>Logan</string>
+		<key>index_title</key>
+		<string>Logan Dwight</string>
 		<key>description</key>
 		<string>Curabitur blandit tempus porttitor. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Sed posuere consectetur est at lobortis. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</string>
 		<key>photo</key>
@@ -19,6 +21,8 @@
 		<string>Logan Dwight</string>
 		<key>short_title</key>
 		<string>Logan</string>
+		<key>index_title</key>
+		<string>Logan Dwight</string>
 		<key>description</key>
 		<string>Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</string>
 		<key>photo</key>
@@ -31,6 +35,8 @@
 		<string>Logan Dwight</string>
 		<key>short_title</key>
 		<string>Logan</string>
+		<key>index_title</key>
+		<string>Logan Dwight</string>
 		<key>description</key>
 		<string>Donec id elit non mi porta gravida at eget metus. Cras mattis consectetur purus sit amet fermentum. Maecenas sed diam eget risus varius blandit sit amet non magna. Sed posuere consectetur est at lobortis.</string>
 		<key>photo</key>
@@ -43,6 +49,8 @@
 		<string>Ian Hirschfeld</string>
 		<key>short_title</key>
 		<string>Ian</string>
+		<key>index_title</key>
+		<string>Ian Hirschfeld</string>
 		<key>description</key>
 		<string>Curabitur blandit tempus porttitor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
 
@@ -55,6 +63,8 @@ Nullam quis risus eget urna mollis ornare vel eu leo. Maecenas faucibus mollis i
 		<string>Jarreau Bowen</string>
 		<key>short_title</key>
 		<string>Jarreau</string>
+		<key>index_title</key>
+		<string>Jarreau Bowen</string>
 		<key>description</key>
 		<string>Curabitur blandit tempus porttitor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
 
