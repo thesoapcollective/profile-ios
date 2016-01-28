@@ -18,9 +18,9 @@ class TeamItemViewController: ItemViewController {
     super.viewDidLoad()
 
     if index < delegate.items.count - 1 {
-      gradientView = LinearGradientView(frame: CGRectZero)
-      gradientView?.backgroundColor = UIColor.clearColor()
-      view.addSubview(gradientView!)
+      bottomGradientView = LinearGradientView(frame: CGRectZero)
+      bottomGradientView?.backgroundColor = UIColor.clearColor()
+      view.addSubview(bottomGradientView!)
     }
 
     itemView.descriptionTopConstraint.constant = view.frame.height
@@ -30,14 +30,14 @@ class TeamItemViewController: ItemViewController {
     super.viewDidLayoutSubviews()
 
     let gradientHeight: CGFloat = view.frame.height * 173 / 667
-    gradientView?.frame = CGRect(x: 0, y: view.frame.height - gradientHeight, width: view.frame.width, height: gradientHeight)
+    bottomGradientView?.frame = CGRect(x: 0, y: view.frame.height - gradientHeight, width: view.frame.width, height: gradientHeight)
   }
 
   override func updateColors() {
     super.updateColors()
 
-    gradientView?.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
-    gradientView?.toColor = UIColor.appPrimaryBackgroundColor()
+    bottomGradientView?.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
+    bottomGradientView?.toColor = UIColor.appPrimaryBackgroundColor()
   }
 
   func panDescriptionView(dy: CGFloat) {
@@ -69,7 +69,7 @@ class TeamItemViewController: ItemViewController {
 
     if currentDirection == .Up {
       if currentIndex + 1 == index { // Panning up to this index
-        itemView.gradientContainerView.alpha = fadingInAlpha
+        itemView.radialGradientContainerView.alpha = fadingInAlpha
         itemView.photoImageView.alpha = fadingInAlpha
         itemView.shortTitleLabel.alpha = fadingInAlpha
       } else if currentIndex == index { // Panning up on this index
@@ -88,7 +88,7 @@ class TeamItemViewController: ItemViewController {
         // Do nothing.
       } else if currentIndex == index { // Panning down on this index
         if currentStage == 0 { // Panning down on this index to previous index
-          itemView.gradientContainerView.alpha = fadingOutAlpha
+          itemView.radialGradientContainerView.alpha = fadingOutAlpha
           itemView.photoImageView.alpha = fadingOutAlpha
           itemView.shortTitleLabel.alpha = fadingOutAlpha
         } else { // Panning down on this index to stage 0
@@ -130,7 +130,7 @@ class TeamItemViewController: ItemViewController {
 
     UIView.animateWithDuration(0.3, animations: { () -> Void in
       self.itemView.descriptionContainerView.alpha = alpha
-      self.itemView.gradientContainerView.alpha = alpha
+      self.itemView.radialGradientContainerView.alpha = alpha
       self.itemView.photoGrayscaleImageView.alpha = stage1Alpha
       self.itemView.photoImageView.alpha = stage0Alpha
       self.itemView.shortTitleLabel.alpha = stage0Alpha

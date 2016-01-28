@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -30,7 +30,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHORT TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Xf-tI-I4g">
                     <rect key="frame" x="100" y="200" width="78" height="18"/>
                     <fontDescription key="fontDescription" name="FuturaPT-Heavy" family="Futura PT" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvl-rs-9oA" userLabel="Description Clip View">
@@ -134,12 +134,12 @@
                 <outlet property="descriptionContainerView" destination="bHG-zd-Mfc" id="32p-Oo-6CC"/>
                 <outlet property="descriptionLabel" destination="Jzi-Oa-QPc" id="QVI-wD-5mp"/>
                 <outlet property="descriptionTopConstraint" destination="mce-f8-1p5" id="rHM-Ts-mdE"/>
-                <outlet property="gradientContainerView" destination="C9x-dN-rTr" id="6Bh-pQ-nQs"/>
-                <outlet property="gradientTopConstraint" destination="HM1-xS-KjO" id="7hd-0O-XpX"/>
-                <outlet property="gradientTrailingConstraint" destination="XvU-Yi-iya" id="y4z-Gs-yHY"/>
-                <outlet property="gradientView" destination="Txy-qK-fzH" id="gJx-Fv-98o"/>
                 <outlet property="photoGrayscaleImageView" destination="CnB-Q8-KfY" id="XxL-Cd-4ev"/>
                 <outlet property="photoImageView" destination="FvV-YE-QHT" id="Dcd-Rb-r9F"/>
+                <outlet property="radialGradientContainerView" destination="C9x-dN-rTr" id="1jw-Y8-myj"/>
+                <outlet property="radialGradientTopConstraint" destination="HM1-xS-KjO" id="V5e-eW-8hz"/>
+                <outlet property="radialGradientTrailingConstraint" destination="XvU-Yi-iya" id="eXe-8T-Y9q"/>
+                <outlet property="radialGradientView" destination="Txy-qK-fzH" id="zrL-7x-feE"/>
                 <outlet property="shortTitleLabel" destination="7Xf-tI-I4g" id="zso-RH-OrU"/>
                 <outlet property="titleLabel" destination="ep7-GT-dPW" id="6dP-hk-l1N"/>
             </connections>

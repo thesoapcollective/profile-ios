@@ -126,7 +126,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Fl-WL-qpH" userLabel="Gradient Container View">
+                            <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Fl-WL-qpH">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
                                     <view userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kco-Qd-jMT" customClass="RadialGradientView" customModule="Profile" customModuleProvider="target">
@@ -223,10 +223,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="gradientContainerView" destination="8Fl-WL-qpH" id="eSR-9k-kdF"/>
-                        <outlet property="gradientTopConstraint" destination="I7F-DI-QLG" id="bBK-bB-stO"/>
-                        <outlet property="gradientTrailingConstraint" destination="0BL-Lj-dZA" id="cA8-Uo-Bsy"/>
-                        <outlet property="gradientView" destination="Kco-Qd-jMT" id="Fbh-lL-BlU"/>
                         <outlet property="indexIconContainerView" destination="UdF-st-ED4" id="RUq-Tn-Tdd"/>
                         <outlet property="indexIconDottedBorderImageView" destination="ITL-Rq-etR" id="NtI-GE-7Ye"/>
                         <outlet property="indexIconImageView" destination="NyE-9l-Tui" id="Owd-4g-lfc"/>
@@ -234,6 +230,10 @@
                         <outlet property="mailIconContainerView" destination="cwS-Ww-8vs" id="w1k-oa-Yjd"/>
                         <outlet property="mailIconDottedBorderImageView" destination="DEn-ob-0fk" id="nF6-W2-Q8z"/>
                         <outlet property="mailIconImageView" destination="wJg-gx-y45" id="lKD-p3-HTf"/>
+                        <outlet property="radialGradientContainerView" destination="8Fl-WL-qpH" id="yGA-2x-41m"/>
+                        <outlet property="radialGradientTopConstraint" destination="I7F-DI-QLG" id="Cod-FR-VXj"/>
+                        <outlet property="radialGradientTrailingConstraint" destination="0BL-Lj-dZA" id="7F8-C7-AVV"/>
+                        <outlet property="radialGradientView" destination="Kco-Qd-jMT" id="xmp-aD-Lya"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HH7-Li-hAD" userLabel="First Responder" sceneMemberID="firstResponder"/>

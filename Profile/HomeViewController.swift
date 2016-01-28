@@ -14,8 +14,8 @@ class HomeViewController: PROViewController {
   // PROPERTIES
   // ==================================================
 
-  @IBOutlet weak var gradientContainerView: UIView!
-  @IBOutlet weak var gradientView: RadialGradientView!
+  @IBOutlet weak var radialGradientContainerView: UIView!
+  @IBOutlet weak var radialGradientView: RadialGradientView!
   @IBOutlet weak var indexIconContainerView: UIView!
   @IBOutlet weak var indexIconImageView: UIImageView!
   @IBOutlet weak var indexIconDottedBorderImageView: DottedBorderImageView!
@@ -24,8 +24,8 @@ class HomeViewController: PROViewController {
   @IBOutlet weak var mailIconImageView: UIImageView!
   @IBOutlet weak var mailIconDottedBorderImageView: DottedBorderImageView!
 
-  @IBOutlet weak var gradientTopConstraint: NSLayoutConstraint!
-  @IBOutlet weak var gradientTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet weak var radialGradientTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var radialGradientTrailingConstraint: NSLayoutConstraint!
 
   var index = 0
 
@@ -48,8 +48,8 @@ class HomeViewController: PROViewController {
 
     if UIDevice.currentDevice().orientation == .Portrait || UIDevice.currentDevice().orientation == .PortraitUpsideDown {
       let gradientOffset: CGFloat = -view.frame.width * 0.9
-      gradientTopConstraint.constant = gradientOffset
-      gradientTrailingConstraint.constant = gradientOffset
+      radialGradientTopConstraint.constant = gradientOffset
+      radialGradientTrailingConstraint.constant = gradientOffset
       view.layoutIfNeeded()
     }
   }
@@ -60,8 +60,8 @@ class HomeViewController: PROViewController {
     indexIconDottedBorderImageView.dotColor = UIColor.appPrimaryTextColor()
     mailIconImageView.tintColor = UIColor.appPrimaryTextColor()
     mailIconDottedBorderImageView.dotColor = UIColor.appPrimaryTextColor()
-    gradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
-    gradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
+    radialGradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
+    radialGradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
   }
 
   // ==================================================
@@ -137,7 +137,7 @@ class HomeViewController: PROViewController {
       alpha = 1 - (threshold - abs(panDy)) / threshold
     }
 
-    gradientContainerView.alpha = alpha
+    radialGradientContainerView.alpha = alpha
     indexIconContainerView.alpha = alpha
     logoImageView.alpha = alpha
     mailIconContainerView.alpha = alpha
@@ -149,7 +149,7 @@ class HomeViewController: PROViewController {
     let alpha: CGFloat =  currentIndex == index ? 1 : 0
 
     UIView.animateWithDuration(0.3, animations: { () -> Void in
-      self.gradientContainerView.alpha = alpha
+      self.radialGradientContainerView.alpha = alpha
       self.indexIconContainerView.alpha = alpha
       self.logoImageView.alpha = alpha
       self.mailIconContainerView.alpha = alpha

@@ -18,9 +18,9 @@ class WorkItemViewController: ItemViewController {
     super.viewDidLoad()
 
     if index > 0 {
-      gradientView = LinearGradientView(frame: CGRectZero)
-      gradientView?.backgroundColor = UIColor.clearColor()
-      view.addSubview(gradientView!)
+      topGradientView = LinearGradientView(frame: CGRectZero)
+      topGradientView?.backgroundColor = UIColor.clearColor()
+      view.addSubview(topGradientView!)
     }
 
     itemView.descriptionTopConstraint.constant = -view.frame.height
@@ -30,14 +30,14 @@ class WorkItemViewController: ItemViewController {
     super.viewDidLayoutSubviews()
 
     let gradientHeight: CGFloat = view.frame.height * 173 / 667
-    gradientView?.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: gradientHeight)
+    topGradientView?.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: gradientHeight)
   }
 
   override func updateColors() {
     super.updateColors()
 
-    gradientView?.fromColor = UIColor.appPrimaryBackgroundColor()
-    gradientView?.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
+    topGradientView?.fromColor = UIColor.appPrimaryBackgroundColor()
+    topGradientView?.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
   }
 
   func panDescriptionView(dy: CGFloat) {
@@ -72,7 +72,7 @@ class WorkItemViewController: ItemViewController {
         // Do nothing.
       } else if currentIndex == index { // Panning up on this index
         if currentStage == 0 { // Panning up on this index to next index
-          itemView.gradientContainerView.alpha = fadingOutAlpha
+          itemView.radialGradientContainerView.alpha = fadingOutAlpha
           itemView.photoImageView.alpha = fadingOutAlpha
           itemView.shortTitleLabel.alpha = fadingOutAlpha
         } else { // Panning up on this index to stage 0
@@ -85,7 +85,7 @@ class WorkItemViewController: ItemViewController {
       }
     } else if currentDirection == .Down {
       if currentIndex - 1 == index { // Panning down to this index
-        itemView.gradientContainerView.alpha = fadingInAlpha
+        itemView.radialGradientContainerView.alpha = fadingInAlpha
         itemView.photoImageView.alpha = fadingInAlpha
         itemView.shortTitleLabel.alpha = fadingInAlpha
       } else if currentIndex == index { // Panning down on this index
@@ -130,7 +130,7 @@ class WorkItemViewController: ItemViewController {
 
     UIView.animateWithDuration(0.3, animations: { () -> Void in
       self.itemView.descriptionContainerView.alpha = alpha
-      self.itemView.gradientContainerView.alpha = alpha
+      self.itemView.radialGradientContainerView.alpha = alpha
       self.itemView.photoGrayscaleImageView.alpha = stage1Alpha
       self.itemView.photoImageView.alpha = stage0Alpha
       self.itemView.shortTitleLabel.alpha = stage0Alpha

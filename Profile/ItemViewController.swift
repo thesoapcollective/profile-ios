@@ -21,7 +21,9 @@ class ItemViewController: PROViewController {
     }
   }
   weak var delegate: ContainerViewController!
-  var gradientView: LinearGradientView?
+  var topGradientView: LinearGradientView?
+  var bottomGradientView: LinearGradientView?
+  var descriptionGradientView: LinearGradientView?
   var index = 0
   var itemView: ItemView!
   var photoImage: UIImage?
@@ -45,8 +47,8 @@ class ItemViewController: PROViewController {
 
     if UIDevice.currentDevice().orientation == .Portrait || UIDevice.currentDevice().orientation == .PortraitUpsideDown {
       let gradientOffset: CGFloat = -view.frame.width * 0.9
-      itemView.gradientTopConstraint.constant = gradientOffset
-      itemView.gradientTrailingConstraint.constant = gradientOffset
+      itemView.radialGradientTopConstraint.constant = gradientOffset
+      itemView.radialGradientTrailingConstraint.constant = gradientOffset
       view.layoutIfNeeded()
     }
   }
@@ -72,8 +74,8 @@ class ItemViewController: PROViewController {
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
     itemView.descriptionContainerView.layer.borderColor = UIColor.appPrimaryTextColor().colorWithAlphaComponent(0.75).CGColor
     itemView.descriptionLabel.textColor = UIColor.appPrimaryTextColor()
-    itemView.gradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
-    itemView.gradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
+    itemView.radialGradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
+    itemView.radialGradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
     itemView.shortTitleLabel.textColor = UIColor.appPrimaryTextColor()
     itemView.titleLabel.textColor = UIColor.appPrimaryTextColor()
   }
