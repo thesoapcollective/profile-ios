@@ -130,7 +130,7 @@ class TeamItemViewController: ItemViewController {
     var stage0Alpha: CGFloat!
     var stage1Alpha: CGFloat!
     var topGradientAlpha: CGFloat!
-    var arrowStage0Constraint: CGFloat?
+    var arrowStage0Constraint: CGFloat!
     var bottomGradientConstraint: CGFloat!
     var descriptionTopConstraint: CGFloat!
     var descriptionGradientBottomConstraint: CGFloat!
@@ -164,6 +164,8 @@ class TeamItemViewController: ItemViewController {
       topGradientAlpha = 0
       if currentIndex == index {
         arrowStage0Constraint = currentStage == 0 ? -Global.ArrowOffset : -Global.ArrowOffset - view.frame.height
+      } else {
+        arrowStage0Constraint = -Global.ArrowOffset
       }
       bottomGradientConstraint = currentStage == 0 ? -view.frame.height : 0
       descriptionGradientBottomConstraint = currentStage == 0 ? 0 : view.frame.height
@@ -185,8 +187,8 @@ class TeamItemViewController: ItemViewController {
       self.itemView.bottomGradientBottomConstraint.constant = bottomGradientConstraint
       self.itemView.descriptionGradientBottomConstraint.constant = descriptionGradientBottomConstraint
       self.itemView.descriptionTopConstraint.constant = descriptionTopConstraint
-      if let arrowConstraintStage0 = self.delegate.continueArrowConstraints["itemView\(self.index)-stage0"], let arrowConstraint = arrowStage0Constraint {
-        arrowConstraintStage0.constant = arrowConstraint
+      if let arrowConstraintStage0 = self.delegate.continueArrowConstraints["itemView\(self.index)-stage0"] {
+        arrowConstraintStage0.constant = arrowStage0Constraint
       }
       self.view.layoutIfNeeded()
       self.delegate.view.layoutIfNeeded()
