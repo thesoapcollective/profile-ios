@@ -90,6 +90,11 @@ class ContainerViewController: PROViewController {
 
   override func updateColors() {
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
+    for (_, continueArrowView) in continueArrowViews {
+      continueArrowView.arrowHeadImageView.tintColor = UIColor.appPrimaryTextColor()
+      continueArrowView.arrowTailImageView.tintColor = UIColor.appPrimaryTextColor()
+      continueArrowView.arrowStemImageView.dotColor = UIColor.appPrimaryTextColor()
+    }
   }
 
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -190,12 +195,10 @@ class ContainerViewController: PROViewController {
 
       let stage0ContinueArrowView = NSBundle.mainBundle().loadNibNamed("ContinueArrowView", owner: self, options: nil).last as! ContinueArrowView
       stage0ContinueArrowView.translatesAutoresizingMaskIntoConstraints = false
-//      stage0ContinueArrowView.backgroundColor = UIColor.redColor()
       continueArrowViews["itemViewStage0-\(i)"] = stage0ContinueArrowView
 
       let stage1ContinueArrowView = NSBundle.mainBundle().loadNibNamed("ContinueArrowView", owner: self, options: nil).last as! ContinueArrowView
       stage1ContinueArrowView.translatesAutoresizingMaskIntoConstraints = false
-//      stage1ContinueArrowView.backgroundColor = UIColor.greenColor()
       continueArrowViews["itemViewStage1-\(i)"] = stage1ContinueArrowView
 
       if (i < homeIndex) {

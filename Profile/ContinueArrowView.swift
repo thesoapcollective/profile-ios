@@ -8,4 +8,25 @@
 
 import UIKit
 
-class ContinueArrowView: UIView {}
+class ContinueArrowView: UIView {
+
+  // ==================================================
+  // PROPERTIES
+  // ==================================================
+
+  @IBOutlet weak var arrowHeadImageView: UIImageView!
+  @IBOutlet weak var arrowStemImageView: DottedBorderImageView!
+  @IBOutlet weak var arrowTailImageView: UIImageView!
+
+  // ==================================================
+  // METHODS
+  // ==================================================
+
+  override func awakeFromNib() {
+    super.awakeFromNib()
+
+    arrowHeadImageView.image = arrowHeadImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+    arrowTailImageView.image = arrowTailImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+  }
+
+}
