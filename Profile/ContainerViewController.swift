@@ -44,6 +44,7 @@ class ContainerViewController: PROViewController {
   ]
   var itemViewControllers = [UIViewController]()
   var continueArrowViews = [String: ContinueArrowView]()
+  var continueArrowConstraints = [String: NSLayoutConstraint]()
 
   // ==================================================
   // METHODS
@@ -180,9 +181,9 @@ class ContainerViewController: PROViewController {
     // Setup arrow contraints
     let arrowWidth: CGFloat = 40
     let arrowHeight: CGFloat = 55
-    let arrowOffset: CGFloat = 25
+    let arrowOffset: CGFloat = Global.ArrowOffset
     let arrowMargin: CGFloat = 17
-    for i in 0..<items.count {
+    for (i, viewController) in itemViewControllers.enumerate() {
       if i == homeIndex { continue }
       let stage0ContinueArrowView = NSBundle.mainBundle().loadNibNamed("ContinueArrowView", owner: self, options: nil).last as! ContinueArrowView
       stage0ContinueArrowView.translatesAutoresizingMaskIntoConstraints = false
@@ -243,6 +244,7 @@ class ContainerViewController: PROViewController {
           views: ["subview": stage1ContinueArrowView])
         )
       } else {
+        let itemViewController = viewController as! ItemViewController
         // Team Stage 0 Arrow
         contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
           "H:|-padding-[subview(width)]",
@@ -254,14 +256,24 @@ class ContainerViewController: PROViewController {
           views: ["subview": stage0ContinueArrowView])
         )
         contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-          "V:|-padding-[subview(height)]",
+          "V:[subview(height)]",
           options: [],
           metrics: [
             "height": arrowHeight,
-            "padding": view.frame.height * CGFloat(i) - arrowOffset
           ],
           views: ["subview": stage0ContinueArrowView])
         )
+        let arrowStage0Constraint = NSLayoutConstraint(
+          item: stage0ContinueArrowView,
+          attribute: .Top,
+          relatedBy: .Equal,
+          toItem: itemViewController.itemView,
+          attribute: .Top,
+          multiplier: 1,
+          constant: -arrowOffset
+        )
+        contentView.addConstraint(arrowStage0Constraint)
+        continueArrowConstraints["itemView\(i)-stage0"] = arrowStage0Constraint
 
         // Team Stage 1 Arrow
         contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
@@ -274,14 +286,24 @@ class ContainerViewController: PROViewController {
           views: ["subview": stage1ContinueArrowView])
         )
         contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-          "V:|-padding-[subview(height)]",
+          "V:[subview(height)]",
           options: [],
           metrics: [
-            "height": arrowHeight,
-            "padding": view.frame.height * CGFloat(i + 1) - arrowOffset
+            "height": arrowHeight
           ],
           views: ["subview": stage1ContinueArrowView])
         )
+        let arrowStage1Constraint = NSLayoutConstraint(
+          item: stage1ContinueArrowView,
+          attribute: .Top,
+          relatedBy: .Equal,
+          toItem: itemViewController.itemView.descriptionPositionView,
+          attribute: .Top,
+          multiplier: 1,
+          constant: -arrowOffset
+        )
+        contentView.addConstraint(arrowStage1Constraint)
+        continueArrowConstraints["itemView\(i)-stage1"] = arrowStage1Constraint
       }
     }
   }
@@ -484,6 +506,7 @@ class ContainerViewController: PROViewController {
       isPanningContact = false
       isPanningIndex = false
       currentDirection = .None
+
       break
 
     default:

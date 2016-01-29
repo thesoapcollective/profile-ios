@@ -40,16 +40,26 @@ class TeamItemViewController: ItemViewController {
       itemView.bottomGradientBottomConstraint.constant = 0
       itemView.descriptionGradientBottomConstraint.constant = view.frame.height
       itemView.descriptionTopConstraint.constant = 0
+      if let arrowConstraintStage0 = self.delegate.continueArrowConstraints["itemView\(self.index)-stage0"] {
+        arrowConstraintStage0.constant = -Global.ArrowOffset - view.frame.height
+      }
     } else if newOffsetY >= view.frame.height {
       itemView.bottomGradientBottomConstraint.constant = -view.frame.height
       itemView.descriptionGradientBottomConstraint.constant = 0
       itemView.descriptionTopConstraint.constant = view.frame.height
+      if let arrowConstraintStage0 = self.delegate.continueArrowConstraints["itemView\(self.index)-stage0"] {
+        arrowConstraintStage0.constant = -Global.ArrowOffset
+      }
     } else {
       itemView.bottomGradientBottomConstraint.constant = itemView.bottomGradientBottomConstraint.constant - dy
       itemView.descriptionGradientBottomConstraint.constant = itemView.descriptionGradientBottomConstraint.constant - dy
       itemView.descriptionTopConstraint.constant = newOffsetY
+      if let arrowConstraintStage0 = self.delegate.continueArrowConstraints["itemView\(self.index)-stage0"] {
+        arrowConstraintStage0.constant = arrowConstraintStage0.constant + dy
+      }
     }
     view.layoutIfNeeded()
+    delegate.view.layoutIfNeeded()
   }
 
   // ==================================================
@@ -86,6 +96,13 @@ class TeamItemViewController: ItemViewController {
     } else if currentDirection == .Down {
       if currentIndex - 1 == index { // Panning down back to this index
         // Do nothing.
+      } else if currentIndex + 1 == index { // Panning down away from this index
+        if currentStage == 1 {
+          if let arrowConstraintStage0 = self.delegate.continueArrowConstraints["itemView\(self.index)-stage0"] {
+            arrowConstraintStage0.constant = arrowConstraintStage0.constant + dy
+            delegate.view.layoutIfNeeded()
+          }
+        }
       } else if currentIndex == index { // Panning down on this index
         if currentStage == 0 { // Panning down on this index to previous index
           itemView.radialGradientContainerView.alpha = fadingOutAlpha
@@ -113,6 +130,7 @@ class TeamItemViewController: ItemViewController {
     var stage0Alpha: CGFloat!
     var stage1Alpha: CGFloat!
     var topGradientAlpha: CGFloat!
+    var arrowStage0Constraint: CGFloat?
     var bottomGradientConstraint: CGFloat!
     var descriptionTopConstraint: CGFloat!
     var descriptionGradientBottomConstraint: CGFloat!
@@ -122,6 +140,11 @@ class TeamItemViewController: ItemViewController {
       stage0Alpha = 0
       stage1Alpha = 0
       topGradientAlpha = 1
+      if currentIndex == delegate.homeIndex {
+        arrowStage0Constraint = -Global.ArrowOffset
+      } else {
+        arrowStage0Constraint = currentStage == 0 ? -Global.ArrowOffset + view.frame.height : -Global.ArrowOffset
+      }
       bottomGradientConstraint = -view.frame.height
       descriptionGradientBottomConstraint = 0
       descriptionTopConstraint = view.frame.height
@@ -130,6 +153,7 @@ class TeamItemViewController: ItemViewController {
       stage0Alpha = 0
       stage1Alpha = 1
       topGradientAlpha = 0
+      arrowStage0Constraint = -Global.ArrowOffset - view.frame.height
       bottomGradientConstraint = 0
       descriptionGradientBottomConstraint = view.frame.height
       descriptionTopConstraint = 0
@@ -138,6 +162,9 @@ class TeamItemViewController: ItemViewController {
       stage0Alpha = currentStage == 0 ? 1 : 0
       stage1Alpha = currentStage == 1 ? 1 : 0
       topGradientAlpha = 0
+      if currentIndex == index {
+        arrowStage0Constraint = currentStage == 0 ? -Global.ArrowOffset : -Global.ArrowOffset - view.frame.height
+      }
       bottomGradientConstraint = currentStage == 0 ? -view.frame.height : 0
       descriptionGradientBottomConstraint = currentStage == 0 ? 0 : view.frame.height
       descriptionTopConstraint = currentStage == 0 ? view.frame.height : 0
@@ -153,11 +180,16 @@ class TeamItemViewController: ItemViewController {
     })
 
     view.layoutIfNeeded()
+    delegate.view.layoutIfNeeded()
     UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
       self.itemView.bottomGradientBottomConstraint.constant = bottomGradientConstraint
       self.itemView.descriptionGradientBottomConstraint.constant = descriptionGradientBottomConstraint
       self.itemView.descriptionTopConstraint.constant = descriptionTopConstraint
+      if let arrowConstraintStage0 = self.delegate.continueArrowConstraints["itemView\(self.index)-stage0"], let arrowConstraint = arrowStage0Constraint {
+        arrowConstraintStage0.constant = arrowConstraint
+      }
       self.view.layoutIfNeeded()
+      self.delegate.view.layoutIfNeeded()
     }, completion: nil)
   }
 
