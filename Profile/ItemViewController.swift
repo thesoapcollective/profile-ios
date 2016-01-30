@@ -6,6 +6,7 @@
 //  Copyright © 2015 The Soap Collective. All rights reserved.
 //
 
+import AlamofireImage
 import SwiftyJSON
 import UIKit
 
@@ -23,7 +24,6 @@ class ItemViewController: PROViewController {
   weak var delegate: ContainerViewController!
   var index = 0
   var itemView: ItemView!
-  var photoImage: UIImage?
 
   // ==================================================
   // METHODS
@@ -60,10 +60,11 @@ class ItemViewController: PROViewController {
     itemView.titleLabel.attributedText = titleText
 
     itemView.descriptionLabel.text = data["description"].stringValue
-    if let image = data["photo"].string {
-      photoImage = UIImage(named: image)
-      itemView.photoImageView.image = photoImage
-      itemView.photoGrayscaleImageView.image = photoImage?.tintedImage(UIColor.appPrimaryTextColor(), tintAlpha: 1, tintBlendMode: .Color)
+    if let imageUrl = NSURL(string: data["photo_url"].stringValue) {
+
+      itemView.photoImageView.af_setImageWithURL(imageUrl, placeholderImage: nil, filter: nil, imageTransition: .CrossDissolve(0.3), runImageTransitionIfCached: false, completion: { [unowned self] (response) -> Void in
+        self.itemView.photoGrayscaleImageView.image = response.result.value?.tintedImage(UIColor.appPrimaryTextColor(), tintAlpha: 1, tintBlendMode: .Color)
+      })
     }
   }
 

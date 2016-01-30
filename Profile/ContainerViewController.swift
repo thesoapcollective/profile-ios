@@ -6,6 +6,7 @@
 //  Copyright © 2015 The Soap Collective. All rights reserved.
 //
 
+import Alamofire
 import SwiftyJSON
 import UIKit
 
@@ -18,10 +19,14 @@ class ContainerViewController: PROViewController {
   @IBOutlet weak var contactView: UIView!
   @IBOutlet weak var contentView: UIView!
   @IBOutlet weak var indexView: UIView!
+  @IBOutlet weak var loadingView: UIView!
+  @IBOutlet weak var loadingLogoImageView: UIImageView!
+  @IBOutlet weak var loadingProgressView: UIView!
   @IBOutlet weak var scrollView: UIScrollView!
 
   @IBOutlet weak var contactViewTrailingConstraint: NSLayoutConstraint!
   @IBOutlet weak var indexViewLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet weak var loadingProgressWidthConstraint: NSLayoutConstraint!
   @IBOutlet weak var scrollViewLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var scrollViewTrailingConstraint: NSLayoutConstraint!
 
@@ -35,6 +40,7 @@ class ContainerViewController: PROViewController {
   var isPanningContact = false
   var isPanningContent = false
   var isPanningIndex = false
+  var isDataReady = false
 
   var panDx: CGFloat = 0
   var panDy: CGFloat = 0
@@ -46,6 +52,8 @@ class ContainerViewController: PROViewController {
   var continueArrowViews = [String: ContinueArrowView]()
   var continueArrowConstraints = [String: NSLayoutConstraint]()
 
+  var loadingTimer: NSTimer?
+
   // ==================================================
   // METHODS
   // ==================================================
@@ -55,28 +63,16 @@ class ContainerViewController: PROViewController {
 
     contactViewTrailingConstraint.constant = Global.isContactOpen ? 0 : -contactView.frame.width
     indexViewLeadingConstraint.constant = Global.isIndexOpen ? 0 : -indexView.frame.width
-
-    setupData()
-    setupInitialViewControllers()
-    setupGestures()
-    setupNotifcations()
+    loadingProgressWidthConstraint.constant = 0
   }
 
   override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
-    snapContent(false)
-    NSNotificationCenter.defaultCenter().postNotificationName(
-      Global.ScrollEndedNotification,
-      object: nil,
-      userInfo: [
-        "dy": CGFloat(0),
-        "panDy": CGFloat(0),
-        "dyThreshold": false,
-        "currentDirection": currentDirection.rawValue,
-        "currentIndex": currentIndex,
-        "currentStage": currentStage
-      ]
-    )
+
+    if items.count == 1 {
+      downloadData()
+      startLoadingAnimation()
+    }
   }
 
   override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
@@ -104,31 +100,107 @@ class ContainerViewController: PROViewController {
     }
   }
 
-  func setupData() {
-    setupWorkData()
-    setupTeamData()
+  func startLoadingAnimation() {
+    invalidateLoadingTimer()
+    loadingTimer = NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: "animateLoadingProgress", userInfo: nil, repeats: false)
+  }
+
+  func animateLoadingProgress() {
+    loadingProgressWidthConstraint.constant = 0
+    view.layoutIfNeeded()
+    UIView.animateWithDuration(2, animations: { () -> Void in
+      self.loadingProgressWidthConstraint.constant = self.loadingLogoImageView.frame.width
+      self.view.layoutIfNeeded()
+    }) { (completed) -> Void in
+      if self.isDataReady {
+        UIView.animateWithDuration(0.5, delay: 0.3, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
+          self.loadingView.alpha = 0
+        }, completion: nil)
+      } else {
+        self.startLoadingAnimation()
+      }
+    }
+  }
+
+  func invalidateLoadingTimer() {
+    loadingTimer?.invalidate()
+    loadingTimer = nil
+  }
+
+  func downloadData() {
+    let env = NSProcessInfo.processInfo().environment
+    let baseUrl = env["API_BASE_URL"] != nil ? env["API_BASE_URL"]! : "https://soap-profile.herokuapp.com"
+    print("Using: \(baseUrl)")
+
+    Alamofire.request(.GET, "\(baseUrl)/data.json").validate().responseJSON { [unowned self] response in
+      switch response.result {
+      case .Success:
+        if let value = response.result.value {
+          self.downloadDataSuccess(JSON(value))
+        }
+      case .Failure(let error):
+        print(error)
+        self.downloadDataError()
+      }
+    }
+  }
+
+  func downloadDataSuccess(data: JSON) {
+    // Gather work items
+    if let workData = data.dictionaryValue["work"] {
+      for item in workData.arrayValue {
+        if !items.contains(item) {
+          items.insert(item, atIndex: 0)
+        }
+      }
+
+      // Setup initial indexes
+      homeIndex = workData.arrayValue.count
+      currentIndex = homeIndex
+    }
+
+    // Gather team items
+    if let teamData = data.dictionaryValue["team"] {
+      for item in teamData.arrayValue {
+        if !items.contains(item) {
+          items.append(item)
+        }
+      }
+    }
+
+    setupInitialViewControllers()
+    setupGestures()
+    setupNotifcations()
+
     NSNotificationCenter.defaultCenter().postNotificationName(Global.DataLoaded, object: nil)
+
+    snapContent(false)
+
+    NSNotificationCenter.defaultCenter().postNotificationName(
+      Global.ScrollEndedNotification,
+      object: nil,
+      userInfo: [
+        "dy": CGFloat(0),
+        "panDy": CGFloat(0),
+        "dyThreshold": false,
+        "currentDirection": currentDirection.rawValue,
+        "currentIndex": currentIndex,
+        "currentStage": currentStage
+      ]
+    )
+
+    updateColors()
+
+    isDataReady = true
   }
 
-  func setupWorkData() {
-    guard let path = NSBundle.mainBundle().pathForResource("WorkData", ofType: "plist") else { return }
-    guard let dataArray = NSArray(contentsOfFile: path) else { return }
-
-    for data in dataArray {
-      items.insert(JSON(data), atIndex: 0)
-    }
-
-    homeIndex = dataArray.count
-    currentIndex = homeIndex
-  }
-
-  func setupTeamData() {
-    guard let path = NSBundle.mainBundle().pathForResource("TeamData", ofType: "plist") else { return }
-    guard let dataArray = NSArray(contentsOfFile: path) else { return }
-
-    for data in dataArray {
-      items.append(JSON(data))
-    }
+  func downloadDataError() {
+    let alertViewController = UIAlertController(title: "Oops!", message: "Something went wrong downloading data. Want to try again?", preferredStyle: .Alert)
+    alertViewController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+    alertViewController.addAction(UIAlertAction(title: "Try Again", style: .Default, handler: { [unowned self] (alertAction) -> Void in
+      self.downloadData()
+    }))
+    presentViewController(alertViewController, animated: true, completion: nil)
   }
 
   func setupInitialViewControllers() {

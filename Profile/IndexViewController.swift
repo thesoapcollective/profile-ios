@@ -6,6 +6,7 @@
 //  Copyright © 2015 The Soap Collective. All rights reserved.
 //
 
+import AlamofireImage
 import UIKit
 import SwiftyJSON
 
@@ -112,8 +113,8 @@ extension IndexViewController: UITableViewDataSource {
     cell.titleLabel.text = item["index_title"].stringValue
     if indexPath.row == delegate.homeIndex {
       cell.iconImageView.image = UIImage(named: "homeIcon")?.imageWithRenderingMode(.AlwaysTemplate)
-    } else if let iconName = item["icon"].string {
-      cell.iconImageView.image = UIImage(named: iconName)
+    } else if let imageUrl = NSURL(string: item["icon_url"].stringValue) {
+      cell.iconImageView.af_setImageWithURL(imageUrl, imageTransition: .CrossDissolve(0.3))
     }
     cell.iconDottedBorderView.hidden = !item["indexes"].arrayValue.contains(JSON(delegate.currentIndex))
     cell.bottomDottedBorderView.hidden = item["indexes"].arrayValue.contains(JSON(delegate.items.count - 1))

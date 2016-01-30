@@ -17,8 +17,6 @@
 		657953631C522025001F1B40 /* IndexTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657953621C522025001F1B40 /* IndexTableViewCell.swift */; };
 		657CB42B1C29CA3B008E8F0D /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB42A1C29CA3B008E8F0D /* ContactViewController.swift */; };
 		657CB42D1C29CA53008E8F0D /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB42C1C29CA53008E8F0D /* IndexViewController.swift */; };
-		657CB4301C2A546A008E8F0D /* WorkData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 657CB42F1C2A546A008E8F0D /* WorkData.plist */; };
-		657CB4321C2A551A008E8F0D /* TeamData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 657CB4311C2A551A008E8F0D /* TeamData.plist */; };
 		657CB43B1C2A6C43008E8F0D /* FuturaPT-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 657CB4391C2A6C43008E8F0D /* FuturaPT-Book.otf */; };
 		657CB43C1C2A6C43008E8F0D /* FuturaPT-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 657CB43A1C2A6C43008E8F0D /* FuturaPT-Heavy.otf */; };
 		657CB43E1C2B7BB4008E8F0D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB43D1C2B7BB4008E8F0D /* HomeViewController.swift */; };
@@ -78,8 +76,6 @@
 		657953621C522025001F1B40 /* IndexTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexTableViewCell.swift; sourceTree = "<group>"; };
 		657CB42A1C29CA3B008E8F0D /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		657CB42C1C29CA53008E8F0D /* IndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
-		657CB42F1C2A546A008E8F0D /* WorkData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WorkData.plist; sourceTree = "<group>"; };
-		657CB4311C2A551A008E8F0D /* TeamData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TeamData.plist; sourceTree = "<group>"; };
 		657CB4391C2A6C43008E8F0D /* FuturaPT-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FuturaPT-Book.otf"; sourceTree = "<group>"; };
 		657CB43A1C2A6C43008E8F0D /* FuturaPT-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FuturaPT-Heavy.otf"; sourceTree = "<group>"; };
 		657CB43D1C2B7BB4008E8F0D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -212,19 +208,9 @@
 			name = TableViewCells;
 			sourceTree = "<group>";
 		};
-		657CB42E1C2A5424008E8F0D /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				657CB42F1C2A546A008E8F0D /* WorkData.plist */,
-				657CB4311C2A551A008E8F0D /* TeamData.plist */,
-			);
-			name = Data;
-			sourceTree = "<group>";
-		};
 		657CB4331C2A6B71008E8F0D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				657CB42E1C2A5424008E8F0D /* Data */,
 				657CB4341C2A6B7D008E8F0D /* Fonts */,
 			);
 			name = Resources;
@@ -417,9 +403,7 @@
 				656A3FBF1C24EDE800A1948B /* LaunchScreen.storyboard in Resources */,
 				6583339A1C4C8C8900E978B6 /* ContinueArrowView.xib in Resources */,
 				657CB43B1C2A6C43008E8F0D /* FuturaPT-Book.otf in Resources */,
-				657CB4301C2A546A008E8F0D /* WorkData.plist in Resources */,
 				656A3FBC1C24EDE800A1948B /* Assets.xcassets in Resources */,
-				657CB4321C2A551A008E8F0D /* TeamData.plist in Resources */,
 				657CB43C1C2A6C43008E8F0D /* FuturaPT-Heavy.otf in Resources */,
 				656A3FBA1C24EDE800A1948B /* Main.storyboard in Resources */,
 			);
