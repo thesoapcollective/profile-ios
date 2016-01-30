@@ -15,6 +15,8 @@ enum ProfileMode {
 
 struct Global {
 
+  static let ArrowTopTappedNotification = "ArrowTopTappedNotification"
+  static let ArrowBottomTappedNotification = "ArrowBottomTappedNotification"
   static let CloseContactNotification = "CloseContactNotification"
   static let CloseIndexNotification = "CloseIndexNotification"
   static let ContactStateChanged = "ContactStatedChanged"

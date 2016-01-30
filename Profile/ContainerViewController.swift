@@ -266,9 +266,13 @@ class ContainerViewController: PROViewController {
 
       let stage0ContinueArrowView = NSBundle.mainBundle().loadNibNamed("ContinueArrowView", owner: self, options: nil).last as! ContinueArrowView
       stage0ContinueArrowView.translatesAutoresizingMaskIntoConstraints = false
+      stage0ContinueArrowView.index = i
+      stage0ContinueArrowView.stage = 0
       continueArrowViews["itemViewStage0-\(i)"] = stage0ContinueArrowView
 
       let stage1ContinueArrowView = NSBundle.mainBundle().loadNibNamed("ContinueArrowView", owner: self, options: nil).last as! ContinueArrowView
+      stage1ContinueArrowView.index = i
+      stage1ContinueArrowView.stage = 1
       stage1ContinueArrowView.translatesAutoresizingMaskIntoConstraints = false
       continueArrowViews["itemViewStage1-\(i)"] = stage1ContinueArrowView
 
@@ -668,11 +672,61 @@ class ContainerViewController: PROViewController {
 
   override func setupNotifcations() {
     super.setupNotifcations()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "arrowBottomTapped:", name: Global.ArrowBottomTappedNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "arrowTopTapped:", name: Global.ArrowTopTappedNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeContact:", name: Global.CloseContactNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeIndex:", name: Global.CloseIndexNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "openContact:", name: Global.OpenContactNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "openIndex:", name: Global.OpenIndexNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
+  }
+
+  func arrowBottomTapped(notification: NSNotification) {
+    guard let userInfo = notification.userInfo else { return }
+    let index = userInfo["index"] as! Int
+    let stage = userInfo["stage"] as! Int
+
+    if index < homeIndex {
+      currentIndex = stage == 0 ? index + 1 : index
+    } else {
+      currentIndex = stage == 0 ? index - 1 : index
+    }
+    currentStage = stage == 0 ? 1 : 0
+    snapContent(true)
+    NSNotificationCenter.defaultCenter().postNotificationName(
+      Global.ScrollEndedNotification,
+      object: nil,
+      userInfo: [
+        "dy": CGFloat(0),
+        "panDy": CGFloat(0),
+        "dyThreshold": false,
+        "currentDirection": currentDirection.rawValue,
+        "currentIndex": currentIndex,
+        "currentStage": currentStage
+      ]
+    )
+  }
+
+  func arrowTopTapped(notification: NSNotification) {
+    guard let userInfo = notification.userInfo else { return }
+    let index = userInfo["index"] as! Int
+    let stage = userInfo["stage"] as! Int
+
+    currentIndex = index
+    currentStage = stage
+    snapContent(true)
+    NSNotificationCenter.defaultCenter().postNotificationName(
+      Global.ScrollEndedNotification,
+      object: nil,
+      userInfo: [
+        "dy": CGFloat(0),
+        "panDy": CGFloat(0),
+        "dyThreshold": false,
+        "currentDirection": currentDirection.rawValue,
+        "currentIndex": currentIndex,
+        "currentStage": currentStage
+      ]
+    )
   }
 
   func closeContact(notification: NSNotification) {

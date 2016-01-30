@@ -17,6 +17,11 @@ class ContinueArrowView: UIView {
   @IBOutlet weak var arrowHeadImageView: UIImageView!
   @IBOutlet weak var arrowStemImageView: DottedBorderImageView!
   @IBOutlet weak var arrowTailImageView: UIImageView!
+  @IBOutlet weak var bottomHitboxView: UIView!
+  @IBOutlet weak var topHitboxView: UIView!
+
+  var index: Int!
+  var stage: Int!
 
   // ==================================================
   // METHODS
@@ -27,6 +32,20 @@ class ContinueArrowView: UIView {
 
     arrowHeadImageView.image = arrowHeadImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
     arrowTailImageView.image = arrowTailImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+
+    let bottomHitboxTapGesture = UITapGestureRecognizer(target: self, action: "bottomHitboxTapped:")
+    bottomHitboxView.addGestureRecognizer(bottomHitboxTapGesture)
+
+    let topHitboxTapGesture = UITapGestureRecognizer(target: self, action: "topHitboxTapped:")
+    topHitboxView.addGestureRecognizer(topHitboxTapGesture)
+  }
+
+  func bottomHitboxTapped(gesture: UITapGestureRecognizer) {
+    NSNotificationCenter.defaultCenter().postNotificationName(Global.ArrowBottomTappedNotification, object: nil, userInfo: ["index": index, "stage": stage])
+  }
+
+  func topHitboxTapped(gesture: UITapGestureRecognizer) {
+    NSNotificationCenter.defaultCenter().postNotificationName(Global.ArrowTopTappedNotification, object: nil, userInfo: ["index": index, "stage": stage])
   }
 
 }

@@ -106,11 +106,11 @@ class HomeViewController: PROViewController {
 
   func contactStateChanged(notification: NSNotification) {
     let newImageIcon = Global.isContactOpen ? UIImage(named: "closeIcon") : UIImage(named: "mailIcon")
-    UIView.animateWithDuration(0.5, animations: { () -> Void in
+    UIView.animateWithDuration(0.3, animations: { () -> Void in
       self.mailIconImageView.alpha = 0
     }) { (completed) -> Void in
       self.mailIconImageView.image = newImageIcon?.imageWithRenderingMode(.AlwaysTemplate)
-      UIView.animateWithDuration(0.5, animations: { () -> Void in
+      UIView.animateWithDuration(0.3, animations: { () -> Void in
         self.mailIconImageView.alpha = 1
       })
     }
@@ -118,11 +118,11 @@ class HomeViewController: PROViewController {
 
   func indexStateChanged(notification: NSNotification) {
     let newImageIcon = Global.isIndexOpen ? UIImage(named: "closeIcon") : UIImage(named: "hamburgerIcon")
-    UIView.animateWithDuration(0.5, animations: { () -> Void in
+    UIView.animateWithDuration(0.3, animations: { () -> Void in
       self.indexIconImageView.alpha = 0
     }) { (completed) -> Void in
       self.indexIconImageView.image = newImageIcon?.imageWithRenderingMode(.AlwaysTemplate)
-      UIView.animateWithDuration(0.5, animations: { () -> Void in
+      UIView.animateWithDuration(0.3, animations: { () -> Void in
         self.indexIconImageView.alpha = 1
       })
     }
