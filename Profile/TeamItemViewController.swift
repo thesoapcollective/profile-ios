@@ -108,7 +108,7 @@ class TeamItemViewController: ItemViewController {
           itemView.radialGradientContainerView.alpha = fadingOutAlpha
           itemView.photoImageView.alpha = fadingOutAlpha
           itemView.shortTitleLabel.alpha = fadingOutAlpha
-          UIView.animateWithDuration(0.3, animations: { () -> Void in
+          UIView.animateWithDuration(0.1, animations: { () -> Void in
             self.itemView.topGradientView.alpha = 1
           })
         } else { // Panning down on this index to stage 0

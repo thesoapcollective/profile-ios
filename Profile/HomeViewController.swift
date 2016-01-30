@@ -14,6 +14,7 @@ class HomeViewController: PROViewController {
   // PROPERTIES
   // ==================================================
 
+  @IBOutlet weak var bottomGradientView: LinearGradientView!
   @IBOutlet weak var radialGradientContainerView: UIView!
   @IBOutlet weak var radialGradientView: RadialGradientView!
   @IBOutlet weak var indexIconContainerView: UIView!
@@ -23,6 +24,7 @@ class HomeViewController: PROViewController {
   @IBOutlet weak var mailIconContainerView: UIView!
   @IBOutlet weak var mailIconImageView: UIImageView!
   @IBOutlet weak var mailIconDottedBorderImageView: DottedBorderImageView!
+  @IBOutlet weak var topGradientView: LinearGradientView!
 
   @IBOutlet weak var radialGradientTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var radialGradientTrailingConstraint: NSLayoutConstraint!
@@ -55,13 +57,17 @@ class HomeViewController: PROViewController {
   }
 
   override func updateColors() {
-    logoImageView.tintColor = UIColor.appPrimaryTextColor()
+    bottomGradientView.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
+    bottomGradientView.toColor = UIColor.appPrimaryBackgroundColor()
     indexIconImageView.tintColor = UIColor.appPrimaryTextColor()
     indexIconDottedBorderImageView.dotColor = UIColor.appPrimaryTextColor()
+    logoImageView.tintColor = UIColor.appPrimaryTextColor()
     mailIconImageView.tintColor = UIColor.appPrimaryTextColor()
     mailIconDottedBorderImageView.dotColor = UIColor.appPrimaryTextColor()
     radialGradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
     radialGradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
+    topGradientView.fromColor = UIColor.appPrimaryBackgroundColor()
+    topGradientView.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
   }
 
   // ==================================================
@@ -125,6 +131,7 @@ class HomeViewController: PROViewController {
   func scrollChanged(notification: NSNotification) {
     guard let userInfo = notification.userInfo else { return }
     let panDy = userInfo["panDy"] as! CGFloat
+    let currentDirection = UIPanGestureRecognizerDirection(rawValue: userInfo["currentDirection"] as! Int)
     let currentIndex = userInfo["currentIndex"] as! Int
     var threshold: CGFloat = 0
     var alpha: CGFloat = 0
@@ -137,22 +144,46 @@ class HomeViewController: PROViewController {
       alpha = 1 - (threshold - abs(panDy)) / threshold
     }
 
-    radialGradientContainerView.alpha = alpha
     indexIconContainerView.alpha = alpha
     logoImageView.alpha = alpha
     mailIconContainerView.alpha = alpha
+    radialGradientContainerView.alpha = alpha
+
+    if currentDirection == .Up {
+      if currentIndex == index {
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+          self.bottomGradientView.alpha = 1
+        })
+      } else if currentIndex + 1 == index {
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+          self.topGradientView.alpha = 1
+        })
+      }
+    } else if currentDirection == .Down {
+      if currentIndex == index {
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+          self.topGradientView.alpha = 1
+        })
+      } else if currentIndex - 1 == index {
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+          self.bottomGradientView.alpha = 1
+        })
+      }
+    }
   }
 
   func scrollEnded(notification: NSNotification) {
     guard let userInfo = notification.userInfo else { return }
     let currentIndex = userInfo["currentIndex"] as! Int
-    let alpha: CGFloat =  currentIndex == index ? 1 : 0
+    let alpha: CGFloat = currentIndex == index ? 1 : 0
 
     UIView.animateWithDuration(0.3, animations: { () -> Void in
-      self.radialGradientContainerView.alpha = alpha
+      self.bottomGradientView.alpha = 0
       self.indexIconContainerView.alpha = alpha
       self.logoImageView.alpha = alpha
       self.mailIconContainerView.alpha = alpha
+      self.radialGradientContainerView.alpha = alpha
+      self.topGradientView.alpha = 0
     })
   }
 

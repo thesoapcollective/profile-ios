@@ -177,6 +177,14 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Y5r-de-PYV">
                                 <rect key="frame" x="218" y="275" width="165" height="50"/>
                             </imageView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Tk-FA-ad5" customClass="LinearGradientView" customModule="Profile" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="600" height="155"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2V-je-7dV" customClass="LinearGradientView" customModule="Profile" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="445" width="600" height="155"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UdF-st-ED4">
                                 <rect key="frame" x="0.0" y="32" width="35" height="40"/>
                                 <subviews>
@@ -243,17 +251,26 @@
                         <constraints>
                             <constraint firstItem="UdF-st-ED4" firstAttribute="top" secondItem="DoL-OU-1td" secondAttribute="bottom" constant="12" id="1Iy-IW-Xb4"/>
                             <constraint firstAttribute="trailing" secondItem="8Fl-WL-qpH" secondAttribute="trailing" id="1jo-Rw-slR"/>
+                            <constraint firstItem="6Tk-FA-ad5" firstAttribute="leading" secondItem="gFa-hb-b4T" secondAttribute="leading" id="2oD-KE-Iu0"/>
                             <constraint firstAttribute="trailing" secondItem="cwS-Ww-8vs" secondAttribute="trailing" id="6yr-Zr-EmR"/>
+                            <constraint firstItem="Cdk-tx-w7e" firstAttribute="top" secondItem="E2V-je-7dV" secondAttribute="bottom" id="AFm-vA-CyA"/>
                             <constraint firstItem="8Fl-WL-qpH" firstAttribute="leading" secondItem="gFa-hb-b4T" secondAttribute="leading" id="DwX-g1-pve"/>
+                            <constraint firstAttribute="trailing" secondItem="6Tk-FA-ad5" secondAttribute="trailing" id="FE5-uS-sXa"/>
                             <constraint firstItem="8Fl-WL-qpH" firstAttribute="top" secondItem="DoL-OU-1td" secondAttribute="bottom" id="Kca-mV-RrU"/>
+                            <constraint firstItem="E2V-je-7dV" firstAttribute="height" secondItem="gFa-hb-b4T" secondAttribute="height" multiplier="173/667" id="R3r-9i-Cge"/>
+                            <constraint firstItem="E2V-je-7dV" firstAttribute="leading" secondItem="gFa-hb-b4T" secondAttribute="leading" id="SHs-ZK-bnh"/>
+                            <constraint firstAttribute="trailing" secondItem="E2V-je-7dV" secondAttribute="trailing" id="UVs-fX-xFd"/>
                             <constraint firstItem="Cdk-tx-w7e" firstAttribute="top" secondItem="cwS-Ww-8vs" secondAttribute="bottom" constant="12" id="cu7-UR-NWL"/>
                             <constraint firstItem="Y5r-de-PYV" firstAttribute="centerY" secondItem="gFa-hb-b4T" secondAttribute="centerY" id="hEm-Bw-sSg"/>
+                            <constraint firstItem="6Tk-FA-ad5" firstAttribute="height" secondItem="gFa-hb-b4T" secondAttribute="height" multiplier="173/667" id="iAe-vW-Wod"/>
                             <constraint firstItem="Cdk-tx-w7e" firstAttribute="top" secondItem="8Fl-WL-qpH" secondAttribute="bottom" id="jFT-31-0oL"/>
                             <constraint firstItem="Y5r-de-PYV" firstAttribute="centerX" secondItem="gFa-hb-b4T" secondAttribute="centerX" id="mzl-CI-VrO"/>
                             <constraint firstItem="UdF-st-ED4" firstAttribute="leading" secondItem="gFa-hb-b4T" secondAttribute="leading" id="pNx-bF-CSa"/>
+                            <constraint firstItem="6Tk-FA-ad5" firstAttribute="top" secondItem="DoL-OU-1td" secondAttribute="bottom" id="u62-PN-z90"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomGradientView" destination="E2V-je-7dV" id="Nmn-Sd-RO2"/>
                         <outlet property="indexIconContainerView" destination="UdF-st-ED4" id="RUq-Tn-Tdd"/>
                         <outlet property="indexIconDottedBorderImageView" destination="ITL-Rq-etR" id="NtI-GE-7Ye"/>
                         <outlet property="indexIconImageView" destination="NyE-9l-Tui" id="Owd-4g-lfc"/>
@@ -265,6 +282,7 @@
                         <outlet property="radialGradientTopConstraint" destination="I7F-DI-QLG" id="Cod-FR-VXj"/>
                         <outlet property="radialGradientTrailingConstraint" destination="0BL-Lj-dZA" id="7F8-C7-AVV"/>
                         <outlet property="radialGradientView" destination="Kco-Qd-jMT" id="xmp-aD-Lya"/>
+                        <outlet property="topGradientView" destination="6Tk-FA-ad5" id="eD8-pN-nOX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HH7-Li-hAD" userLabel="First Responder" sceneMemberID="firstResponder"/>
