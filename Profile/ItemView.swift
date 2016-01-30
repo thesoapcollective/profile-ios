@@ -14,6 +14,7 @@ class ItemView: UIView {
   // PROPERTIES
   // ==================================================
 
+  @IBOutlet weak var appStoreButton: UIButton!
   @IBOutlet weak var bottomGradientView: LinearGradientView!
   @IBOutlet weak var descriptionContainerView: UIView!
   @IBOutlet weak var descriptionGradientView: LinearGradientView!
@@ -26,9 +27,11 @@ class ItemView: UIView {
   @IBOutlet weak var shortTitleLabel: UILabel!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var topGradientView: LinearGradientView!
+  @IBOutlet weak var websiteButton: UIButton!
 
   @IBOutlet weak var bottomGradientBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var descriptionGradientBottomConstraint: NSLayoutConstraint!
+  @IBOutlet weak var descriptionLabelBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var descriptionTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var radialGradientTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var radialGradientTrailingConstraint: NSLayoutConstraint!

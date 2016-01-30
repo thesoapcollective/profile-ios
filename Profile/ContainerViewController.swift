@@ -115,7 +115,9 @@ class ContainerViewController: PROViewController {
       if self.isDataReady {
         UIView.animateWithDuration(0.5, delay: 0.3, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
           self.loadingView.alpha = 0
-        }, completion: nil)
+        }, completion: { (completed) -> Void in
+            self.loadingView.hidden = true
+        })
       } else {
         self.startLoadingAnimation()
       }

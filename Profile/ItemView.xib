@@ -12,6 +12,7 @@
         <mutableArray key="FuturaPT-Heavy.otf">
             <string>FuturaPT-Heavy</string>
             <string>FuturaPT-Heavy</string>
+            <string>FuturaPT-Heavy</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -33,17 +34,17 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvl-rs-9oA" userLabel="Description Clip View">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvl-rs-9oA" userLabel="Description Clip View">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GLe-YH-9b1">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GLe-YH-9b1">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             <subviews>
-                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHG-zd-Mfc">
-                                    <rect key="frame" x="120" y="216" width="360" height="168"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHG-zd-Mfc">
+                                    <rect key="frame" x="120" y="191" width="360" height="218"/>
                                     <subviews>
-                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qF6-Pp-Vul" userLabel="Description Padding View">
-                                            <rect key="frame" x="16" y="16" width="328" height="136"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qF6-Pp-Vul" userLabel="Description Padding View">
+                                            <rect key="frame" x="16" y="16" width="328" height="186"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ep7-GT-dPW">
                                                     <rect key="frame" x="0.0" y="0.0" width="328" height="18"/>
@@ -58,14 +59,29 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIr-lM-Txw">
+                                                    <rect key="frame" x="69" y="156" width="189" height="30"/>
+                                                    <fontDescription key="fontDescription" name="FuturaPT-Heavy" family="Futura PT" pointSize="14"/>
+                                                    <state key="normal" title="http://thesoapcollective.com">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ivB-uL-wR6">
+                                                    <rect key="frame" x="97" y="146" width="135" height="40"/>
+                                                    <state key="normal" image="appStoreButton"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="JIr-lM-Txw" secondAttribute="bottom" id="5li-ba-IxN"/>
+                                                <constraint firstItem="ivB-uL-wR6" firstAttribute="centerX" secondItem="qF6-Pp-Vul" secondAttribute="centerX" id="CDs-4l-kac"/>
                                                 <constraint firstItem="ep7-GT-dPW" firstAttribute="leading" secondItem="qF6-Pp-Vul" secondAttribute="leading" id="OFc-Pe-ibO"/>
                                                 <constraint firstAttribute="trailing" secondItem="Jzi-Oa-QPc" secondAttribute="trailing" id="OGR-zn-Gkq"/>
                                                 <constraint firstItem="ep7-GT-dPW" firstAttribute="top" secondItem="qF6-Pp-Vul" secondAttribute="top" id="TYM-EU-iFB"/>
+                                                <constraint firstItem="JIr-lM-Txw" firstAttribute="centerX" secondItem="qF6-Pp-Vul" secondAttribute="centerX" id="XMk-Xo-d1Z"/>
                                                 <constraint firstItem="Jzi-Oa-QPc" firstAttribute="leading" secondItem="qF6-Pp-Vul" secondAttribute="leading" id="e0v-Hb-aCU"/>
                                                 <constraint firstItem="Jzi-Oa-QPc" firstAttribute="top" secondItem="ep7-GT-dPW" secondAttribute="bottom" constant="10" id="jOe-ur-WcX"/>
-                                                <constraint firstAttribute="bottom" secondItem="Jzi-Oa-QPc" secondAttribute="bottom" id="mjK-EH-XYn"/>
+                                                <constraint firstAttribute="bottom" secondItem="Jzi-Oa-QPc" secondAttribute="bottom" constant="50" id="mjK-EH-XYn"/>
+                                                <constraint firstAttribute="bottom" secondItem="ivB-uL-wR6" secondAttribute="bottom" id="tPd-jd-6hJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="ep7-GT-dPW" secondAttribute="trailing" id="zya-0Z-YBc"/>
                                             </constraints>
                                         </view>
@@ -93,7 +109,7 @@
                         <constraint firstItem="GLe-YH-9b1" firstAttribute="top" secondItem="wvl-rs-9oA" secondAttribute="top" id="mce-f8-1p5"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tT5-rE-PgK" customClass="LinearGradientView" customModule="Profile" customModuleProvider="target">
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tT5-rE-PgK" customClass="LinearGradientView" customModule="Profile" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="444" width="600" height="156"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -114,11 +130,11 @@
                         <constraint firstItem="Txy-qK-fzH" firstAttribute="width" secondItem="C9x-dN-rTr" secondAttribute="width" multiplier="2" id="lNF-Tj-ig1"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1s-NS-sLd" customClass="LinearGradientView" customModule="Profile" customModuleProvider="target">
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1s-NS-sLd" customClass="LinearGradientView" customModule="Profile" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="156"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qbK-Ua-0U9" customClass="LinearGradientView" customModule="Profile" customModuleProvider="target">
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qbK-Ua-0U9" customClass="LinearGradientView" customModule="Profile" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="444" width="600" height="156"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -156,12 +172,14 @@
                 <constraint firstItem="7Xf-tI-I4g" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="100" id="z5O-xO-4Vj"/>
             </constraints>
             <connections>
+                <outlet property="appStoreButton" destination="ivB-uL-wR6" id="m2Q-C5-TbM"/>
                 <outlet property="bottomGradientBottomConstraint" destination="QhA-o9-SS1" id="jyd-ee-n6W"/>
                 <outlet property="bottomGradientView" destination="qbK-Ua-0U9" id="iez-YI-PoQ"/>
                 <outlet property="descriptionContainerView" destination="bHG-zd-Mfc" id="32p-Oo-6CC"/>
                 <outlet property="descriptionGradientBottomConstraint" destination="IoO-dx-gKk" id="gf1-Lx-osJ"/>
                 <outlet property="descriptionGradientView" destination="tT5-rE-PgK" id="YoT-8f-bVf"/>
                 <outlet property="descriptionLabel" destination="Jzi-Oa-QPc" id="QVI-wD-5mp"/>
+                <outlet property="descriptionLabelBottomConstraint" destination="mjK-EH-XYn" id="5y7-xe-Pvp"/>
                 <outlet property="descriptionPositionView" destination="GLe-YH-9b1" id="0Qc-nx-BxQ"/>
                 <outlet property="descriptionTopConstraint" destination="mce-f8-1p5" id="rHM-Ts-mdE"/>
                 <outlet property="photoGrayscaleImageView" destination="CnB-Q8-KfY" id="XxL-Cd-4ev"/>
@@ -176,7 +194,11 @@
                 <outlet property="titleLabel" destination="ep7-GT-dPW" id="6dP-hk-l1N"/>
                 <outlet property="topGradientTopConstraint" destination="2fF-b2-d6s" id="Wrj-sr-yHq"/>
                 <outlet property="topGradientView" destination="d1s-NS-sLd" id="7lA-zr-2mA"/>
+                <outlet property="websiteButton" destination="JIr-lM-Txw" id="4Ok-KL-6Nc"/>
             </connections>
         </view>
     </objects>
+    <resources>
+        <image name="appStoreButton" width="135" height="40"/>
+    </resources>
 </document>

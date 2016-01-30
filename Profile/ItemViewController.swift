@@ -50,18 +50,6 @@ class ItemViewController: PROViewController {
     }
   }
 
-  func setupData() {
-    let shortTitleText = NSMutableAttributedString(string: data["short_title"].stringValue.uppercaseString)
-    shortTitleText.addAttribute(NSKernAttributeName, value: 5, range: NSMakeRange(0, shortTitleText.length))
-    itemView.shortTitleLabel.attributedText = shortTitleText
-
-    let titleText = NSMutableAttributedString(string: data["title"].stringValue.uppercaseString)
-    titleText.addAttribute(NSKernAttributeName, value: 5, range: NSMakeRange(0, titleText.length))
-    itemView.titleLabel.attributedText = titleText
-
-    setModeDependentAttributes()
-  }
-
   override func updateColors() {
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
     itemView.descriptionContainerView.layer.borderColor = UIColor.appPrimaryTextColor().colorWithAlphaComponent(0.75).CGColor
@@ -71,10 +59,41 @@ class ItemViewController: PROViewController {
     itemView.radialGradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
     itemView.shortTitleLabel.textColor = UIColor.appPrimaryTextColor()
     itemView.titleLabel.textColor = UIColor.appPrimaryTextColor()
+    itemView.websiteButton.setTitleColor(UIColor.appPrimaryTextColor(), forState: .Normal)
   }
 
   override func profileModeChanged(notification: NSNotification) {
     super.profileModeChanged(notification)
+    setModeDependentAttributes()
+  }
+
+  func setupData() {
+    let shortTitleText = NSMutableAttributedString(string: data["short_title"].stringValue.uppercaseString)
+    shortTitleText.addAttribute(NSKernAttributeName, value: 5, range: NSMakeRange(0, shortTitleText.length))
+    itemView.shortTitleLabel.attributedText = shortTitleText
+
+    let titleText = NSMutableAttributedString(string: data["title"].stringValue.uppercaseString)
+    titleText.addAttribute(NSKernAttributeName, value: 5, range: NSMakeRange(0, titleText.length))
+    itemView.titleLabel.attributedText = titleText
+
+    if let websiteUrl = data["website_url"].string {
+      itemView.websiteButton.setTitle(websiteUrl, forState: .Normal)
+      itemView.websiteButton.hidden = false
+      itemView.appStoreButton.hidden = true
+      itemView.descriptionLabelBottomConstraint.constant = 40
+      itemView.websiteButton.addTarget(self, action: "websiteTapped:", forControlEvents: .TouchUpInside)
+    } else if let _ = data["app_store_url"].string {
+      itemView.websiteButton.hidden = true
+      itemView.appStoreButton.hidden = false
+      itemView.descriptionLabelBottomConstraint.constant = 50
+      itemView.appStoreButton.addTarget(self, action: "appStoreTapped:", forControlEvents: .TouchUpInside)
+    } else {
+      itemView.websiteButton.hidden = true
+      itemView.appStoreButton.hidden = true
+      itemView.descriptionLabelBottomConstraint.constant = 0
+    }
+    view.layoutIfNeeded()
+
     setModeDependentAttributes()
   }
 
@@ -103,6 +122,18 @@ class ItemViewController: PROViewController {
       itemView.shortTitleLabelTopConstraint.constant = 50
     }
     view.layoutIfNeeded()
+  }
+
+  func websiteTapped(sender: UIButton) {
+    guard let websiteUrl = data["website_url"].string else { return }
+    guard let url = NSURL(string: websiteUrl) else { return }
+    UIApplication.sharedApplication().openURL(url)
+  }
+
+  func appStoreTapped(sender: UIButton) {
+    guard let websiteUrl = data["app_store_url"].string else { return }
+    guard let url = NSURL(string: websiteUrl) else { return }
+    UIApplication.sharedApplication().openURL(url)
   }
 
   // ==================================================
