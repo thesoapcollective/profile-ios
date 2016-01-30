@@ -17,9 +17,9 @@ class WorkItemViewController: ItemViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    itemView.topGradientView.hidden = index <= 0
     itemView.descriptionTopConstraint.constant = -view.frame.height
     itemView.descriptionGradientBottomConstraint.constant = view.frame.height - itemView.descriptionGradientView.frame.height
+    itemView.topGradientView.hidden = index <= 0
     itemView.topGradientTopConstraint.constant = -view.frame.height
   }
 

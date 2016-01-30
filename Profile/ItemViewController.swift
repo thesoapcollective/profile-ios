@@ -66,6 +66,22 @@ class ItemViewController: PROViewController {
         self.itemView.photoGrayscaleImageView.image = response.result.value?.tintedImage(UIColor.appPrimaryTextColor(), tintAlpha: 1, tintBlendMode: .Color)
       })
     }
+
+    let itemPosition = data["title_position"].dictionaryValue
+    var titlePosition = itemPosition["iphone"]?.dictionaryValue
+    if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+      if let ipadPosition = itemPosition["ipad"]?.dictionary {
+        titlePosition = ipadPosition
+      }
+    }
+    if let position = titlePosition {
+      itemView.shortTitleLabelLeadingConstraint.constant = CGFloat(position["x"]!.doubleValue) * view.frame.width
+      itemView.shortTitleLabelTopConstraint.constant = CGFloat(position["y"]!.doubleValue) * view.frame.height
+    } else {
+      itemView.shortTitleLabelLeadingConstraint.constant = 100
+      itemView.shortTitleLabelTopConstraint.constant = 50
+    }
+    view.layoutIfNeeded()
   }
 
   override func updateColors() {

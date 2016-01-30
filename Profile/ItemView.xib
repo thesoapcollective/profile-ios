@@ -171,6 +171,8 @@
                 <outlet property="radialGradientTrailingConstraint" destination="XvU-Yi-iya" id="eXe-8T-Y9q"/>
                 <outlet property="radialGradientView" destination="Txy-qK-fzH" id="zrL-7x-feE"/>
                 <outlet property="shortTitleLabel" destination="7Xf-tI-I4g" id="zso-RH-OrU"/>
+                <outlet property="shortTitleLabelLeadingConstraint" destination="z5O-xO-4Vj" id="2ph-6q-98a"/>
+                <outlet property="shortTitleLabelTopConstraint" destination="OQs-DF-SbO" id="oOK-wV-K8E"/>
                 <outlet property="titleLabel" destination="ep7-GT-dPW" id="6dP-hk-l1N"/>
                 <outlet property="topGradientTopConstraint" destination="2fF-b2-d6s" id="Wrj-sr-yHq"/>
                 <outlet property="topGradientView" destination="d1s-NS-sLd" id="7lA-zr-2mA"/>

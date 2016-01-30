@@ -32,6 +32,8 @@ class ItemView: UIView {
   @IBOutlet weak var descriptionTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var radialGradientTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var radialGradientTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet weak var shortTitleLabelTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var shortTitleLabelLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var topGradientTopConstraint: NSLayoutConstraint!
 
   var photoImage: UIImage?
