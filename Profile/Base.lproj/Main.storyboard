@@ -13,9 +13,11 @@
             <string>FuturaPT-Book</string>
             <string>FuturaPT-Book</string>
             <string>FuturaPT-Book</string>
-            <string>FuturaPT-Book</string>
-            <string>FuturaPT-Book</string>
-            <string>FuturaPT-Book</string>
+        </mutableArray>
+        <mutableArray key="FuturaPT-BookOblique.otf">
+            <string>FuturaPT-BookObl</string>
+            <string>FuturaPT-BookObl</string>
+            <string>FuturaPT-BookObl</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -403,13 +405,13 @@
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Our Work" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdx-p5-RxP">
                                                 <rect key="frame" x="24" y="22" width="198" height="18"/>
-                                                <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="FuturaPT-BookObl" family="Futura PT" pointSize="14"/>
                                                 <color key="textColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Our Team" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F5K-SP-uGI">
                                                 <rect key="frame" x="24" y="192" width="198" height="18"/>
-                                                <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="FuturaPT-BookObl" family="Futura PT" pointSize="14"/>
                                                 <color key="textColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -508,7 +510,7 @@ San Francisco, CA
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Us" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5m8-1g-QcA">
                                 <rect key="frame" x="24" y="540" width="198" height="18"/>
-                                <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="FuturaPT-BookObl" family="Futura PT" pointSize="14"/>
                                 <color key="textColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
