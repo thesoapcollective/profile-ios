@@ -257,11 +257,11 @@ class ContainerViewController: PROViewController {
     // Setup arrow contraints
     let arrowWidth: CGFloat = 40
     let arrowHeight: CGFloat = 55
-    let arrowOffset: CGFloat = Global.ArrowOffset
     let arrowMargin: CGFloat = 17
     for (i, viewController) in itemViewControllers.enumerate() {
       if i == homeIndex { continue }
 
+      let arrowOffset: CGFloat = i < homeIndex ? Global.WorkArrowOffset : Global.TeamArrowOffset
       let itemViewController = viewController as! ItemViewController
 
       let stage0ContinueArrowView = NSBundle.mainBundle().loadNibNamed("ContinueArrowView", owner: self, options: nil).last as! ContinueArrowView

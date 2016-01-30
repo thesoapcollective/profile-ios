@@ -28,7 +28,8 @@ struct Global {
   static let ScrollChangedNotification = "ScrollChangedNotification"
   static let ScrollEndedNotification = "ScrollEndedNotification"
 
-  static let ArrowOffset: CGFloat = 25
+  static let TeamArrowOffset: CGFloat = 30
+  static let WorkArrowOffset: CGFloat = 25
 
   static var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
 

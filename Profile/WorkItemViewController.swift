@@ -41,14 +41,14 @@ class WorkItemViewController: ItemViewController {
       itemView.descriptionTopConstraint.constant = 0
       itemView.topGradientTopConstraint.constant = -view.frame.height
       if let arrowConstraintStage0 = self.delegate.continueArrowConstraints["itemView\(self.index)-stage0"] {
-        arrowConstraintStage0.constant = -Global.ArrowOffset
+        arrowConstraintStage0.constant = -Global.WorkArrowOffset
       }
     } else if newOffsetY <= -view.frame.height {
       itemView.descriptionGradientBottomConstraint.constant = view.frame.height - itemView.descriptionGradientView.frame.height
       itemView.descriptionTopConstraint.constant = -view.frame.height
       itemView.topGradientTopConstraint.constant = 0
       if let arrowConstraintStage0 = self.delegate.continueArrowConstraints["itemView\(self.index)-stage0"] {
-        arrowConstraintStage0.constant = -Global.ArrowOffset + view.frame.height
+        arrowConstraintStage0.constant = -Global.WorkArrowOffset + view.frame.height
       }
     } else {
       itemView.descriptionGradientBottomConstraint.constant = itemView.descriptionGradientBottomConstraint.constant - dy
@@ -140,7 +140,7 @@ class WorkItemViewController: ItemViewController {
       bottomGradientAlpha = 0
       stage0Alpha = 0
       stage1Alpha = 1
-      arrowStage0Constraint = -Global.ArrowOffset + view.frame.height
+      arrowStage0Constraint = -Global.WorkArrowOffset + view.frame.height
       descriptionTopConstraint = 0
       descriptionGradientBottomConstraint = -itemView.descriptionGradientView.frame.height
       topGradientConstraint = 0
@@ -150,9 +150,9 @@ class WorkItemViewController: ItemViewController {
       stage0Alpha = 0
       stage1Alpha = 0
       if currentIndex == delegate.homeIndex {
-        arrowStage0Constraint = -Global.ArrowOffset
+        arrowStage0Constraint = -Global.WorkArrowOffset
       } else {
-        arrowStage0Constraint = currentStage == 0 ? -Global.ArrowOffset - view.frame.height : -Global.ArrowOffset
+        arrowStage0Constraint = currentStage == 0 ? -Global.WorkArrowOffset - view.frame.height : -Global.WorkArrowOffset
       }
       descriptionTopConstraint = -view.frame.height
       descriptionGradientBottomConstraint = view.frame.height - itemView.descriptionGradientView.frame.height
@@ -163,9 +163,9 @@ class WorkItemViewController: ItemViewController {
       stage0Alpha = currentStage == 0 ? 1 : 0
       stage1Alpha = currentStage == 1 ? 1 : 0
       if currentIndex == index {
-        arrowStage0Constraint = currentStage == 0 ? -Global.ArrowOffset : -Global.ArrowOffset + view.frame.height
+        arrowStage0Constraint = currentStage == 0 ? -Global.WorkArrowOffset : -Global.WorkArrowOffset + view.frame.height
       } else {
-        arrowStage0Constraint = -Global.ArrowOffset
+        arrowStage0Constraint = -Global.WorkArrowOffset
       }
       descriptionTopConstraint = currentStage == 0 ? -view.frame.height : 0
       descriptionGradientBottomConstraint = currentStage == 0 ? view.frame.height - itemView.descriptionGradientView.frame.height : -itemView.descriptionGradientView.frame.height
