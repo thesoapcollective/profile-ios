@@ -37,6 +37,11 @@ class IndexViewController: PROViewController {
     tableView.reloadData()
   }
 
+  override func profileModeChanged(notification: NSNotification) {
+    super.profileModeChanged(notification)
+    tableView.reloadData()
+  }
+
   // ==================================================
   // NOTIFICATIONS
   // ==================================================
@@ -111,9 +116,10 @@ extension IndexViewController: UITableViewDataSource {
     let item = items[indexPath.row]
 
     cell.titleLabel.text = item["index_title"].stringValue
+    let iconUrl = Global.mode == .Light ? item["day_icon_url"].stringValue : item["night_icon_url"].stringValue
     if indexPath.row == delegate.homeIndex {
       cell.iconImageView.image = UIImage(named: "homeIcon")?.imageWithRenderingMode(.AlwaysTemplate)
-    } else if let imageUrl = NSURL(string: item["icon_url"].stringValue) {
+    } else if let imageUrl = NSURL(string: iconUrl) {
       cell.iconImageView.af_setImageWithURL(imageUrl, imageTransition: .CrossDissolve(0.3))
     }
     cell.iconDottedBorderView.hidden = !item["indexes"].arrayValue.contains(JSON(delegate.currentIndex))

@@ -59,15 +59,36 @@ class ItemViewController: PROViewController {
     titleText.addAttribute(NSKernAttributeName, value: 5, range: NSMakeRange(0, titleText.length))
     itemView.titleLabel.attributedText = titleText
 
-    itemView.descriptionLabel.text = data["description"].stringValue
-    if let imageUrl = NSURL(string: data["photo_url"].stringValue) {
+    setModeDependentAttributes()
+  }
 
+  override func updateColors() {
+    view.backgroundColor = UIColor.appPrimaryBackgroundColor()
+    itemView.descriptionContainerView.layer.borderColor = UIColor.appPrimaryTextColor().colorWithAlphaComponent(0.75).CGColor
+    itemView.descriptionPositionView.backgroundColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0.9)
+    itemView.descriptionLabel.textColor = UIColor.appPrimaryTextColor()
+    itemView.radialGradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
+    itemView.radialGradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
+    itemView.shortTitleLabel.textColor = UIColor.appPrimaryTextColor()
+    itemView.titleLabel.textColor = UIColor.appPrimaryTextColor()
+  }
+
+  override func profileModeChanged(notification: NSNotification) {
+    super.profileModeChanged(notification)
+    setModeDependentAttributes()
+  }
+
+  func setModeDependentAttributes() {
+    itemView.descriptionLabel.text = Global.mode == .Light ? data["day_description"].stringValue : data["night_description"].stringValue
+
+    let photoUrl = Global.mode == .Light ? data["day_photo_url"].stringValue : data["night_photo_url"].stringValue
+    if let imageUrl = NSURL(string: photoUrl) {
       itemView.photoImageView.af_setImageWithURL(imageUrl, placeholderImage: nil, filter: nil, imageTransition: .CrossDissolve(0.3), runImageTransitionIfCached: false, completion: { [unowned self] (response) -> Void in
         self.itemView.photoGrayscaleImageView.image = response.result.value?.tintedImage(UIColor.appPrimaryTextColor(), tintAlpha: 1, tintBlendMode: .Color)
       })
     }
 
-    let itemPosition = data["title_position"].dictionaryValue
+    let itemPosition = Global.mode == .Light ? data["day_title_position"].dictionaryValue : data["night_title_position"].dictionaryValue
     var titlePosition = itemPosition["iphone"]?.dictionaryValue
     if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
       if let ipadPosition = itemPosition["ipad"]?.dictionary {
@@ -82,17 +103,6 @@ class ItemViewController: PROViewController {
       itemView.shortTitleLabelTopConstraint.constant = 50
     }
     view.layoutIfNeeded()
-  }
-
-  override func updateColors() {
-    view.backgroundColor = UIColor.appPrimaryBackgroundColor()
-    itemView.descriptionContainerView.layer.borderColor = UIColor.appPrimaryTextColor().colorWithAlphaComponent(0.75).CGColor
-    itemView.descriptionPositionView.backgroundColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0.9)
-    itemView.descriptionLabel.textColor = UIColor.appPrimaryTextColor()
-    itemView.radialGradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
-    itemView.radialGradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
-    itemView.shortTitleLabel.textColor = UIColor.appPrimaryTextColor()
-    itemView.titleLabel.textColor = UIColor.appPrimaryTextColor()
   }
 
   // ==================================================
