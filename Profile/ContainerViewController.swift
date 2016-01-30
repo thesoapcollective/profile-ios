@@ -170,7 +170,6 @@ class ContainerViewController: PROViewController {
 
     setupInitialViewControllers()
     setupGestures()
-    setupNotifcations()
 
     NSNotificationCenter.defaultCenter().postNotificationName(Global.DataLoaded, object: nil)
 
