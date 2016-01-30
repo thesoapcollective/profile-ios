@@ -53,6 +53,7 @@
 	<array>
 		<string>FuturaPT-Heavy.otf</string>
 		<string>FuturaPT-Book.otf</string>
+		<string>FuturaPT-BookOblique.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

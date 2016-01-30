@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		654849051C5C614A00CA158A /* FuturaPT-BookOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = 654849041C5C614A00CA158A /* FuturaPT-BookOblique.otf */; };
 		654D0A371C3A47E7000B1B50 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654D0A361C3A47E7000B1B50 /* UIImage.swift */; };
 		656A3FB51C24EDE800A1948B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656A3FB41C24EDE800A1948B /* AppDelegate.swift */; };
 		656A3FBA1C24EDE800A1948B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 656A3FB81C24EDE800A1948B /* Main.storyboard */; };
@@ -60,6 +61,7 @@
 /* Begin PBXFileReference section */
 		3EA9B8AD80B3545209384F56 /* Pods_Profile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Profile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6027AE5178E78F9769D4513F /* Pods-Profile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Profile.release.xcconfig"; path = "Pods/Target Support Files/Pods-Profile/Pods-Profile.release.xcconfig"; sourceTree = "<group>"; };
+		654849041C5C614A00CA158A /* FuturaPT-BookOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FuturaPT-BookOblique.otf"; sourceTree = "<group>"; };
 		654D0A361C3A47E7000B1B50 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		656A3FB11C24EDE800A1948B /* Profile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Profile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		656A3FB41C24EDE800A1948B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				657CB4391C2A6C43008E8F0D /* FuturaPT-Book.otf */,
+				654849041C5C614A00CA158A /* FuturaPT-BookOblique.otf */,
 				657CB43A1C2A6C43008E8F0D /* FuturaPT-Heavy.otf */,
 			);
 			name = Fonts;
@@ -402,6 +405,7 @@
 				6583339F1C4CAD7500E978B6 /* ItemView.xib in Resources */,
 				656A3FBF1C24EDE800A1948B /* LaunchScreen.storyboard in Resources */,
 				6583339A1C4C8C8900E978B6 /* ContinueArrowView.xib in Resources */,
+				654849051C5C614A00CA158A /* FuturaPT-BookOblique.otf in Resources */,
 				657CB43B1C2A6C43008E8F0D /* FuturaPT-Book.otf in Resources */,
 				656A3FBC1C24EDE800A1948B /* Assets.xcassets in Resources */,
 				657CB43C1C2A6C43008E8F0D /* FuturaPT-Heavy.otf in Resources */,
