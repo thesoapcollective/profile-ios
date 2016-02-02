@@ -371,7 +371,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isVertical" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="3dR-ZY-U9e">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="3dR-ZY-U9e">
                                                                     <rect key="frame" x="0.0" y="4" width="154" height="24"/>
                                                                     <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="18"/>
                                                                     <nil key="highlightedColor"/>
@@ -491,6 +491,9 @@ San Francisco, CA
                                 <state key="normal" title="857.203.1004" image="phoneIcon">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="phoneTapped:" destination="ypH-1J-YpO" eventType="touchUpInside" id="aR3-KS-v9k"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vkI-lW-f9W">
                                 <rect key="frame" x="24" y="456" width="198" height="24"/>
@@ -499,6 +502,9 @@ San Francisco, CA
                                 <state key="normal" title="info@thesoapcollective.com" image="emailIcon">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="emailTapped:" destination="ypH-1J-YpO" eventType="touchUpInside" id="Csy-1J-gGm"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mG3-FF-0Vi">
                                 <rect key="frame" x="24" y="414" width="198" height="24"/>
@@ -507,6 +513,9 @@ San Francisco, CA
                                 <state key="normal" title="@SoapCollective" image="twitterIcon">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="twitterTapped:" destination="ypH-1J-YpO" eventType="touchUpInside" id="wHP-MV-v0W"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Us" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5m8-1g-QcA">
                                 <rect key="frame" x="24" y="540" width="198" height="18"/>

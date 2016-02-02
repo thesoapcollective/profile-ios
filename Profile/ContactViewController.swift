@@ -46,4 +46,32 @@ class ContactViewController: PROViewController {
     contactUsLabel.textColor = UIColor.appInvertedSecondaryTextColor()
   }
 
+  @IBAction func twitterTapped(sender: UIButton) {
+    guard let url = NSURL(string: "https://twitter.com/soapcollective") else { return }
+    UIApplication.sharedApplication().openURL(url)
+  }
+
+  @IBAction func emailTapped(sender: UIButton) {
+    guard let url = NSURL(string: "mailto:info@thesoapcollective.com?subject=Hey%20Soap!") else { return }
+    if UIApplication.sharedApplication().canOpenURL(url) {
+      UIApplication.sharedApplication().openURL(url)
+    } else {
+      let alertViewController = UIAlertController(title: "Cannot send email!", message: "Configure at least one email account in the Mail app and try again.", preferredStyle: .Alert)
+      alertViewController.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
+      presentViewController(alertViewController, animated: true, completion: nil)
+    }
+  }
+
+  @IBAction func phoneTapped(sender: UIButton) {
+    guard let url = NSURL(string: "tel:1-857-203-1004") else { return }
+    if UIApplication.sharedApplication().canOpenURL(url) {
+      let alertViewController = UIAlertController(title: "Want to give us a call?", message: nil, preferredStyle: .Alert)
+      alertViewController.addAction(UIAlertAction(title: "No thanks.", style: .Cancel, handler: nil))
+      alertViewController.addAction(UIAlertAction(title: "Yes!", style: .Default, handler: { (alertAction) -> Void in
+        UIApplication.sharedApplication().openURL(url)
+      }))
+      presentViewController(alertViewController, animated: true, completion: nil)
+    }
+  }
+
 }
