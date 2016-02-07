@@ -135,6 +135,8 @@ class WorkItemViewController: ItemViewController {
     var descriptionGradientBottomConstraint: CGFloat!
     var topGradientConstraint: CGFloat!
 
+    updateImage()
+
     if currentIndex + 1 == index {
       alpha = 1
       bottomGradientAlpha = 0

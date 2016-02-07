@@ -100,12 +100,7 @@ class ItemViewController: PROViewController {
   func setModeDependentAttributes() {
     itemView.descriptionLabel.text = Global.mode == .Light ? data["day_description"].stringValue : data["night_description"].stringValue
 
-    let photoUrl = Global.mode == .Light ? data["day_photo_url"].stringValue : data["night_photo_url"].stringValue
-    if let imageUrl = NSURL(string: photoUrl) {
-      itemView.photoImageView.af_setImageWithURL(imageUrl, placeholderImage: nil, filter: nil, imageTransition: .CrossDissolve(0.3), runImageTransitionIfCached: false, completion: { [unowned self] (response) -> Void in
-        self.itemView.photoGrayscaleImageView.image = response.result.value?.tintedImage(UIColor.appPrimaryTextColor(), tintAlpha: 1, tintBlendMode: .Color)
-      })
-    }
+    updateImage(true)
 
     let itemPosition = Global.mode == .Light ? data["day_title_position"].dictionaryValue : data["night_title_position"].dictionaryValue
     var titlePosition = itemPosition["iphone"]?.dictionaryValue
@@ -122,6 +117,24 @@ class ItemViewController: PROViewController {
       itemView.shortTitleLabelTopConstraint.constant = 50
     }
     view.layoutIfNeeded()
+  }
+
+  func updateImage(modeChanged: Bool = false) {
+    if delegate.currentIndex + 1 == index ||
+      delegate.currentIndex - 1 == index ||
+      delegate.currentIndex == index {
+        if itemView.photoImageView.image == nil || modeChanged {
+          let photoUrl = Global.mode == .Light ? data["day_photo_url"].stringValue : data["night_photo_url"].stringValue
+          if let imageUrl = NSURL(string: photoUrl) {
+            itemView.photoImageView.af_setImageWithURL(imageUrl, placeholderImage: nil, filter: nil, imageTransition: .CrossDissolve(0.3), runImageTransitionIfCached: false, completion: { [unowned self] (response) -> Void in
+              self.itemView.photoGrayscaleImageView.image = response.result.value?.tintedImage(UIColor.appPrimaryTextColor(), tintAlpha: 1, tintBlendMode: .Color)
+              })
+          }
+        }
+    } else {
+      itemView.photoImageView.image = nil
+      itemView.photoGrayscaleImageView.image = nil
+    }
   }
 
   func websiteTapped(sender: UIButton) {

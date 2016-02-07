@@ -135,6 +135,8 @@ class TeamItemViewController: ItemViewController {
     var descriptionTopConstraint: CGFloat!
     var descriptionGradientBottomConstraint: CGFloat!
 
+    updateImage()
+
     if currentIndex + 1 == index {
       alpha = 0
       stage0Alpha = 0
