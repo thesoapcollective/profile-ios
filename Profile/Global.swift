@@ -31,6 +31,10 @@ struct Global {
   static let TeamArrowOffset: CGFloat = 30
   static let WorkArrowOffset: CGFloat = 25
 
+  static let ParallaxOffset3: CGFloat = 50
+  static let ParallaxOffset2: CGFloat = -30
+  static let ParallaxOffset1: CGFloat = -20
+
   static var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
 
   static var mode: ProfileMode = .Light {

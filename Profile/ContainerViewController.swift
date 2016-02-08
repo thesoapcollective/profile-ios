@@ -284,7 +284,9 @@ class ContainerViewController: PROViewController {
       }
 
       contentView.addSubview(stage0ContinueArrowView)
+      stage0ContinueArrowView.addParallax(Global.ParallaxOffset1)
       contentView.addSubview(stage1ContinueArrowView)
+      stage1ContinueArrowView.addParallax(Global.ParallaxOffset1)
 
       if i < homeIndex {
         // Work Stage 0 Arrow

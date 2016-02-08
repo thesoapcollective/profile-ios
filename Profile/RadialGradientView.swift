@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RadialGradientView: UIView {
+class RadialGradientView: ParallaxView {
 
   // ==================================================
   // PROPERTIES

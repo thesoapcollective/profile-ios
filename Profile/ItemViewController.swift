@@ -149,6 +149,22 @@ class ItemViewController: PROViewController {
     UIApplication.sharedApplication().openURL(url)
   }
 
+  func addParallaxToViews() {
+    itemView.photoImageView.addParallax(Global.ParallaxOffset3)
+    itemView.photoGrayscaleImageView.addParallax(Global.ParallaxOffset3)
+    itemView.radialGradientView.addParallax(Global.ParallaxOffset2)
+    itemView.descriptionContainerView.addParallax(Global.ParallaxOffset1)
+    itemView.shortTitleLabel.addParallax(Global.ParallaxOffset1)
+  }
+
+  func removeParallaxFromViews() {
+    itemView.photoImageView.removeParallax()
+    itemView.photoGrayscaleImageView.removeParallax()
+    itemView.radialGradientView.removeParallax()
+    itemView.descriptionContainerView.removeParallax()
+    itemView.shortTitleLabel.removeParallax()
+  }
+
   // ==================================================
   // NOTIFICATIONS
   // ==================================================

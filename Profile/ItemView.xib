@@ -22,25 +22,36 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FvV-YE-QHT">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FvV-YE-QHT" customClass="ParallaxImageView" customModule="Profile" customModuleProvider="target">
                     <rect key="frame" x="-50" y="-50" width="700" height="700"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CnB-Q8-KfY">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CnB-Q8-KfY" customClass="ParallaxImageView" customModule="Profile" customModuleProvider="target">
                     <rect key="frame" x="-50" y="-50" width="700" height="700"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHORT TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Xf-tI-I4g">
-                    <rect key="frame" x="100" y="200" width="77.5" height="18"/>
-                    <fontDescription key="fontDescription" name="FuturaPT-Heavy" family="Futura PT" pointSize="14"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9x-dN-rTr">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <view userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Txy-qK-fzH" customClass="RadialGradientView" customModule="Profile" customModuleProvider="target">
+                            <rect key="frame" x="-60" y="-540" width="1200" height="1200"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Txy-qK-fzH" secondAttribute="height" multiplier="1:1" id="3rM-Ni-qdC"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Txy-qK-fzH" firstAttribute="top" secondItem="C9x-dN-rTr" secondAttribute="top" constant="-540" id="HM1-xS-KjO"/>
+                        <constraint firstAttribute="trailing" secondItem="Txy-qK-fzH" secondAttribute="trailing" constant="-540" id="XvU-Yi-iya"/>
+                        <constraint firstItem="Txy-qK-fzH" firstAttribute="width" secondItem="C9x-dN-rTr" secondAttribute="width" multiplier="2" id="lNF-Tj-ig1"/>
+                    </constraints>
+                </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvl-rs-9oA" userLabel="Description Clip View">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GLe-YH-9b1">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHG-zd-Mfc">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHG-zd-Mfc" customClass="ParallaxView" customModule="Profile" customModuleProvider="target">
                                     <rect key="frame" x="120" y="191" width="360" height="218"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qF6-Pp-Vul" userLabel="Description Padding View">
@@ -113,23 +124,6 @@
                     <rect key="frame" x="0.0" y="444" width="600" height="156"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9x-dN-rTr" userLabel="Gradient Container View">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <subviews>
-                        <view userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Txy-qK-fzH" customClass="RadialGradientView" customModule="Profile" customModuleProvider="target">
-                            <rect key="frame" x="-60" y="-540" width="1200" height="1200"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="Txy-qK-fzH" secondAttribute="height" multiplier="1:1" id="3rM-Ni-qdC"/>
-                            </constraints>
-                        </view>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="Txy-qK-fzH" firstAttribute="top" secondItem="C9x-dN-rTr" secondAttribute="top" constant="-540" id="HM1-xS-KjO"/>
-                        <constraint firstAttribute="trailing" secondItem="Txy-qK-fzH" secondAttribute="trailing" constant="-540" id="XvU-Yi-iya"/>
-                        <constraint firstItem="Txy-qK-fzH" firstAttribute="width" secondItem="C9x-dN-rTr" secondAttribute="width" multiplier="2" id="lNF-Tj-ig1"/>
-                    </constraints>
-                </view>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1s-NS-sLd" customClass="LinearGradientView" customModule="Profile" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="156"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -138,6 +132,12 @@
                     <rect key="frame" x="0.0" y="444" width="600" height="156"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHORT TITLE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Xf-tI-I4g" customClass="ParallaxLabel" customModule="Profile" customModuleProvider="target">
+                    <rect key="frame" x="100" y="200" width="77.5" height="18"/>
+                    <fontDescription key="fontDescription" name="FuturaPT-Heavy" family="Futura PT" pointSize="14"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <constraints>
                 <constraint firstItem="d1s-NS-sLd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2fF-b2-d6s"/>

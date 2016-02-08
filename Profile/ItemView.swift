@@ -16,15 +16,15 @@ class ItemView: UIView {
 
   @IBOutlet weak var appStoreButton: UIButton!
   @IBOutlet weak var bottomGradientView: LinearGradientView!
-  @IBOutlet weak var descriptionContainerView: UIView!
+  @IBOutlet weak var descriptionContainerView: ParallaxView!
   @IBOutlet weak var descriptionGradientView: LinearGradientView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var descriptionPositionView: UIView!
   @IBOutlet weak var radialGradientContainerView: UIView!
   @IBOutlet weak var radialGradientView: RadialGradientView!
-  @IBOutlet weak var photoGrayscaleImageView: UIImageView!
-  @IBOutlet weak var photoImageView: UIImageView!
-  @IBOutlet weak var shortTitleLabel: UILabel!
+  @IBOutlet weak var photoGrayscaleImageView: ParallaxImageView!
+  @IBOutlet weak var photoImageView: ParallaxImageView!
+  @IBOutlet weak var shortTitleLabel: ParallaxLabel!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var topGradientView: LinearGradientView!
   @IBOutlet weak var websiteButton: UIButton!

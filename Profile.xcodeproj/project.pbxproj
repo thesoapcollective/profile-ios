@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		654849051C5C614A00CA158A /* FuturaPT-BookOblique.otf in Resources */ = {isa = PBXBuildFile; fileRef = 654849041C5C614A00CA158A /* FuturaPT-BookOblique.otf */; };
 		654D0A371C3A47E7000B1B50 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654D0A361C3A47E7000B1B50 /* UIImage.swift */; };
+		6553309E1C6811EA0006DFA4 /* ParallaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6553309D1C6811EA0006DFA4 /* ParallaxView.swift */; };
+		655330A01C6827A30006DFA4 /* ParallaxLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6553309F1C6827A30006DFA4 /* ParallaxLabel.swift */; };
 		656A3FB51C24EDE800A1948B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656A3FB41C24EDE800A1948B /* AppDelegate.swift */; };
 		656A3FBA1C24EDE800A1948B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 656A3FB81C24EDE800A1948B /* Main.storyboard */; };
 		656A3FBC1C24EDE800A1948B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 656A3FBB1C24EDE800A1948B /* Assets.xcassets */; };
 		656A3FBF1C24EDE800A1948B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 656A3FBD1C24EDE800A1948B /* LaunchScreen.storyboard */; };
 		656A3FCA1C24EDE800A1948B /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656A3FC91C24EDE800A1948B /* ProfileTests.swift */; };
 		656A3FD51C24EDE800A1948B /* ProfileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656A3FD41C24EDE800A1948B /* ProfileUITests.swift */; };
+		656FB71A1C6810C100479368 /* ParallaxImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FB7191C6810C100479368 /* ParallaxImageView.swift */; };
 		657953631C522025001F1B40 /* IndexTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657953621C522025001F1B40 /* IndexTableViewCell.swift */; };
 		657CB42B1C29CA3B008E8F0D /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB42A1C29CA3B008E8F0D /* ContactViewController.swift */; };
 		657CB42D1C29CA53008E8F0D /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657CB42C1C29CA53008E8F0D /* IndexViewController.swift */; };
@@ -63,6 +66,8 @@
 		6027AE5178E78F9769D4513F /* Pods-Profile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Profile.release.xcconfig"; path = "Pods/Target Support Files/Pods-Profile/Pods-Profile.release.xcconfig"; sourceTree = "<group>"; };
 		654849041C5C614A00CA158A /* FuturaPT-BookOblique.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FuturaPT-BookOblique.otf"; sourceTree = "<group>"; };
 		654D0A361C3A47E7000B1B50 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		6553309D1C6811EA0006DFA4 /* ParallaxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxView.swift; sourceTree = "<group>"; };
+		6553309F1C6827A30006DFA4 /* ParallaxLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxLabel.swift; sourceTree = "<group>"; };
 		656A3FB11C24EDE800A1948B /* Profile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Profile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		656A3FB41C24EDE800A1948B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		656A3FB91C24EDE800A1948B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -75,6 +80,7 @@
 		656A3FD01C24EDE800A1948B /* ProfileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProfileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		656A3FD41C24EDE800A1948B /* ProfileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUITests.swift; sourceTree = "<group>"; };
 		656A3FD61C24EDE800A1948B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		656FB7191C6810C100479368 /* ParallaxImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxImageView.swift; sourceTree = "<group>"; };
 		657953621C522025001F1B40 /* IndexTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexTableViewCell.swift; sourceTree = "<group>"; };
 		657CB42A1C29CA3B008E8F0D /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		657CB42C1C29CA53008E8F0D /* IndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
@@ -171,7 +177,6 @@
 			children = (
 				657CB4331C2A6B71008E8F0D /* Resources */,
 				65F645241C2880CE00D21E47 /* Extensions */,
-				657CB4431C2B8693008E8F0D /* Subclasses */,
 				657CB4441C2CBFC6008E8F0D /* Views */,
 				65F645211C28804800D21E47 /* ViewControllers */,
 				656A3FB41C24EDE800A1948B /* AppDelegate.swift */,
@@ -228,15 +233,6 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
-		657CB4431C2B8693008E8F0D /* Subclasses */ = {
-			isa = PBXGroup;
-			children = (
-				657CB4411C2B868C008E8F0D /* PROViewController.swift */,
-				6586739C1C28CBA300B82CD7 /* ItemViewController.swift */,
-			);
-			name = Subclasses;
-			sourceTree = "<group>";
-		};
 		657CB4441C2CBFC6008E8F0D /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +243,9 @@
 				657FC34A1C5609F800B73375 /* DottedCircleBorderImageView.swift */,
 				657CB4491C30978D008E8F0D /* RadialGradientView.swift */,
 				657F03941C39FDAE00513ACB /* LinearGradientView.swift */,
+				6553309D1C6811EA0006DFA4 /* ParallaxView.swift */,
+				656FB7191C6810C100479368 /* ParallaxImageView.swift */,
+				6553309F1C6827A30006DFA4 /* ParallaxLabel.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -276,6 +275,8 @@
 				65F645221C28806700D21E47 /* ContainerViewController.swift */,
 				657CB43D1C2B7BB4008E8F0D /* HomeViewController.swift */,
 				657CB42C1C29CA53008E8F0D /* IndexViewController.swift */,
+				6586739C1C28CBA300B82CD7 /* ItemViewController.swift */,
+				657CB4411C2B868C008E8F0D /* PROViewController.swift */,
 				657F03901C39F60B00513ACB /* TeamItemViewController.swift */,
 				657F038E1C39F5EF00513ACB /* WorkItemViewController.swift */,
 			);
@@ -497,6 +498,8 @@
 			files = (
 				6586739D1C28CBA300B82CD7 /* ItemViewController.swift in Sources */,
 				657CB42B1C29CA3B008E8F0D /* ContactViewController.swift in Sources */,
+				656FB71A1C6810C100479368 /* ParallaxImageView.swift in Sources */,
+				655330A01C6827A30006DFA4 /* ParallaxLabel.swift in Sources */,
 				657CB42D1C29CA53008E8F0D /* IndexViewController.swift in Sources */,
 				6583339D1C4CAD4A00E978B6 /* ItemView.swift in Sources */,
 				65F645261C28811000D21E47 /* UIStoryboard.swift in Sources */,
@@ -510,6 +513,7 @@
 				65F645231C28806700D21E47 /* ContainerViewController.swift in Sources */,
 				657FC34B1C5609F800B73375 /* DottedCircleBorderImageView.swift in Sources */,
 				656A3FB51C24EDE800A1948B /* AppDelegate.swift in Sources */,
+				6553309E1C6811EA0006DFA4 /* ParallaxView.swift in Sources */,
 				657CB4421C2B868C008E8F0D /* PROViewController.swift in Sources */,
 				658673991C28C1A900B82CD7 /* Global.swift in Sources */,
 				65F6452E1C28900100D21E47 /* UIPanGestureRecognizer.swift in Sources */,

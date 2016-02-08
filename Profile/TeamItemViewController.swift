@@ -137,6 +137,12 @@ class TeamItemViewController: ItemViewController {
 
     updateImage()
 
+    if currentIndex == index {
+      addParallaxToViews()
+    } else {
+      removeParallaxFromViews()
+    }
+
     if currentIndex + 1 == index {
       alpha = 0
       stage0Alpha = 0

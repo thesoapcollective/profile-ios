@@ -137,6 +137,12 @@ class WorkItemViewController: ItemViewController {
 
     updateImage()
 
+    if currentIndex == index {
+      addParallaxToViews()
+    } else {
+      removeParallaxFromViews()
+    }
+
     if currentIndex + 1 == index {
       alpha = 1
       bottomGradientAlpha = 0

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContinueArrowView: UIView {
+class ContinueArrowView: ParallaxView {
 
   // ==================================================
   // PROPERTIES
