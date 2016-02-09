@@ -42,7 +42,8 @@ class ItemViewController: PROViewController {
   override func updateColors() {
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
     itemView.descriptionContainerView.layer.borderColor = UIColor.appPrimaryTextColor().colorWithAlphaComponent(0.75).CGColor
-    itemView.descriptionPositionView.backgroundColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0.9)
+    let descriptionPositionBackgroundColor: CGFloat = Global.mode == .Light ? 0.9 : 0.7
+    itemView.descriptionPositionView.backgroundColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(descriptionPositionBackgroundColor)
     itemView.descriptionLabel.textColor = UIColor.appPrimaryTextColor()
     itemView.shortTitleLabel.textColor = UIColor.appPrimaryTextColor()
     itemView.titleLabel.textColor = UIColor.appPrimaryTextColor()
