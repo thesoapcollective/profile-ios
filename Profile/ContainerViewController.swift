@@ -116,7 +116,8 @@ class ContainerViewController: PROViewController {
         UIView.animateWithDuration(0.5, delay: 0.3, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
           self.loadingView.alpha = 0
         }, completion: { (completed) -> Void in
-            self.loadingView.hidden = true
+          NSNotificationCenter.defaultCenter().postNotificationName(Global.AppBootedNotification, object: nil)
+          self.loadingView.hidden = true
         })
       } else {
         self.startLoadingAnimation()
@@ -674,6 +675,7 @@ class ContainerViewController: PROViewController {
 
   override func setupNotifcations() {
     super.setupNotifcations()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "appBooted:", name: Global.AppBootedNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "arrowBottomTapped:", name: Global.ArrowBottomTappedNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "arrowTopTapped:", name: Global.ArrowTopTappedNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeContact:", name: Global.CloseContactNotification, object: nil)
@@ -681,6 +683,10 @@ class ContainerViewController: PROViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "openContact:", name: Global.OpenContactNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "openIndex:", name: Global.OpenIndexNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
+  }
+
+  func appBooted(notification: NSNotification) {
+    Global.isAppBooted = true
   }
 
   func arrowBottomTapped(notification: NSNotification) {

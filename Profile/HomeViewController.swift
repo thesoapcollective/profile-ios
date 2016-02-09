@@ -108,10 +108,15 @@ class HomeViewController: PROViewController {
 
   override func setupNotifcations() {
     super.setupNotifcations()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "appBooted:", name: Global.AppBootedNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "contactStateChanged:", name: Global.ContactStateChanged, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "indexStateChanged:", name: Global.IndexStateChanged, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollChanged:", name: Global.ScrollChangedNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollEnded:", name: Global.ScrollEndedNotification, object: nil)
+  }
+
+  func appBooted(notification: NSNotification) {
+    addParallaxToViews()
   }
 
   func contactStateChanged(notification: NSNotification) {
@@ -187,7 +192,7 @@ class HomeViewController: PROViewController {
     let currentIndex = userInfo["currentIndex"] as! Int
     let alpha: CGFloat = currentIndex == index ? 1 : 0
 
-    if currentIndex == index {
+    if currentIndex == index && Global.isAppBooted {
       addParallaxToViews()
     } else {
       removeParallaxFromViews()

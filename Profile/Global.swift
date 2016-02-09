@@ -15,6 +15,7 @@ enum ProfileMode {
 
 struct Global {
 
+  static let AppBootedNotification = "AppBootedNotification"
   static let ArrowTopTappedNotification = "ArrowTopTappedNotification"
   static let ArrowBottomTappedNotification = "ArrowBottomTappedNotification"
   static let CloseContactNotification = "CloseContactNotification"
@@ -35,9 +36,10 @@ struct Global {
   static let ParallaxOffset2: CGFloat = 40
   static let ParallaxOffset1: CGFloat = -30
 
-  static let SwipeThreshold: CGFloat = 50
+  static let SwipeThreshold: CGFloat = 30
 
   static var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+  static var isAppBooted = false
 
   static var mode: ProfileMode = .Light {
     didSet {
