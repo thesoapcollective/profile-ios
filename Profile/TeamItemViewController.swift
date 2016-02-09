@@ -79,17 +79,21 @@ class TeamItemViewController: ItemViewController {
 
     removeParallaxFromViews()
 
+    if currentIndex == index {
+      UIView.animateWithDuration(0.1, animations: { () -> Void in
+        self.itemView.shortTitleLabel.alpha = 0
+      })
+    }
+
     if currentDirection == .Up {
       if currentIndex + 1 == index { // Panning up to this index
         itemView.photoImageView.alpha = fadingInAlpha
-        itemView.shortTitleLabel.alpha = fadingInAlpha
       } else if currentIndex == index { // Panning up on this index
         if currentStage == 0 { // Panning up on this index to stage 1
           panDescriptionView(dy)
           itemView.descriptionContainerView.alpha = fadingInAlpha
           itemView.photoGrayscaleImageView.alpha = fadingInAlpha
           itemView.photoImageView.alpha = fadingOutAlpha
-          itemView.shortTitleLabel.alpha = fadingOutAlpha
         } else { // Panning up on this index to next index
           // Do nothing.
         }
@@ -107,7 +111,6 @@ class TeamItemViewController: ItemViewController {
       } else if currentIndex == index { // Panning down on this index
         if currentStage == 0 { // Panning down on this index to previous index
           itemView.photoImageView.alpha = fadingOutAlpha
-          itemView.shortTitleLabel.alpha = fadingOutAlpha
           UIView.animateWithDuration(0.1, animations: { () -> Void in
             self.itemView.topGradientView.alpha = 1
           })
@@ -116,7 +119,6 @@ class TeamItemViewController: ItemViewController {
           itemView.descriptionContainerView.alpha = fadingOutAlpha
           itemView.photoGrayscaleImageView.alpha = fadingOutAlpha
           itemView.photoImageView.alpha = fadingInAlpha
-          itemView.shortTitleLabel.alpha = fadingInAlpha
         }
       }
     }
