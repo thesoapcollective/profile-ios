@@ -522,8 +522,8 @@ class ContainerViewController: PROViewController {
       break
 
     case .Ended:
-      let dxThreshold = abs(panDx) >= view.frame.width / 3
-      let dyThreshold = abs(panDy) >= view.frame.height / 3
+      let dxThreshold = abs(panDx) >= Global.SwipeThreshold
+      let dyThreshold = abs(panDy) >= Global.SwipeThreshold
 
       if isPanningContent {
         if dyThreshold {

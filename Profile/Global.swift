@@ -35,6 +35,8 @@ struct Global {
   static let ParallaxOffset2: CGFloat = -30
   static let ParallaxOffset1: CGFloat = -20
 
+  static let SwipeThreshold: CGFloat = 50
+
   static var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
 
   static var mode: ProfileMode = .Light {
