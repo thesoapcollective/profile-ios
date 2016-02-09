@@ -32,8 +32,8 @@ struct Global {
   static let WorkArrowOffset: CGFloat = 25
 
   static let ParallaxOffset3: CGFloat = 50
-  static let ParallaxOffset2: CGFloat = -30
-  static let ParallaxOffset1: CGFloat = -20
+  static let ParallaxOffset2: CGFloat = 40
+  static let ParallaxOffset1: CGFloat = -30
 
   static let SwipeThreshold: CGFloat = 50
 

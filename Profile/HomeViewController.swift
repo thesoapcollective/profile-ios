@@ -20,7 +20,7 @@ class HomeViewController: PROViewController {
   @IBOutlet weak var indexIconContainerView: UIView!
   @IBOutlet weak var indexIconImageView: UIImageView!
   @IBOutlet weak var indexIconDottedBorderImageView: DottedBorderImageView!
-  @IBOutlet weak var logoImageView: UIImageView!
+  @IBOutlet weak var logoImageView: ParallaxImageView!
   @IBOutlet weak var mailIconContainerView: UIView!
   @IBOutlet weak var mailIconImageView: UIImageView!
   @IBOutlet weak var mailIconDottedBorderImageView: DottedBorderImageView!
@@ -68,6 +68,16 @@ class HomeViewController: PROViewController {
     radialGradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
     topGradientView.fromColor = UIColor.appPrimaryBackgroundColor()
     topGradientView.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
+  }
+
+  func addParallaxToViews() {
+    logoImageView.addParallax(Global.ParallaxOffset1)
+    radialGradientView.addParallax(Global.ParallaxOffset2)
+  }
+
+  func removeParallaxFromViews() {
+    logoImageView.removeParallax()
+    radialGradientView.removeParallax()
   }
 
   // ==================================================
@@ -176,6 +186,12 @@ class HomeViewController: PROViewController {
     guard let userInfo = notification.userInfo else { return }
     let currentIndex = userInfo["currentIndex"] as! Int
     let alpha: CGFloat = currentIndex == index ? 1 : 0
+
+    if currentIndex == index {
+      addParallaxToViews()
+    } else {
+      removeParallaxFromViews()
+    }
 
     UIView.animateWithDuration(0.3, animations: { () -> Void in
       self.bottomGradientView.alpha = 0
