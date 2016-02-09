@@ -151,6 +151,8 @@ class HomeViewController: PROViewController {
     var threshold: CGFloat = 0
     var alpha: CGFloat = 0
 
+    removeParallaxFromViews()
+
     if currentIndex == index {
       threshold = view.frame.height / 2
       alpha = (threshold - abs(panDy)) / threshold
@@ -194,8 +196,6 @@ class HomeViewController: PROViewController {
 
     if currentIndex == index && Global.isAppBooted {
       addParallaxToViews()
-    } else {
-      removeParallaxFromViews()
     }
 
     UIView.animateWithDuration(0.3, animations: { () -> Void in

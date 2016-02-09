@@ -77,6 +77,8 @@ class TeamItemViewController: ItemViewController {
     let fadingOutAlpha: CGFloat = (threshold - abs(panDy)) / threshold
     let fadingInAlpha: CGFloat = 1 - fadingOutAlpha
 
+    removeParallaxFromViews()
+
     if currentDirection == .Up {
       if currentIndex + 1 == index { // Panning up to this index
         itemView.photoImageView.alpha = fadingInAlpha
@@ -137,8 +139,6 @@ class TeamItemViewController: ItemViewController {
 
     if currentIndex == index {
       addParallaxToViews()
-    } else {
-      removeParallaxFromViews()
     }
 
     if currentIndex + 1 == index {

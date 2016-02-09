@@ -77,6 +77,8 @@ class WorkItemViewController: ItemViewController {
     let fadingOutAlpha: CGFloat = (threshold - abs(panDy)) / threshold
     let fadingInAlpha: CGFloat = 1 - fadingOutAlpha
 
+    removeParallaxFromViews()
+
     if currentDirection == .Up {
       if currentIndex + 1 == index { // Panning up back to this index
         // Do nothing.
@@ -137,8 +139,6 @@ class WorkItemViewController: ItemViewController {
 
     if currentIndex == index {
       addParallaxToViews()
-    } else {
-      removeParallaxFromViews()
     }
 
     if currentIndex + 1 == index {
