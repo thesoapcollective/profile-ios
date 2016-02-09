@@ -89,7 +89,6 @@ class WorkItemViewController: ItemViewController {
         }
       } else if currentIndex == index { // Panning up on this index
         if currentStage == 0 { // Panning up on this index to next index
-          itemView.radialGradientContainerView.alpha = fadingOutAlpha
           itemView.photoImageView.alpha = fadingOutAlpha
           itemView.shortTitleLabel.alpha = fadingOutAlpha
           UIView.animateWithDuration(0.1, animations: { () -> Void in
@@ -105,7 +104,6 @@ class WorkItemViewController: ItemViewController {
       }
     } else if currentDirection == .Down {
       if currentIndex - 1 == index { // Panning down to this index
-        itemView.radialGradientContainerView.alpha = fadingInAlpha
         itemView.photoImageView.alpha = fadingInAlpha
         itemView.shortTitleLabel.alpha = fadingInAlpha
       } else if currentIndex == index { // Panning down on this index
@@ -182,7 +180,6 @@ class WorkItemViewController: ItemViewController {
 
     UIView.animateWithDuration(0.3, animations: { () -> Void in
       self.itemView.descriptionContainerView.alpha = alpha
-      self.itemView.radialGradientContainerView.alpha = alpha
       self.itemView.photoGrayscaleImageView.alpha = stage1Alpha
       self.itemView.photoImageView.alpha = stage0Alpha
       self.itemView.shortTitleLabel.alpha = stage0Alpha

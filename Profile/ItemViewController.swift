@@ -39,24 +39,11 @@ class ItemViewController: PROViewController {
     view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[subview]|", options: [], metrics: nil, views: ["subview": itemView]))
   }
 
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-
-    if UIDevice.currentDevice().orientation == .Portrait || UIDevice.currentDevice().orientation == .PortraitUpsideDown {
-      let gradientOffset: CGFloat = -view.frame.width * 0.9
-      itemView.radialGradientTopConstraint.constant = gradientOffset
-      itemView.radialGradientTrailingConstraint.constant = gradientOffset
-      view.layoutIfNeeded()
-    }
-  }
-
   override func updateColors() {
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
     itemView.descriptionContainerView.layer.borderColor = UIColor.appPrimaryTextColor().colorWithAlphaComponent(0.75).CGColor
     itemView.descriptionPositionView.backgroundColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0.9)
     itemView.descriptionLabel.textColor = UIColor.appPrimaryTextColor()
-    itemView.radialGradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
-    itemView.radialGradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
     itemView.shortTitleLabel.textColor = UIColor.appPrimaryTextColor()
     itemView.titleLabel.textColor = UIColor.appPrimaryTextColor()
     itemView.websiteButton.setTitleColor(UIColor.appPrimaryTextColor(), forState: .Normal)
@@ -152,7 +139,6 @@ class ItemViewController: PROViewController {
   func addParallaxToViews() {
     itemView.photoImageView.addParallax(Global.ParallaxOffset3)
     itemView.photoGrayscaleImageView.addParallax(Global.ParallaxOffset3)
-    itemView.radialGradientView.addParallax(Global.ParallaxOffset2)
     itemView.descriptionContainerView.addParallax(Global.ParallaxOffset1)
     itemView.shortTitleLabel.addParallax(Global.ParallaxOffset1)
   }
@@ -160,7 +146,6 @@ class ItemViewController: PROViewController {
   func removeParallaxFromViews() {
     itemView.photoImageView.removeParallax()
     itemView.photoGrayscaleImageView.removeParallax()
-    itemView.radialGradientView.removeParallax()
     itemView.descriptionContainerView.removeParallax()
     itemView.shortTitleLabel.removeParallax()
   }

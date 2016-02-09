@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -28,23 +27,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CnB-Q8-KfY" customClass="ParallaxImageView" customModule="Profile" customModuleProvider="target">
                     <rect key="frame" x="-50" y="-50" width="700" height="700"/>
                 </imageView>
-                <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9x-dN-rTr">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <subviews>
-                        <view userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Txy-qK-fzH" customClass="RadialGradientView" customModule="Profile" customModuleProvider="target">
-                            <rect key="frame" x="-60" y="-540" width="1200" height="1200"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="Txy-qK-fzH" secondAttribute="height" multiplier="1:1" id="3rM-Ni-qdC"/>
-                            </constraints>
-                        </view>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="Txy-qK-fzH" firstAttribute="top" secondItem="C9x-dN-rTr" secondAttribute="top" constant="-540" id="HM1-xS-KjO"/>
-                        <constraint firstAttribute="trailing" secondItem="Txy-qK-fzH" secondAttribute="trailing" constant="-540" id="XvU-Yi-iya"/>
-                        <constraint firstItem="Txy-qK-fzH" firstAttribute="width" secondItem="C9x-dN-rTr" secondAttribute="width" multiplier="2" id="lNF-Tj-ig1"/>
-                    </constraints>
-                </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvl-rs-9oA" userLabel="Description Clip View">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
@@ -141,13 +123,10 @@
             </subviews>
             <constraints>
                 <constraint firstItem="d1s-NS-sLd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2fF-b2-d6s"/>
-                <constraint firstItem="C9x-dN-rTr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4QQ-sk-lMh"/>
-                <constraint firstItem="C9x-dN-rTr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5e4-oz-y5g"/>
                 <constraint firstItem="tT5-rE-PgK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8dk-eD-lYV"/>
                 <constraint firstAttribute="bottom" secondItem="wvl-rs-9oA" secondAttribute="bottom" id="97M-ls-ygq"/>
                 <constraint firstItem="FvV-YE-QHT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-50" id="CLb-i1-b8j"/>
                 <constraint firstAttribute="bottom" secondItem="CnB-Q8-KfY" secondAttribute="bottom" constant="-50" id="Gob-jk-zIG"/>
-                <constraint firstAttribute="trailing" secondItem="C9x-dN-rTr" secondAttribute="trailing" id="HVn-jZ-zvG"/>
                 <constraint firstItem="d1s-NS-sLd" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="173/667" id="Hma-ST-QFj"/>
                 <constraint firstAttribute="bottom" secondItem="tT5-rE-PgK" secondAttribute="bottom" id="IoO-dx-gKk"/>
                 <constraint firstItem="qbK-Ua-0U9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="J7b-GM-Wqg"/>
@@ -166,7 +145,6 @@
                 <constraint firstAttribute="trailing" secondItem="FvV-YE-QHT" secondAttribute="trailing" constant="-50" id="dZG-Tl-ZKS"/>
                 <constraint firstAttribute="trailing" secondItem="d1s-NS-sLd" secondAttribute="trailing" id="gbY-J5-wAJ"/>
                 <constraint firstItem="FvV-YE-QHT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-50" id="je7-cg-ANr"/>
-                <constraint firstAttribute="bottom" secondItem="C9x-dN-rTr" secondAttribute="bottom" id="m9G-Qr-xj2"/>
                 <constraint firstItem="tT5-rE-PgK" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="173/667" id="pPE-vh-kQo"/>
                 <constraint firstAttribute="trailing" secondItem="tT5-rE-PgK" secondAttribute="trailing" id="wXo-Dr-O1r"/>
                 <constraint firstItem="7Xf-tI-I4g" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="100" id="z5O-xO-4Vj"/>
@@ -184,10 +162,6 @@
                 <outlet property="descriptionTopConstraint" destination="mce-f8-1p5" id="rHM-Ts-mdE"/>
                 <outlet property="photoGrayscaleImageView" destination="CnB-Q8-KfY" id="XxL-Cd-4ev"/>
                 <outlet property="photoImageView" destination="FvV-YE-QHT" id="Dcd-Rb-r9F"/>
-                <outlet property="radialGradientContainerView" destination="C9x-dN-rTr" id="1jw-Y8-myj"/>
-                <outlet property="radialGradientTopConstraint" destination="HM1-xS-KjO" id="V5e-eW-8hz"/>
-                <outlet property="radialGradientTrailingConstraint" destination="XvU-Yi-iya" id="eXe-8T-Y9q"/>
-                <outlet property="radialGradientView" destination="Txy-qK-fzH" id="zrL-7x-feE"/>
                 <outlet property="shortTitleLabel" destination="7Xf-tI-I4g" id="zso-RH-OrU"/>
                 <outlet property="shortTitleLabelLeadingConstraint" destination="z5O-xO-4Vj" id="2ph-6q-98a"/>
                 <outlet property="shortTitleLabelTopConstraint" destination="OQs-DF-SbO" id="oOK-wV-K8E"/>

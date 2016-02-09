@@ -20,8 +20,6 @@ class ItemView: UIView {
   @IBOutlet weak var descriptionGradientView: LinearGradientView!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var descriptionPositionView: UIView!
-  @IBOutlet weak var radialGradientContainerView: UIView!
-  @IBOutlet weak var radialGradientView: RadialGradientView!
   @IBOutlet weak var photoGrayscaleImageView: ParallaxImageView!
   @IBOutlet weak var photoImageView: ParallaxImageView!
   @IBOutlet weak var shortTitleLabel: ParallaxLabel!
@@ -33,8 +31,6 @@ class ItemView: UIView {
   @IBOutlet weak var descriptionGradientBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var descriptionLabelBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var descriptionTopConstraint: NSLayoutConstraint!
-  @IBOutlet weak var radialGradientTopConstraint: NSLayoutConstraint!
-  @IBOutlet weak var radialGradientTrailingConstraint: NSLayoutConstraint!
   @IBOutlet weak var shortTitleLabelTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var shortTitleLabelLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var topGradientTopConstraint: NSLayoutConstraint!
