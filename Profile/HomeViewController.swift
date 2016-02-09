@@ -109,7 +109,9 @@ class HomeViewController: PROViewController {
   override func setupNotifcations() {
     super.setupNotifcations()
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "appBooted:", name: Global.AppBootedNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "contactPanning:", name: Global.ContactPanningNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "contactStateChanged:", name: Global.ContactStateChanged, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "indexPanning:", name: Global.IndexPanningNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "indexStateChanged:", name: Global.IndexStateChanged, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollChanged:", name: Global.ScrollChangedNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollEnded:", name: Global.ScrollEndedNotification, object: nil)
@@ -119,7 +121,13 @@ class HomeViewController: PROViewController {
     addParallaxToViews()
   }
 
+  func contactPanning(notification: NSNotification) {
+    removeParallaxFromViews()
+  }
+
   func contactStateChanged(notification: NSNotification) {
+    Global.isContactOpen ? removeParallaxFromViews() : addParallaxToViews()
+
     let newImageIcon = Global.isContactOpen ? UIImage(named: "closeIcon") : UIImage(named: "mailIcon")
     UIView.animateWithDuration(0.3, animations: { () -> Void in
       self.mailIconImageView.alpha = 0
@@ -131,7 +139,13 @@ class HomeViewController: PROViewController {
     }
   }
 
+  func indexPanning(notification: NSNotification) {
+    removeParallaxFromViews()
+  }
+
   func indexStateChanged(notification: NSNotification) {
+    Global.isIndexOpen ? removeParallaxFromViews() : addParallaxToViews()
+
     let newImageIcon = Global.isIndexOpen ? UIImage(named: "closeIcon") : UIImage(named: "hamburgerIcon")
     UIView.animateWithDuration(0.3, animations: { () -> Void in
       self.indexIconImageView.alpha = 0

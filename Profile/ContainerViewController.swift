@@ -650,6 +650,7 @@ class ContainerViewController: PROViewController {
       scrollViewLeadingConstraint.constant += dx
       scrollViewTrailingConstraint.constant -= dx
     }
+    NSNotificationCenter.defaultCenter().postNotificationName(Global.ContactPanningNotification, object: nil)
   }
 
   func panIndexView(dx: CGFloat) {
@@ -667,6 +668,7 @@ class ContainerViewController: PROViewController {
       scrollViewLeadingConstraint.constant += dx
       scrollViewTrailingConstraint.constant -= dx
     }
+    NSNotificationCenter.defaultCenter().postNotificationName(Global.IndexPanningNotification, object: nil)
   }
 
   // ==================================================

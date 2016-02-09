@@ -66,6 +66,30 @@ class TeamItemViewController: ItemViewController {
   // NOTIFICATIONS
   // ==================================================
 
+  override func setupNotifcations() {
+    super.setupNotifcations()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "contactPanning:", name: Global.ContactPanningNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "contactStateChanged:", name: Global.ContactStateChanged, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "indexPanning:", name: Global.IndexPanningNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "indexStateChanged:", name: Global.IndexStateChanged, object: nil)
+  }
+
+  func contactPanning(notification: NSNotification) {
+    removeParallaxFromViews()
+  }
+
+  func contactStateChanged(notification: NSNotification) {
+    Global.isContactOpen ? removeParallaxFromViews() : addParallaxToViews()
+  }
+
+  func indexPanning(notification: NSNotification) {
+    removeParallaxFromViews()
+  }
+
+  func indexStateChanged(notification: NSNotification) {
+    Global.isIndexOpen ? removeParallaxFromViews() : addParallaxToViews()
+  }
+
   override func scrollChanged(notification: NSNotification) {
     guard let userInfo = notification.userInfo else { return }
     let dy = userInfo["dy"] as! CGFloat
