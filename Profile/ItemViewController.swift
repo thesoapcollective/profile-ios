@@ -57,11 +57,11 @@ class ItemViewController: PROViewController {
 
   func setupData() {
     let shortTitleText = NSMutableAttributedString(string: data["short_title"].stringValue.uppercaseString)
-    shortTitleText.addAttribute(NSKernAttributeName, value: 5, range: NSMakeRange(0, shortTitleText.length))
+    shortTitleText.addAttribute(NSKernAttributeName, value: 5, range: NSRange(location: 0, length: shortTitleText.length))
     itemView.shortTitleLabel.attributedText = shortTitleText
 
     let titleText = NSMutableAttributedString(string: data["title"].stringValue.uppercaseString)
-    titleText.addAttribute(NSKernAttributeName, value: 5, range: NSMakeRange(0, titleText.length))
+    titleText.addAttribute(NSKernAttributeName, value: 5, range: NSRange(location: 0, length: titleText.length))
     itemView.titleLabel.attributedText = titleText
 
     if let websiteUrl = data["website_url"].string {
@@ -86,7 +86,26 @@ class ItemViewController: PROViewController {
   }
 
   func setModeDependentAttributes() {
-    itemView.descriptionLabel.text = Global.mode == .Light ? data["day_description"].stringValue : data["night_description"].stringValue
+    let description = Global.mode == .Light ? data["day_description"].stringValue : data["night_description"].stringValue
+    itemView.descriptionLabel.text = description
+
+    if description.rangeOfString("\u{2022}") != nil {
+      let descriptionText = NSMutableAttributedString(string: description)
+      let paragraphStyle = NSMutableParagraphStyle()
+      paragraphStyle.firstLineHeadIndent = 10
+      paragraphStyle.headIndent = 28
+      paragraphStyle.paragraphSpacingBefore = 10
+      let startRange = description.rangeOfString("\n")
+      let startLocation = description.startIndex.distanceTo(startRange!.startIndex)
+      descriptionText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: startLocation, length: descriptionText.length - startLocation))
+      itemView.descriptionLabel.attributedText = descriptionText
+    } else if description.rangeOfString("\u{2022}") == nil && description.rangeOfString("\n") != nil {
+      let descriptionText = NSMutableAttributedString(string: description)
+      let paragraphStyle = NSMutableParagraphStyle()
+      paragraphStyle.paragraphSpacingBefore = 10
+      descriptionText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: descriptionText.length))
+      itemView.descriptionLabel.attributedText = descriptionText
+    }
 
     updateImage(true)
 
