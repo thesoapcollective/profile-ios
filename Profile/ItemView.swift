@@ -43,7 +43,10 @@ class ItemView: UIView {
 
   override func awakeFromNib() {
     super.awakeFromNib()
+
     descriptionContainerView.layer.borderWidth = 1
+    websiteButton.titleLabel?.adjustsFontSizeToFitWidth = true
+    websiteButton.titleLabel?.minimumScaleFactor = 10.0 / 14.0
   }
 
 }

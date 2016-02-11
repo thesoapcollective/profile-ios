@@ -52,8 +52,8 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIr-lM-Txw">
-                                                    <rect key="frame" x="69" y="156" width="189" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIr-lM-Txw">
+                                                    <rect key="frame" x="0.0" y="156" width="328" height="30"/>
                                                     <fontDescription key="fontDescription" name="FuturaPT-Heavy" family="Futura PT" pointSize="14"/>
                                                     <state key="normal" title="http://thesoapcollective.com">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,7 +70,8 @@
                                                 <constraint firstItem="ep7-GT-dPW" firstAttribute="leading" secondItem="qF6-Pp-Vul" secondAttribute="leading" id="OFc-Pe-ibO"/>
                                                 <constraint firstAttribute="trailing" secondItem="Jzi-Oa-QPc" secondAttribute="trailing" id="OGR-zn-Gkq"/>
                                                 <constraint firstItem="ep7-GT-dPW" firstAttribute="top" secondItem="qF6-Pp-Vul" secondAttribute="top" id="TYM-EU-iFB"/>
-                                                <constraint firstItem="JIr-lM-Txw" firstAttribute="centerX" secondItem="qF6-Pp-Vul" secondAttribute="centerX" id="XMk-Xo-d1Z"/>
+                                                <constraint firstAttribute="trailing" secondItem="JIr-lM-Txw" secondAttribute="trailing" id="Z56-bf-m7c"/>
+                                                <constraint firstItem="JIr-lM-Txw" firstAttribute="leading" secondItem="qF6-Pp-Vul" secondAttribute="leading" id="cbE-sr-xpy"/>
                                                 <constraint firstItem="Jzi-Oa-QPc" firstAttribute="leading" secondItem="qF6-Pp-Vul" secondAttribute="leading" id="e0v-Hb-aCU"/>
                                                 <constraint firstItem="Jzi-Oa-QPc" firstAttribute="top" secondItem="ep7-GT-dPW" secondAttribute="bottom" constant="10" id="jOe-ur-WcX"/>
                                                 <constraint firstAttribute="bottom" secondItem="Jzi-Oa-QPc" secondAttribute="bottom" constant="50" id="mjK-EH-XYn"/>
