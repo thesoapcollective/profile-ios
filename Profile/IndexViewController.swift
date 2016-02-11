@@ -40,6 +40,17 @@ class IndexViewController: PROViewController {
   override func profileModeChanged(notification: NSNotification) {
     super.profileModeChanged(notification)
     tableView.reloadData()
+    toggleCurrentIndexAnimation()
+  }
+
+  func toggleCurrentIndexAnimation() {
+    for (i, item) in items.enumerate() {
+      if item["indexes"].arrayValue.contains(JSON(delegate.currentIndex)) {
+        guard let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) as? IndexTableViewCell else { return }
+        Global.isIndexOpen ? cell.startAnimation() : cell.stopAnimation()
+        break
+      }
+    }
   }
 
   // ==================================================
@@ -49,6 +60,7 @@ class IndexViewController: PROViewController {
   override func setupNotifcations() {
     super.setupNotifcations()
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataLoaded:", name: Global.DataLoaded, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "indexStateChanged:", name: Global.IndexStateChanged, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollEnded:", name: Global.ScrollEndedNotification, object: nil)
   }
 
@@ -63,6 +75,10 @@ class IndexViewController: PROViewController {
       }
     }
     tableView.reloadData()
+  }
+
+  func indexStateChanged(notification: NSNotification) {
+    toggleCurrentIndexAnimation()
   }
 
   func scrollEnded(notification: NSNotification) {
@@ -122,8 +138,15 @@ extension IndexViewController: UITableViewDataSource {
     } else if let imageUrl = NSURL(string: iconUrl) {
       cell.iconImageView.af_setImageWithURL(imageUrl, imageTransition: .CrossDissolve(0.3))
     }
-    cell.iconDottedBorderView.hidden = !item["indexes"].arrayValue.contains(JSON(delegate.currentIndex))
     cell.bottomDottedBorderView.hidden = item["indexes"].arrayValue.contains(JSON(delegate.items.count - 1))
+
+    if item["indexes"].arrayValue.contains(JSON(delegate.currentIndex)) {
+      cell.iconDottedBorderView.hidden = false
+      cell.titleLabel.font = UIFont(name: "FuturaPt-Heavy", size: cell.titleLabel.font.pointSize)
+    } else {
+      cell.iconDottedBorderView.hidden = true
+      cell.titleLabel.font = UIFont(name: "FuturaPt-Book", size: cell.titleLabel.font.pointSize)
+    }
 
     cell.tintColor = UIColor.appInvertedPrimaryTextColor()
     cell.titleLabel.textColor = UIColor.appInvertedPrimaryTextColor()

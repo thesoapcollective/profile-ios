@@ -28,4 +28,17 @@ class IndexTableViewCell: UITableViewCell {
     iconImageView.layer.cornerRadius = iconImageView.frame.width / 2
   }
 
+  func startAnimation() {
+    let animation = CABasicAnimation(keyPath: "transform.rotation")
+    animation.fromValue = 0
+    animation.toValue = M_PI * -2
+    animation.duration = 20
+    animation.repeatCount = 999
+    iconDottedBorderView.layer.addAnimation(animation, forKey: "rotationAnimation")
+  }
+
+  func stopAnimation() {
+    iconDottedBorderView.layer.removeAllAnimations()
+  }
+
 }
