@@ -144,6 +144,7 @@ class ContainerViewController: PROViewController {
       case .Failure(let error):
         print(error)
         self.downloadDataError()
+        self.invalidateLoadingTimer()
       }
     }
   }
@@ -201,6 +202,7 @@ class ContainerViewController: PROViewController {
     alertViewController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
     alertViewController.addAction(UIAlertAction(title: "Try Again", style: .Default, handler: { [unowned self] (alertAction) -> Void in
       self.downloadData()
+      self.startLoadingAnimation()
     }))
     presentViewController(alertViewController, animated: true, completion: nil)
   }
