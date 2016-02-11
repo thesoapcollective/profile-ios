@@ -72,7 +72,7 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="GIQ-wL-sjr">
-                                        <rect key="frame" x="217.5" y="265" width="165" height="50"/>
+                                        <rect key="frame" x="218" y="265" width="165" height="50"/>
                                     </imageView>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s2C-RA-qwn">
                                         <rect key="frame" x="218" y="335" width="165" height="1"/>
@@ -184,7 +184,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2V-je-7dV" customClass="LinearGradientView" customModule="Profile" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="444.5" width="600" height="155.5"/>
+                                <rect key="frame" x="0.0" y="445" width="600" height="155"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UdF-st-ED4">

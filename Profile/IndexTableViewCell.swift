@@ -19,4 +19,13 @@ class IndexTableViewCell: UITableViewCell {
   @IBOutlet weak var bottomDottedBorderView: DottedBorderImageView!
   @IBOutlet weak var titleLabel: UILabel!
 
+  // ==================================================
+  // METHODS
+  // ==================================================
+
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    iconImageView.layer.cornerRadius = iconImageView.frame.width / 2
+  }
+
 }
