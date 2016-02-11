@@ -261,7 +261,7 @@ class ContainerViewController: PROViewController {
 
     // Setup arrow contraints
     let arrowWidth: CGFloat = 40
-    let arrowHeight: CGFloat = 55
+    let arrowHeight: CGFloat = 80
     let arrowMargin: CGFloat = 17
     for (i, viewController) in itemViewControllers.enumerate() {
       if i == homeIndex { continue }

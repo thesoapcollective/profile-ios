@@ -31,8 +31,8 @@ struct Global {
   static let ScrollChangedNotification = "ScrollChangedNotification"
   static let ScrollEndedNotification = "ScrollEndedNotification"
 
-  static let TeamArrowOffset: CGFloat = 30
-  static let WorkArrowOffset: CGFloat = 25
+  static let TeamArrowOffset: CGFloat = 40
+  static let WorkArrowOffset: CGFloat = 40
 
   static let ParallaxOffset3: CGFloat = 50
   static let ParallaxOffset2: CGFloat = 40
