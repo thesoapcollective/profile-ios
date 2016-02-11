@@ -61,6 +61,8 @@ class ContainerViewController: PROViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    loadingLogoImageView.image = loadingLogoImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+
     contactViewTrailingConstraint.constant = Global.isContactOpen ? 0 : -contactView.frame.width
     indexViewLeadingConstraint.constant = Global.isIndexOpen ? 0 : -indexView.frame.width
     loadingProgressWidthConstraint.constant = 0
@@ -85,6 +87,9 @@ class ContainerViewController: PROViewController {
   }
 
   override func updateColors() {
+    loadingView.backgroundColor = UIColor.appPrimaryBackgroundColor()
+    loadingLogoImageView.tintColor = UIColor.appPrimaryTextColor()
+    loadingProgressView.backgroundColor = UIColor.appPrimaryTextColor()
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
     for (_, continueArrowView) in continueArrowViews {
       continueArrowView.arrowHeadImageView.tintColor = UIColor.appPrimaryTextColor()
