@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
 class ItemView: UIView {
 
@@ -18,7 +19,8 @@ class ItemView: UIView {
   @IBOutlet weak var bottomGradientView: LinearGradientView!
   @IBOutlet weak var descriptionContainerView: ParallaxView!
   @IBOutlet weak var descriptionGradientView: LinearGradientView!
-  @IBOutlet weak var descriptionLabel: UILabel!
+  @IBOutlet weak var descriptionLabel: TTTAttributedLabel!
+  @IBOutlet weak var descriptionListLabel: UILabel!
   @IBOutlet weak var descriptionPositionView: UIView!
   @IBOutlet weak var photoGrayscaleImageView: ParallaxImageView!
   @IBOutlet weak var photoImageView: ParallaxImageView!

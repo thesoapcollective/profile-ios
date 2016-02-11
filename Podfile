@@ -7,6 +7,7 @@ target 'Profile' do
   pod 'Crashlytics'
   pod 'Fabric'
   pod 'SwiftyJSON', '~> 2.0'
+  pod 'TTTAttributedLabel'
 end
 
 target 'ProfileTests' do

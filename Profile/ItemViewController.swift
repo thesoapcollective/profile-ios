@@ -8,6 +8,7 @@
 
 import AlamofireImage
 import SwiftyJSON
+import TTTAttributedLabel
 import UIKit
 
 class ItemViewController: PROViewController {
@@ -45,6 +46,7 @@ class ItemViewController: PROViewController {
     let descriptionPositionBackgroundColor: CGFloat = Global.mode == .Light ? 0.9 : 0.7
     itemView.descriptionPositionView.backgroundColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(descriptionPositionBackgroundColor)
     itemView.descriptionLabel.textColor = UIColor.appPrimaryTextColor()
+    itemView.descriptionListLabel.textColor = UIColor.appPrimaryTextColor()
     itemView.shortTitleLabel.textColor = UIColor.appPrimaryTextColor()
     itemView.titleLabel.textColor = UIColor.appPrimaryTextColor()
     itemView.websiteButton.setTitleColor(UIColor.appPrimaryTextColor(), forState: .Normal)
@@ -88,8 +90,29 @@ class ItemViewController: PROViewController {
   func setModeDependentAttributes() {
     let description = Global.mode == .Light ? data["day_description"].stringValue : data["night_description"].stringValue
     itemView.descriptionLabel.text = description
+    itemView.descriptionLabel.linkAttributes = [
+      kCTForegroundColorAttributeName: UIColor.appPrimaryTextColor(),
+      kCTUnderlineStyleAttributeName: NSNumber(int: CTUnderlineStyle.None.rawValue)
+    ]
+    itemView.descriptionLabel.activeLinkAttributes = [
+      kCTForegroundColorAttributeName: UIColor.appPrimaryTextColor(),
+      kCTUnderlineStyleAttributeName: NSNumber(int: CTUnderlineStyle.None.rawValue)
+    ]
+    itemView.descriptionLabel.delegate = self
+    itemView.descriptionListLabel.text = ""
+    itemView.descriptionLabel.hidden = false
+    itemView.descriptionListLabel.hidden = true
 
-    if description.rangeOfString("\u{2022}") != nil {
+    // NOTE: Currently, TTTAttributedLabel does NOT properly support paragraph styles. Once it does the extra descriptionListLabel can be removed.
+    // https://github.com/TTTAttributedLabel/TTTAttributedLabel
+    // https://github.com/TTTAttributedLabel/TTTAttributedLabel/issues/561
+    //
+    // @ianhirschfeld 2016-02-11
+    if description.rangeOfString("\u{2022}") != nil { // A description with a bulleted list.
+      itemView.descriptionListLabel.text = description
+      itemView.descriptionLabel.hidden = true
+      itemView.descriptionListLabel.hidden = false
+
       let descriptionText = NSMutableAttributedString(string: description)
       let paragraphStyle = NSMutableParagraphStyle()
       paragraphStyle.firstLineHeadIndent = 10
@@ -98,13 +121,34 @@ class ItemViewController: PROViewController {
       let startRange = description.rangeOfString("\n")
       let startLocation = description.startIndex.distanceTo(startRange!.startIndex)
       descriptionText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: startLocation, length: descriptionText.length - startLocation))
-      itemView.descriptionLabel.attributedText = descriptionText
-    } else if description.rangeOfString("\u{2022}") == nil && description.rangeOfString("\n") != nil {
+      itemView.descriptionListLabel.attributedText = descriptionText
+    } else if description.rangeOfString("\u{2022}") == nil && description.rangeOfString("\n") != nil { // A description with line breaks and no bullets.
       let descriptionText = NSMutableAttributedString(string: description)
       let paragraphStyle = NSMutableParagraphStyle()
       paragraphStyle.paragraphSpacingBefore = 10
       descriptionText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSRange(location: 0, length: descriptionText.length))
-      itemView.descriptionLabel.attributedText = descriptionText
+      if let font = UIFont(name: "FuturaPt-Book", size: itemView.descriptionLabel.font.pointSize) {
+        descriptionText.addAttribute(NSFontAttributeName, value: font, range: NSRange(location: 0, length: descriptionText.length))
+        descriptionText.addAttribute(NSForegroundColorAttributeName, value: UIColor.appPrimaryTextColor().CGColor, range: NSRange(location: 0, length: descriptionText.length))
+      }
+      itemView.descriptionLabel.setText(descriptionText)
+    }
+
+    if description.rangeOfString("@thesoapcollective.com") != nil { // A phone and email description
+      // Assumes two items: Phone, Email
+      let linkItems = description.componentsSeparatedByString("\n")
+
+      let rawPhoneNumber = linkItems[0]
+      let phoneNumber = "1-\(rawPhoneNumber.stringByReplacingOccurrencesOfString(".", withString: "-"))"
+      itemView.descriptionLabel.addLinkToPhoneNumber(phoneNumber, withRange: NSRange(location: 0, length: rawPhoneNumber.characters.count))
+
+      let email = linkItems[1]
+      if let url = NSURL(string: "mailto:\(email)") {
+        let startRange = description.rangeOfString(email)
+        let startLocation = description.startIndex.distanceTo(startRange!.startIndex)
+        itemView.descriptionLabel.addLinkToURL(url, withRange: NSRange(location: startLocation, length: email.characters.count))
+      }
+    } else if description.rangeOfString("Twitter:") != nil || description.rangeOfString("Instagram:") != nil { // A social links description
     }
 
     updateImage(true)
@@ -186,6 +230,25 @@ class ItemViewController: PROViewController {
 
   func scrollEnded(notification: NSNotification) {
     // Override this to do stuff...
+  }
+
+}
+
+extension ItemViewController: TTTAttributedLabelDelegate {
+
+  func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
+    print("url tapped: \(url), \(url.host)")
+    let urlString = url.absoluteString
+
+    if urlString.rangeOfString("mailto:") != nil {
+      let email = urlString[urlString.startIndex.advancedBy(7)..<urlString.endIndex]
+      tryToEmail(email, subject: "Hey \(data["short_title"].stringValue)!")
+    }
+  }
+
+  func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithPhoneNumber phoneNumber: String!) {
+    print("phone number tapped: \(phoneNumber)")
+    askToCall(phoneNumber, name: data["short_title"].stringValue)
   }
 
 }

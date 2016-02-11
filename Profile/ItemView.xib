@@ -7,6 +7,7 @@
     <customFonts key="customFonts">
         <mutableArray key="FuturaPT-Book.otf">
             <string>FuturaPT-Book</string>
+            <string>FuturaPT-Book</string>
         </mutableArray>
         <mutableArray key="FuturaPT-Heavy.otf">
             <string>FuturaPT-Heavy</string>
@@ -45,7 +46,14 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jzi-Oa-QPc">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jzi-Oa-QPc" customClass="TTTAttributedLabel">
+                                                    <rect key="frame" x="0.0" y="28" width="328" height="108"/>
+                                                    <string key="text">Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</string>
+                                                    <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuG-oy-tnH">
                                                     <rect key="frame" x="0.0" y="28" width="328" height="108"/>
                                                     <string key="text">Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</string>
                                                     <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="14"/>
@@ -70,12 +78,16 @@
                                                 <constraint firstItem="ep7-GT-dPW" firstAttribute="leading" secondItem="qF6-Pp-Vul" secondAttribute="leading" id="OFc-Pe-ibO"/>
                                                 <constraint firstAttribute="trailing" secondItem="Jzi-Oa-QPc" secondAttribute="trailing" id="OGR-zn-Gkq"/>
                                                 <constraint firstItem="ep7-GT-dPW" firstAttribute="top" secondItem="qF6-Pp-Vul" secondAttribute="top" id="TYM-EU-iFB"/>
+                                                <constraint firstItem="VuG-oy-tnH" firstAttribute="leading" secondItem="Jzi-Oa-QPc" secondAttribute="leading" id="Wtj-kg-uvP"/>
+                                                <constraint firstItem="VuG-oy-tnH" firstAttribute="top" secondItem="Jzi-Oa-QPc" secondAttribute="top" id="XPU-nI-3C8"/>
                                                 <constraint firstAttribute="trailing" secondItem="JIr-lM-Txw" secondAttribute="trailing" id="Z56-bf-m7c"/>
+                                                <constraint firstItem="VuG-oy-tnH" firstAttribute="bottom" secondItem="Jzi-Oa-QPc" secondAttribute="bottom" id="amx-6I-5Fc"/>
                                                 <constraint firstItem="JIr-lM-Txw" firstAttribute="leading" secondItem="qF6-Pp-Vul" secondAttribute="leading" id="cbE-sr-xpy"/>
                                                 <constraint firstItem="Jzi-Oa-QPc" firstAttribute="leading" secondItem="qF6-Pp-Vul" secondAttribute="leading" id="e0v-Hb-aCU"/>
                                                 <constraint firstItem="Jzi-Oa-QPc" firstAttribute="top" secondItem="ep7-GT-dPW" secondAttribute="bottom" constant="10" id="jOe-ur-WcX"/>
                                                 <constraint firstAttribute="bottom" secondItem="Jzi-Oa-QPc" secondAttribute="bottom" constant="50" id="mjK-EH-XYn"/>
                                                 <constraint firstAttribute="bottom" secondItem="ivB-uL-wR6" secondAttribute="bottom" id="tPd-jd-6hJ"/>
+                                                <constraint firstItem="VuG-oy-tnH" firstAttribute="trailing" secondItem="Jzi-Oa-QPc" secondAttribute="trailing" id="uJy-7l-kkm"/>
                                                 <constraint firstAttribute="trailing" secondItem="ep7-GT-dPW" secondAttribute="trailing" id="zya-0Z-YBc"/>
                                             </constraints>
                                         </view>
@@ -159,6 +171,7 @@
                 <outlet property="descriptionGradientView" destination="tT5-rE-PgK" id="YoT-8f-bVf"/>
                 <outlet property="descriptionLabel" destination="Jzi-Oa-QPc" id="QVI-wD-5mp"/>
                 <outlet property="descriptionLabelBottomConstraint" destination="mjK-EH-XYn" id="5y7-xe-Pvp"/>
+                <outlet property="descriptionListLabel" destination="VuG-oy-tnH" id="5xE-cO-Ux2"/>
                 <outlet property="descriptionPositionView" destination="GLe-YH-9b1" id="0Qc-nx-BxQ"/>
                 <outlet property="descriptionTopConstraint" destination="mce-f8-1p5" id="rHM-Ts-mdE"/>
                 <outlet property="photoGrayscaleImageView" destination="CnB-Q8-KfY" id="XxL-Cd-4ev"/>
