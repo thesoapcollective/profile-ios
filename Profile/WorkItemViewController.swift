@@ -30,7 +30,8 @@ class WorkItemViewController: ItemViewController {
     itemView.topGradientView.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
     itemView.bottomGradientView.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
     itemView.bottomGradientView.toColor = UIColor.appPrimaryBackgroundColor()
-    itemView.descriptionGradientView.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0.9)
+    let descriptionGradientFromColor: CGFloat = Global.mode == .Light ? 0.9 : 0.7
+    itemView.descriptionGradientView.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(descriptionGradientFromColor)
     itemView.descriptionGradientView.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
   }
 

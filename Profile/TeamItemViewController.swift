@@ -31,7 +31,8 @@ class TeamItemViewController: ItemViewController {
     itemView.bottomGradientView.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
     itemView.bottomGradientView.toColor = UIColor.appPrimaryBackgroundColor()
     itemView.descriptionGradientView.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
-    itemView.descriptionGradientView.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0.9)
+    let descriptionGradientToColor: CGFloat = Global.mode == .Light ? 0.9 : 0.7
+    itemView.descriptionGradientView.toColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(descriptionGradientToColor)
   }
 
   func panDescriptionView(dy: CGFloat) {
