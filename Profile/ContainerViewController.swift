@@ -123,6 +123,7 @@ class ContainerViewController: PROViewController {
         }, completion: { (completed) -> Void in
           NSNotificationCenter.defaultCenter().postNotificationName(Global.AppBootedNotification, object: nil)
           self.loadingView.hidden = true
+          self.setupGestures()
         })
       } else {
         self.startLoadingAnimation()
@@ -178,7 +179,6 @@ class ContainerViewController: PROViewController {
     }
 
     setupInitialViewControllers()
-    setupGestures()
 
     NSNotificationCenter.defaultCenter().postNotificationName(Global.DataLoaded, object: nil)
 
