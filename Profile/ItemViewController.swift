@@ -40,6 +40,19 @@ class ItemViewController: PROViewController {
     view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[subview]|", options: [], metrics: nil, views: ["subview": itemView]))
   }
 
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+
+    if let _ = data["website_url"].string {
+      itemView.descriptionLabelBottomConstraint.constant = itemView.websiteButton.frame.height + 10
+    } else if let _ = data["app_store_url"].string {
+      itemView.descriptionLabelBottomConstraint.constant = itemView.appStoreButton.frame.height + 10
+    } else {
+      itemView.descriptionLabelBottomConstraint.constant = 0
+    }
+    view.layoutIfNeeded()
+  }
+
   override func updateColors() {
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
     itemView.descriptionContainerView.layer.borderColor = UIColor.appPrimaryTextColor().colorWithAlphaComponent(0.75).CGColor
@@ -70,19 +83,15 @@ class ItemViewController: PROViewController {
       itemView.websiteButton.setTitle(websiteUrl, forState: .Normal)
       itemView.websiteButton.hidden = false
       itemView.appStoreButton.hidden = true
-      itemView.descriptionLabelBottomConstraint.constant = 40
       itemView.websiteButton.addTarget(self, action: "websiteTapped:", forControlEvents: .TouchUpInside)
     } else if let _ = data["app_store_url"].string {
       itemView.websiteButton.hidden = true
       itemView.appStoreButton.hidden = false
-      itemView.descriptionLabelBottomConstraint.constant = 50
       itemView.appStoreButton.addTarget(self, action: "appStoreTapped:", forControlEvents: .TouchUpInside)
     } else {
       itemView.websiteButton.hidden = true
       itemView.appStoreButton.hidden = true
-      itemView.descriptionLabelBottomConstraint.constant = 0
     }
-    view.layoutIfNeeded()
 
     setModeDependentAttributes()
   }
