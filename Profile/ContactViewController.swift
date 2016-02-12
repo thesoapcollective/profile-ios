@@ -59,4 +59,42 @@ class ContactViewController: PROViewController {
     askToCall("1-857-203-1004", name: "us")
   }
 
+  // ==================================================
+  // NOTIFICATIONS
+  // ==================================================
+
+  override func setupNotifcations() {
+    super.setupNotifcations()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
+  }
+
+  func orientationChanged(notification: NSNotification) {
+    switch UIDevice.currentDevice().orientation {
+    case .Portrait:
+      if Global.mode != .Light {
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+          self.view.alpha = 0
+        }) { (completed) -> Void in
+          UIView.animateWithDuration(0.5, delay: 1, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
+            self.view.alpha = 1
+          }, completion: nil)
+        }
+      }
+      break
+    case .PortraitUpsideDown:
+      if Global.mode != .Dark {
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+          self.view.alpha = 0
+        }) { (completed) -> Void in
+          UIView.animateWithDuration(0.5, delay: 1, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
+            self.view.alpha = 1
+          }, completion: nil)
+        }
+      }
+      break
+    default:
+      break
+    }
+  }
+
 }

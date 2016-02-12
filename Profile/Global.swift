@@ -42,6 +42,7 @@ struct Global {
 
   static var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
   static var isAppBooted = false
+  static var shouldRotate = false
 
   static var mode: ProfileMode = .Light {
     didSet {

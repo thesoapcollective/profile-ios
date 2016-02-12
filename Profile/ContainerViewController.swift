@@ -82,8 +82,7 @@ class ContainerViewController: PROViewController {
   }
 
   override func shouldAutorotate() -> Bool {
-    return UIDevice.currentDevice().orientation == .Portrait ||
-           UIDevice.currentDevice().orientation == .PortraitUpsideDown
+    return Global.shouldRotate
   }
 
   override func updateColors() {
@@ -765,10 +764,34 @@ class ContainerViewController: PROViewController {
   func orientationChanged(notification: NSNotification) {
     switch UIDevice.currentDevice().orientation {
     case .Portrait:
-      Global.mode = .Light
+      if Global.mode != .Light {
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+          self.view.alpha = 0
+        }) { (completed) -> Void in
+          Global.mode = .Light
+          Global.shouldRotate = true
+          UIViewController.attemptRotationToDeviceOrientation()
+          Global.shouldRotate = false
+          UIView.animateWithDuration(0.5, delay: 1, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
+            self.view.alpha = 1
+          }, completion: nil)
+        }
+      }
       break
     case .PortraitUpsideDown:
-      Global.mode = .Dark
+      if Global.mode != .Dark {
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+          self.view.alpha = 0
+        }) { (completed) -> Void in
+          Global.mode = .Dark
+          Global.shouldRotate = true
+          UIViewController.attemptRotationToDeviceOrientation()
+          Global.shouldRotate = false
+          UIView.animateWithDuration(0.5, delay: 1, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
+            self.view.alpha = 1
+          }, completion: nil)
+        }
+      }
       break
     default:
       break
