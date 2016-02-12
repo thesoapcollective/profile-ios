@@ -159,10 +159,18 @@ class ItemViewController: PROViewController {
       for linkItem in linkItems {
         if linkItem.rangeOfString("Instagram:") != nil {
           let username = linkItem.substringFromIndex(linkItem.startIndex.advancedBy(11))
-          if let url = NSURL(string: "https://www.instagram.com/\(username)") {
-            let startRange = description.rangeOfString(linkItem)
-            let startLocation = description.startIndex.distanceTo(startRange!.startIndex.advancedBy(11))
-            itemView.descriptionLabel.addLinkToURL(url, withRange: NSRange(location: startLocation, length: username.characters.count))
+          if let appUrl = NSURL(string: "instagram://user?username=\(username)") {
+            var url: NSURL?
+            if UIApplication.sharedApplication().canOpenURL(appUrl) {
+              url = appUrl
+            } else {
+              url = NSURL(string: "https://www.instagram.com/\(username)")
+            }
+            if url != nil {
+              let startRange = description.rangeOfString(linkItem)
+              let startLocation = description.startIndex.distanceTo(startRange!.startIndex.advancedBy(11))
+              itemView.descriptionLabel.addLinkToURL(url!, withRange: NSRange(location: startLocation, length: username.characters.count))
+            }
           }
         } else if linkItem.rangeOfString("Medium:") != nil {
           let username = linkItem.substringFromIndex(linkItem.startIndex.advancedBy(8))
@@ -172,18 +180,26 @@ class ItemViewController: PROViewController {
             itemView.descriptionLabel.addLinkToURL(url, withRange: NSRange(location: startLocation, length: username.characters.count))
           }
         } else if linkItem.rangeOfString("Twitter:") != nil {
-          let username = linkItem.substringFromIndex(linkItem.startIndex.advancedBy(9))
+          let username = linkItem.substringFromIndex(linkItem.startIndex.advancedBy(10)) // Advance by 10 to remove the @.
           if let url = NSURL(string: "https://twitter.com/\(username)") {
             let startRange = description.rangeOfString(linkItem)
-            let startLocation = description.startIndex.distanceTo(startRange!.startIndex.advancedBy(9))
+            let startLocation = description.startIndex.distanceTo(startRange!.startIndex.advancedBy(10))
             itemView.descriptionLabel.addLinkToURL(url, withRange: NSRange(location: startLocation, length: username.characters.count-1))
           }
         } else if linkItem.rangeOfString("Tumblr:") != nil {
-          let username = linkItem.substringFromIndex(linkItem.startIndex.advancedBy(8))
-          if let url = NSURL(string: "https://\(username).tumblr.com") {
-            let startRange = description.rangeOfString(linkItem)
-            let startLocation = description.startIndex.distanceTo(startRange!.startIndex.advancedBy(8))
-            itemView.descriptionLabel.addLinkToURL(url, withRange: NSRange(location: startLocation, length: username.characters.count))
+          let username = linkItem.substringFromIndex(linkItem.startIndex.advancedBy(8)).lowercaseString
+          if let appUrl = NSURL(string: "tumblr://x-callback-url/blog?blogName=\(username)") {
+            var url: NSURL?
+            if UIApplication.sharedApplication().canOpenURL(appUrl) {
+              url = appUrl
+            } else {
+              url = NSURL(string: "https://\(username).tumblr.com")
+            }
+            if url != nil {
+              let startRange = description.rangeOfString(linkItem)
+              let startLocation = description.startIndex.distanceTo(startRange!.startIndex.advancedBy(8))
+              itemView.descriptionLabel.addLinkToURL(url, withRange: NSRange(location: startLocation, length: username.characters.count))
+            }
           }
         }
       }
@@ -276,7 +292,6 @@ extension ItemViewController: TTTAttributedLabelDelegate {
 
   func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
     let urlString = url.absoluteString
-
     if urlString.rangeOfString("mailto:") != nil {
       let email = urlString[urlString.startIndex.advancedBy(7)..<urlString.endIndex]
       tryToEmail(email, subject: "Hey \(data["short_title"].stringValue)!")

@@ -38,6 +38,8 @@
 	<array>
 		<string>mailto</string>
 		<string>tel</string>
+		<string>instagram</string>
+		<string>tumblr</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
