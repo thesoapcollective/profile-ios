@@ -148,7 +148,45 @@ class ItemViewController: PROViewController {
         let startLocation = description.startIndex.distanceTo(startRange!.startIndex)
         itemView.descriptionLabel.addLinkToURL(url, withRange: NSRange(location: startLocation, length: email.characters.count))
       }
-    } else if description.rangeOfString("Twitter:") != nil || description.rangeOfString("Instagram:") != nil { // A social links description
+
+    // TODO: Come up with a better schema so links can be dynamic.
+    } else if description.rangeOfString("Instagram:") != nil ||
+      description.rangeOfString("Medium:") != nil ||
+      description.rangeOfString("Tumblr:") != nil ||
+      description.rangeOfString("Twitter:") != nil { // A social links description
+      let linkItems = description.componentsSeparatedByString("\n")
+
+      for linkItem in linkItems {
+        if linkItem.rangeOfString("Instagram:") != nil {
+          let username = linkItem.substringFromIndex(linkItem.startIndex.advancedBy(11))
+          if let url = NSURL(string: "https://www.instagram.com/\(username)") {
+            let startRange = description.rangeOfString(linkItem)
+            let startLocation = description.startIndex.distanceTo(startRange!.startIndex.advancedBy(11))
+            itemView.descriptionLabel.addLinkToURL(url, withRange: NSRange(location: startLocation, length: username.characters.count))
+          }
+        } else if linkItem.rangeOfString("Medium:") != nil {
+          let username = linkItem.substringFromIndex(linkItem.startIndex.advancedBy(8))
+          if let url = NSURL(string: "https://medium.com/\(username)") {
+            let startRange = description.rangeOfString(linkItem)
+            let startLocation = description.startIndex.distanceTo(startRange!.startIndex.advancedBy(8))
+            itemView.descriptionLabel.addLinkToURL(url, withRange: NSRange(location: startLocation, length: username.characters.count))
+          }
+        } else if linkItem.rangeOfString("Twitter:") != nil {
+          let username = linkItem.substringFromIndex(linkItem.startIndex.advancedBy(9))
+          if let url = NSURL(string: "https://twitter.com/\(username)") {
+            let startRange = description.rangeOfString(linkItem)
+            let startLocation = description.startIndex.distanceTo(startRange!.startIndex.advancedBy(9))
+            itemView.descriptionLabel.addLinkToURL(url, withRange: NSRange(location: startLocation, length: username.characters.count-1))
+          }
+        } else if linkItem.rangeOfString("Tumblr:") != nil {
+          let username = linkItem.substringFromIndex(linkItem.startIndex.advancedBy(8))
+          if let url = NSURL(string: "https://\(username).tumblr.com") {
+            let startRange = description.rangeOfString(linkItem)
+            let startLocation = description.startIndex.distanceTo(startRange!.startIndex.advancedBy(8))
+            itemView.descriptionLabel.addLinkToURL(url, withRange: NSRange(location: startLocation, length: username.characters.count))
+          }
+        }
+      }
     }
 
     updateImage(true)
@@ -179,7 +217,7 @@ class ItemViewController: PROViewController {
           if let imageUrl = NSURL(string: photoUrl) {
             itemView.photoImageView.af_setImageWithURL(imageUrl, placeholderImage: nil, filter: nil, imageTransition: .CrossDissolve(0.3), runImageTransitionIfCached: false, completion: { [unowned self] (response) -> Void in
               self.itemView.photoGrayscaleImageView.image = response.result.value?.tintedImage(UIColor.appPrimaryTextColor(), tintAlpha: 1, tintBlendMode: .Color)
-              })
+            })
           }
         }
     } else {
@@ -237,17 +275,17 @@ class ItemViewController: PROViewController {
 extension ItemViewController: TTTAttributedLabelDelegate {
 
   func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
-    print("url tapped: \(url), \(url.host)")
     let urlString = url.absoluteString
 
     if urlString.rangeOfString("mailto:") != nil {
       let email = urlString[urlString.startIndex.advancedBy(7)..<urlString.endIndex]
       tryToEmail(email, subject: "Hey \(data["short_title"].stringValue)!")
+    } else {
+      UIApplication.sharedApplication().openURL(url)
     }
   }
 
   func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithPhoneNumber phoneNumber: String!) {
-    print("phone number tapped: \(phoneNumber)")
     askToCall(phoneNumber, name: data["short_title"].stringValue)
   }
 
