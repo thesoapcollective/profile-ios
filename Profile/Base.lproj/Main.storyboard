@@ -18,6 +18,7 @@
             <string>FuturaPT-BookObl</string>
             <string>FuturaPT-BookObl</string>
             <string>FuturaPT-BookObl</string>
+            <string>FuturaPT-BookObl</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -471,7 +472,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Soap Collective" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rE-h7-MOt">
-                                <rect key="frame" x="24" y="318" width="198" height="24"/>
+                                <rect key="frame" x="24" y="319" width="198" height="23"/>
                                 <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="18"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -523,6 +524,16 @@ San Francisco, CA
                                 <color key="textColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="JrP-DX-k7h">
+                                <rect key="frame" x="24" y="22" width="198" height="48"/>
+                                <fontDescription key="fontDescription" name="FuturaPT-BookObl" family="Futura PT" pointSize="14"/>
+                                <state key="normal" title="Photo Credits: David Dat Nguyen">
+                                    <color key="titleColor" red="0.27058823529999998" green="0.27058823529999998" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="photoCreditsTapped:" destination="ypH-1J-YpO" eventType="touchUpInside" id="Z3R-49-KUg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -531,6 +542,7 @@ San Francisco, CA
                             <constraint firstAttribute="trailing" secondItem="1rE-h7-MOt" secondAttribute="trailing" constant="24" id="FDg-JS-bvi"/>
                             <constraint firstItem="u5a-wr-QFL" firstAttribute="leading" secondItem="LLU-pv-gdx" secondAttribute="leading" constant="24" id="GQT-r2-0Nh"/>
                             <constraint firstItem="u5a-wr-QFL" firstAttribute="top" secondItem="vkI-lW-f9W" secondAttribute="bottom" constant="18" id="HAB-oE-RvU"/>
+                            <constraint firstItem="JrP-DX-k7h" firstAttribute="leading" secondItem="LLU-pv-gdx" secondAttribute="leading" constant="24" id="HjA-cS-oEf"/>
                             <constraint firstItem="5m8-1g-QcA" firstAttribute="top" secondItem="u5a-wr-QFL" secondAttribute="bottom" constant="18" id="J1u-Rb-MO4"/>
                             <constraint firstAttribute="trailing" secondItem="vkI-lW-f9W" secondAttribute="trailing" constant="24" id="Jlw-Od-Ts9"/>
                             <constraint firstAttribute="trailing" secondItem="5m8-1g-QcA" secondAttribute="trailing" constant="24" id="KsV-ex-JzE"/>
@@ -541,8 +553,10 @@ San Francisco, CA
                             <constraint firstItem="vkI-lW-f9W" firstAttribute="leading" secondItem="LLU-pv-gdx" secondAttribute="leading" constant="24" id="XYj-Rj-aip"/>
                             <constraint firstAttribute="trailing" secondItem="u5a-wr-QFL" secondAttribute="trailing" constant="24" id="XuH-f2-9KI"/>
                             <constraint firstAttribute="trailing" secondItem="5fm-3y-rti" secondAttribute="trailing" constant="24" id="Y3d-Hz-JlB"/>
+                            <constraint firstItem="JrP-DX-k7h" firstAttribute="top" secondItem="JOD-ZU-Vct" secondAttribute="bottom" constant="22" id="ahr-JK-JHX"/>
                             <constraint firstItem="vkI-lW-f9W" firstAttribute="top" secondItem="mG3-FF-0Vi" secondAttribute="bottom" constant="18" id="ch9-rt-Woj"/>
                             <constraint firstItem="1rE-h7-MOt" firstAttribute="leading" secondItem="LLU-pv-gdx" secondAttribute="leading" constant="24" id="eMW-ZF-k2x"/>
+                            <constraint firstAttribute="trailing" secondItem="JrP-DX-k7h" secondAttribute="trailing" constant="24" id="fq7-cB-ve5"/>
                             <constraint firstItem="5fm-3y-rti" firstAttribute="leading" secondItem="LLU-pv-gdx" secondAttribute="leading" constant="24" id="xTn-4a-DTs"/>
                         </constraints>
                     </view>
@@ -555,6 +569,7 @@ San Francisco, CA
                         <outlet property="mailIconDottedBorderImageView" destination="DEn-ob-0fk" id="saT-ia-YiP"/>
                         <outlet property="mailIconImageView" destination="wJg-gx-y45" id="xFC-a9-FQQ"/>
                         <outlet property="phoneButton" destination="u5a-wr-QFL" id="un5-5l-O8q"/>
+                        <outlet property="photoCreditsButton" destination="JrP-DX-k7h" id="FRf-L9-lSa"/>
                         <outlet property="twitterButton" destination="mG3-FF-0Vi" id="dyx-50-POH"/>
                     </connections>
                 </viewController>
