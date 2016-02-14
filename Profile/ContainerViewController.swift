@@ -59,6 +59,7 @@ class ContainerViewController: PROViewController {
   var continueArrowConstraints = [String: NSLayoutConstraint]()
 
   var loadingTimer: NSTimer?
+  var scrollViewTapGesture: UITapGestureRecognizer!
 
   // ==================================================
   // METHODS
@@ -478,7 +479,8 @@ class ContainerViewController: PROViewController {
     let panGesture = UIPanGestureRecognizer(target: self, action: "panned:")
     view.addGestureRecognizer(panGesture)
 
-    let scrollViewTapGesture = UITapGestureRecognizer(target: self, action: "scrollViewTapped:")
+    scrollViewTapGesture = UITapGestureRecognizer(target: self, action: "scrollViewTapped:")
+    scrollViewTapGesture.enabled = false
     scrollView.addGestureRecognizer(scrollViewTapGesture)
   }
 
@@ -730,6 +732,8 @@ class ContainerViewController: PROViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "arrowTopTapped:", name: Global.ArrowTopTappedNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeContact:", name: Global.CloseContactNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeIndex:", name: Global.CloseIndexNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "contactStateChanged:", name: Global.ContactStateChanged, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "indexStateChanged:", name: Global.IndexStateChanged, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "openContact:", name: Global.OpenContactNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "openIndex:", name: Global.OpenIndexNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
@@ -793,6 +797,14 @@ class ContainerViewController: PROViewController {
 
   func closeIndex(notification: NSNotification) {
     openCloseIndex(false, animated: true)
+  }
+
+  func contactStateChanged(notification: NSNotification) {
+    scrollViewTapGesture.enabled = Global.isContactOpen
+  }
+
+  func indexStateChanged(notification: NSNotification) {
+    scrollViewTapGesture.enabled = Global.isIndexOpen
   }
 
   func openContact(notification: NSNotification) {
