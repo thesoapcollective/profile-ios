@@ -461,6 +461,9 @@ class ContainerViewController: PROViewController {
   func setupGestures() {
     let panGesture = UIPanGestureRecognizer(target: self, action: "panned:")
     view.addGestureRecognizer(panGesture)
+
+    let scrollViewTapGesture = UITapGestureRecognizer(target: self, action: "scrollViewTapped:")
+    scrollView.addGestureRecognizer(scrollViewTapGesture)
   }
 
   func panned(gesture: UIPanGestureRecognizer) {
@@ -675,6 +678,14 @@ class ContainerViewController: PROViewController {
       scrollViewTrailingConstraint.constant -= dx
     }
     NSNotificationCenter.defaultCenter().postNotificationName(Global.IndexPanningNotification, object: nil)
+  }
+
+  func scrollViewTapped(notification: NSNotification) {
+    if Global.isContactOpen {
+      NSNotificationCenter.defaultCenter().postNotificationName(Global.CloseContactNotification, object: nil)
+    } else if Global.isIndexOpen {
+      NSNotificationCenter.defaultCenter().postNotificationName(Global.CloseIndexNotification, object: nil)
+    }
   }
 
   // ==================================================

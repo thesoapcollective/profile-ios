@@ -37,6 +37,9 @@ class HomeViewController: PROViewController {
   var index = 0
   var isDescriptionShowing = false
 
+  var descriptionTapGesture: UITapGestureRecognizer!
+  var logoTapGesture: UITapGestureRecognizer!
+
   // ==================================================
   // METHODS
   // ==================================================
@@ -131,13 +134,13 @@ class HomeViewController: PROViewController {
     let contactTapGesture = UITapGestureRecognizer(target: self, action: "contactTapped:")
     mailIconContainerView.addGestureRecognizer(contactTapGesture)
 
-    let descriptionTapGesture = UITapGestureRecognizer(target: self, action: "descriptionTapped:")
+    descriptionTapGesture = UITapGestureRecognizer(target: self, action: "descriptionTapped:")
     descriptionContainerView.addGestureRecognizer(descriptionTapGesture)
 
     let indexTapGesture = UITapGestureRecognizer(target: self, action: "indexTapped:")
     indexIconContainerView.addGestureRecognizer(indexTapGesture)
 
-    let logoTapGesture = UITapGestureRecognizer(target: self, action: "logoTapped:")
+    logoTapGesture = UITapGestureRecognizer(target: self, action: "logoTapped:")
     logoImageView.addGestureRecognizer(logoTapGesture)
   }
 
@@ -184,7 +187,15 @@ class HomeViewController: PROViewController {
   }
 
   func contactStateChanged(notification: NSNotification) {
-    Global.isContactOpen ? removeParallaxFromViews() : addParallaxToViews()
+    if Global.isContactOpen {
+      descriptionTapGesture.enabled = false
+      logoTapGesture.enabled = false
+      removeParallaxFromViews()
+    } else {
+      descriptionTapGesture.enabled = true
+      logoTapGesture.enabled = true
+      addParallaxToViews()
+    }
 
     let newImageIcon = Global.isContactOpen ? UIImage(named: "closeIcon") : UIImage(named: "mailIcon")
     UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -202,7 +213,15 @@ class HomeViewController: PROViewController {
   }
 
   func indexStateChanged(notification: NSNotification) {
-    Global.isIndexOpen ? removeParallaxFromViews() : addParallaxToViews()
+    if Global.isIndexOpen {
+      descriptionTapGesture.enabled = false
+      logoTapGesture.enabled = false
+      removeParallaxFromViews()
+    } else {
+      descriptionTapGesture.enabled = true
+      logoTapGesture.enabled = true
+      addParallaxToViews()
+    }
 
     let newImageIcon = Global.isIndexOpen ? UIImage(named: "closeIcon") : UIImage(named: "hamburgerIcon")
     UIView.animateWithDuration(0.3, animations: { () -> Void in
