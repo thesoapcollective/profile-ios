@@ -13,6 +13,7 @@
             <string>FuturaPT-Book</string>
             <string>FuturaPT-Book</string>
             <string>FuturaPT-Book</string>
+            <string>FuturaPT-Book</string>
         </mutableArray>
         <mutableArray key="FuturaPT-BookOblique.otf">
             <string>FuturaPT-BookObl</string>
@@ -160,7 +161,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Y5r-de-PYV" customClass="ParallaxImageView" customModule="Profile" customModuleProvider="target">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Y5r-de-PYV" customClass="ParallaxImageView" customModule="Profile" customModuleProvider="target">
                                 <rect key="frame" x="218" y="275" width="165" height="50"/>
                             </imageView>
                             <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Fl-WL-qpH">
@@ -187,6 +188,35 @@
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2V-je-7dV" customClass="LinearGradientView" customModule="Profile" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="445" width="600" height="155"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1l-ln-reQ" customClass="ParallaxView" customModule="Profile" customModuleProvider="target">
+                                <rect key="frame" x="119.5" y="230.5" width="361" height="140"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i5M-N7-gpf" userLabel="Description Padding View">
+                                        <rect key="frame" x="16" y="16" width="329" height="108"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="221-Rw-ftk">
+                                                <rect key="frame" x="0.0" y="0.0" width="329" height="108"/>
+                                                <string key="text">Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</string>
+                                                <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="14"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="221-Rw-ftk" secondAttribute="trailing" id="4ha-Mu-QeJ"/>
+                                            <constraint firstItem="221-Rw-ftk" firstAttribute="leading" secondItem="i5M-N7-gpf" secondAttribute="leading" id="55M-Eb-Ool"/>
+                                            <constraint firstAttribute="bottom" secondItem="221-Rw-ftk" secondAttribute="bottom" id="e7K-8L-Cdi"/>
+                                            <constraint firstItem="221-Rw-ftk" firstAttribute="top" secondItem="i5M-N7-gpf" secondAttribute="top" id="ktb-hT-X4S"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="i5M-N7-gpf" firstAttribute="top" secondItem="c1l-ln-reQ" secondAttribute="top" constant="16" id="7db-RY-Qpo"/>
+                                    <constraint firstAttribute="trailing" secondItem="i5M-N7-gpf" secondAttribute="trailing" constant="16" id="ZTJ-nI-Dfm"/>
+                                    <constraint firstItem="i5M-N7-gpf" firstAttribute="leading" secondItem="c1l-ln-reQ" secondAttribute="leading" constant="16" id="aHr-DE-a7A"/>
+                                    <constraint firstAttribute="bottom" secondItem="i5M-N7-gpf" secondAttribute="bottom" constant="16" id="g3h-z1-1df"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UdF-st-ED4">
                                 <rect key="frame" x="0.0" y="32" width="35" height="40"/>
@@ -260,20 +290,25 @@
                             <constraint firstItem="8Fl-WL-qpH" firstAttribute="leading" secondItem="gFa-hb-b4T" secondAttribute="leading" id="DwX-g1-pve"/>
                             <constraint firstAttribute="trailing" secondItem="6Tk-FA-ad5" secondAttribute="trailing" id="FE5-uS-sXa"/>
                             <constraint firstItem="8Fl-WL-qpH" firstAttribute="top" secondItem="DoL-OU-1td" secondAttribute="bottom" id="Kca-mV-RrU"/>
+                            <constraint firstItem="c1l-ln-reQ" firstAttribute="centerY" secondItem="gFa-hb-b4T" secondAttribute="centerY" id="LjS-zM-PuK"/>
                             <constraint firstItem="E2V-je-7dV" firstAttribute="height" secondItem="gFa-hb-b4T" secondAttribute="height" multiplier="173/667" id="R3r-9i-Cge"/>
                             <constraint firstItem="E2V-je-7dV" firstAttribute="leading" secondItem="gFa-hb-b4T" secondAttribute="leading" id="SHs-ZK-bnh"/>
                             <constraint firstAttribute="trailing" secondItem="E2V-je-7dV" secondAttribute="trailing" id="UVs-fX-xFd"/>
                             <constraint firstItem="Cdk-tx-w7e" firstAttribute="top" secondItem="cwS-Ww-8vs" secondAttribute="bottom" constant="12" id="cu7-UR-NWL"/>
+                            <constraint firstItem="c1l-ln-reQ" firstAttribute="centerX" secondItem="gFa-hb-b4T" secondAttribute="centerX" id="hAu-za-4md"/>
                             <constraint firstItem="Y5r-de-PYV" firstAttribute="centerY" secondItem="gFa-hb-b4T" secondAttribute="centerY" id="hEm-Bw-sSg"/>
                             <constraint firstItem="6Tk-FA-ad5" firstAttribute="height" secondItem="gFa-hb-b4T" secondAttribute="height" multiplier="173/667" id="iAe-vW-Wod"/>
                             <constraint firstItem="Cdk-tx-w7e" firstAttribute="top" secondItem="8Fl-WL-qpH" secondAttribute="bottom" id="jFT-31-0oL"/>
                             <constraint firstItem="Y5r-de-PYV" firstAttribute="centerX" secondItem="gFa-hb-b4T" secondAttribute="centerX" id="mzl-CI-VrO"/>
                             <constraint firstItem="UdF-st-ED4" firstAttribute="leading" secondItem="gFa-hb-b4T" secondAttribute="leading" id="pNx-bF-CSa"/>
+                            <constraint firstItem="c1l-ln-reQ" firstAttribute="width" secondItem="gFa-hb-b4T" secondAttribute="width" multiplier="0.6" constant="1" id="s8B-lG-HPf"/>
                             <constraint firstItem="6Tk-FA-ad5" firstAttribute="top" secondItem="DoL-OU-1td" secondAttribute="bottom" id="u62-PN-z90"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="bottomGradientView" destination="E2V-je-7dV" id="Nmn-Sd-RO2"/>
+                        <outlet property="descriptionContainerView" destination="c1l-ln-reQ" id="dmP-ht-xRb"/>
+                        <outlet property="descriptionLabel" destination="221-Rw-ftk" id="Ijm-gA-qRW"/>
                         <outlet property="indexIconContainerView" destination="UdF-st-ED4" id="RUq-Tn-Tdd"/>
                         <outlet property="indexIconDottedBorderImageView" destination="ITL-Rq-etR" id="NtI-GE-7Ye"/>
                         <outlet property="indexIconImageView" destination="NyE-9l-Tui" id="Owd-4g-lfc"/>
@@ -472,7 +507,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Soap Collective" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rE-h7-MOt">
-                                <rect key="frame" x="24" y="319" width="198" height="23"/>
+                                <rect key="frame" x="24" y="318.5" width="198" height="23.5"/>
                                 <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="18"/>
                                 <nil key="highlightedColor"/>
                             </label>
