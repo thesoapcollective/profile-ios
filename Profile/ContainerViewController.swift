@@ -16,6 +16,10 @@ class ContainerViewController: PROViewController {
   // PROPERTIES
   // ==================================================
 
+  @IBOutlet weak var backToHomeBottomView: UIView!
+  @IBOutlet weak var backToHomeBottomImageView: UIImageView!
+  @IBOutlet weak var backToHomeTopView: UIView!
+  @IBOutlet weak var backToHomeTopImageView: UIImageView!
   @IBOutlet weak var contactView: UIView!
   @IBOutlet weak var contentView: UIView!
   @IBOutlet weak var indexView: UIView!
@@ -24,6 +28,8 @@ class ContainerViewController: PROViewController {
   @IBOutlet weak var loadingProgressView: UIView!
   @IBOutlet weak var scrollView: UIScrollView!
 
+  @IBOutlet weak var backToHomeBottomViewBottomConstaint: NSLayoutConstraint!
+  @IBOutlet weak var backToHomeTopViewTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var contactViewTrailingConstraint: NSLayoutConstraint!
   @IBOutlet weak var indexViewLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var loadingProgressWidthConstraint: NSLayoutConstraint!
@@ -61,6 +67,8 @@ class ContainerViewController: PROViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    backToHomeTopImageView.image = backToHomeTopImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+    backToHomeBottomImageView.image = backToHomeBottomImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
     loadingLogoImageView.image = loadingLogoImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
 
     contactViewTrailingConstraint.constant = Global.isContactOpen ? 0 : -contactView.frame.width
@@ -86,6 +94,10 @@ class ContainerViewController: PROViewController {
   }
 
   override func updateColors() {
+    backToHomeBottomView.backgroundColor = UIColor.appInvertedPrimaryBackgroundColor()
+    backToHomeBottomImageView.tintColor = UIColor.appInvertedPrimaryTextColor()
+    backToHomeTopView.backgroundColor = UIColor.appInvertedPrimaryBackgroundColor()
+    backToHomeTopImageView.tintColor = UIColor.appInvertedPrimaryTextColor()
     loadingView.backgroundColor = UIColor.appPrimaryBackgroundColor()
     loadingLogoImageView.tintColor = UIColor.appPrimaryTextColor()
     loadingProgressView.backgroundColor = UIColor.appPrimaryTextColor()
@@ -423,8 +435,12 @@ class ContainerViewController: PROViewController {
 
   func snapContent(animated: Bool) {
     let duration = animated ? 0.3 : 0
+    view.layoutIfNeeded()
     UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
       self.scrollView.setContentOffset(CGPoint(x: 0, y: self.view.frame.height * CGFloat(self.currentIndex)), animated: false)
+      self.backToHomeBottomViewBottomConstaint.constant = -Global.BackToHomeThreshold
+      self.backToHomeTopViewTopConstraint.constant = -Global.BackToHomeThreshold
+      self.view.layoutIfNeeded()
     }, completion: nil)
   }
 
@@ -536,7 +552,13 @@ class ContainerViewController: PROViewController {
       let dyThreshold = abs(panDy) >= Global.SwipeThreshold
 
       if isPanningContent {
-        if dyThreshold {
+        let newOffsetY: CGFloat = scrollView.contentOffset.y - dy
+        let endOffsetY = contentView.frame.height - view.frame.height + Global.BackToHomeThreshold
+
+        if newOffsetY <= -Global.BackToHomeThreshold || newOffsetY >= endOffsetY {
+          currentIndex = homeIndex
+          currentStage = 0
+        } else if dyThreshold {
           if currentIndex == homeIndex {
             if currentDirection == .Up {
               let nextIndex = currentIndex + 1
@@ -633,14 +655,23 @@ class ContainerViewController: PROViewController {
       (currentIndex > homeIndex && currentStage == 0 && currentDirection == .Down) ||
       (currentIndex > homeIndex && currentStage == 1 && currentDirection == .Up) {
         let newOffsetY: CGFloat = scrollView.contentOffset.y - dy
-        let endOffsetY = contentView.frame.height - view.frame.height
-        if newOffsetY <= 0 {
-          scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        let endOffsetY = contentView.frame.height - view.frame.height + Global.BackToHomeThreshold
+
+        if newOffsetY <= -Global.BackToHomeThreshold {
+          scrollView.setContentOffset(CGPoint(x: 0, y: -Global.BackToHomeThreshold), animated: false)
+          backToHomeTopViewTopConstraint.constant = 0
         } else if newOffsetY >= endOffsetY {
           scrollView.setContentOffset(CGPoint(x: 0, y: endOffsetY), animated: false)
+          backToHomeBottomViewBottomConstaint.constant = 0
         } else {
           scrollView.setContentOffset(CGPoint(x: 0, y: newOffsetY), animated: false)
+          if newOffsetY < 0 {
+            backToHomeTopViewTopConstraint.constant += dy
+          } else if newOffsetY > endOffsetY - Global.BackToHomeThreshold {
+            backToHomeBottomViewBottomConstaint.constant -= dy
+          }
         }
+        view.layoutIfNeeded()
     }
   }
 

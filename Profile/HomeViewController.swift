@@ -72,6 +72,7 @@ class HomeViewController: PROViewController {
   }
 
   override func updateColors() {
+    view.backgroundColor = UIColor.appPrimaryBackgroundColor()
     bottomGradientView.fromColor = UIColor.appPrimaryBackgroundColor().colorWithAlphaComponent(0)
     bottomGradientView.toColor = UIColor.appPrimaryBackgroundColor()
     descriptionLabel.textColor = UIColor.appPrimaryTextColor()

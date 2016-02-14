@@ -39,6 +39,7 @@ struct Global {
   static let ParallaxOffset1: CGFloat = -30
 
   static let SwipeThreshold: CGFloat = 30
+  static let BackToHomeThreshold: CGFloat = 54
 
   static var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
   static var isAppBooted = false
