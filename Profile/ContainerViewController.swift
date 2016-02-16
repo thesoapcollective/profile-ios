@@ -444,6 +444,22 @@ class ContainerViewController: PROViewController {
     }
   }
 
+  func showContinueArrowViews(duration: NSTimeInterval) {
+    UIView.animateWithDuration(duration) { () -> Void in
+      for (_, continueArrowView) in self.continueArrowViews {
+        continueArrowView.alpha = 1
+      }
+    }
+  }
+
+  func hideContinueArrowViews(duration: NSTimeInterval) {
+    UIView.animateWithDuration(duration) { () -> Void in
+      for (_, continueArrowView) in self.continueArrowViews {
+        continueArrowView.alpha = 0
+      }
+    }
+  }
+
   // ==================================================
   // CONTACT / INDEX
   // ==================================================
@@ -467,12 +483,17 @@ class ContainerViewController: PROViewController {
     Global.isContactOpen = open
     view.layoutIfNeeded()
     UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
+      self.mailIconContainerView.alpha = open || self.currentIndex == self.homeIndex ? 1 : 0
       self.contactViewTrailingConstraint.constant = open ? -self.SideMenuOffset : -self.contactView.frame.width
       self.indexIconLeadingConstraint.constant = open ? -self.contactView.frame.width + self.SideMenuOffset : 0
       self.scrollViewLeadingConstraint.constant = open ? -self.contactView.frame.width + self.SideMenuOffset : 0
       self.scrollViewTrailingConstraint.constant = open ? self.contactView.frame.width - self.SideMenuOffset : 0
       self.view.layoutIfNeeded()
     }, completion: nil)
+
+    if !open {
+      showContinueArrowViews(duration)
+    }
   }
 
   func openCloseIndex(open: Bool, animated: Bool, completion: (() -> Void)? = nil) {
@@ -480,6 +501,7 @@ class ContainerViewController: PROViewController {
     Global.isIndexOpen = open
     view.layoutIfNeeded()
     UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
+      self.indexIconContainerView.alpha = open || self.currentIndex == self.homeIndex ? 1 : 0
       self.contactIconTrailingConstraint.constant = open ? -self.indexView.frame.width + self.SideMenuOffset : 0
       self.indexViewLeadingConstraint.constant = open ? -self.SideMenuOffset : -self.indexView.frame.width
       self.scrollViewLeadingConstraint.constant = open ? self.indexView.frame.width - self.SideMenuOffset : 0
@@ -488,6 +510,10 @@ class ContainerViewController: PROViewController {
     }, completion: { (completed) -> Void in
       completion?()
     })
+
+    if !open {
+      showContinueArrowViews(duration)
+    }
   }
 
   // ==================================================
@@ -736,6 +762,8 @@ class ContainerViewController: PROViewController {
       scrollViewTrailingConstraint.constant -= dx
     }
     NSNotificationCenter.defaultCenter().postNotificationName(Global.ContactPanningNotification, object: nil)
+
+    hideContinueArrowViews(0.1)
   }
 
   func panIndexView(dx: CGFloat) {
@@ -757,6 +785,8 @@ class ContainerViewController: PROViewController {
       scrollViewTrailingConstraint.constant -= dx
     }
     NSNotificationCenter.defaultCenter().postNotificationName(Global.IndexPanningNotification, object: nil)
+
+    hideContinueArrowViews(0.1)
   }
 
   func scrollViewTapped(notification: NSNotification) {
@@ -846,10 +876,17 @@ class ContainerViewController: PROViewController {
   }
 
   func contactStateChanged(notification: NSNotification) {
-    scrollViewTapGesture.enabled = Global.isContactOpen
+    if Global.isContactOpen {
+      scrollViewTapGesture.enabled = true
+      hideContinueArrowViews(0.3)
+    } else {
+      scrollViewTapGesture.enabled = false
+      showContinueArrowViews(0.3)
+    }
 
     let newImageIcon = Global.isContactOpen ? UIImage(named: "closeIcon") : UIImage(named: "mailIcon")
-    UIView.animateWithDuration(0.3, animations: { () -> Void in
+    let duration = currentIndex == homeIndex ? 0.3 : 0
+    UIView.animateWithDuration(duration, animations: { () -> Void in
       self.mailIconImageView.alpha = 0
     }) { (completed) -> Void in
       self.mailIconImageView.image = newImageIcon?.imageWithRenderingMode(.AlwaysTemplate)
@@ -860,10 +897,17 @@ class ContainerViewController: PROViewController {
   }
 
   func indexStateChanged(notification: NSNotification) {
-    scrollViewTapGesture.enabled = Global.isIndexOpen
+    if Global.isIndexOpen {
+      scrollViewTapGesture.enabled = true
+      hideContinueArrowViews(0.3)
+    } else {
+      scrollViewTapGesture.enabled = false
+      showContinueArrowViews(0.3)
+    }
 
     let newImageIcon = Global.isIndexOpen ? UIImage(named: "closeIcon") : UIImage(named: "hamburgerIcon")
-    UIView.animateWithDuration(0.3, animations: { () -> Void in
+    let duration = currentIndex == homeIndex ? 0.3 : 0
+    UIView.animateWithDuration(duration, animations: { () -> Void in
       self.indexIconImageView.alpha = 0
     }) { (completed) -> Void in
       self.indexIconImageView.image = newImageIcon?.imageWithRenderingMode(.AlwaysTemplate)
