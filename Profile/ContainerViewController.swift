@@ -16,8 +16,10 @@ class ContainerViewController: PROViewController {
   // PROPERTIES
   // ==================================================
 
+  @IBOutlet weak var backToHomeBottomCoverView: UIView!
   @IBOutlet weak var backToHomeBottomView: UIView!
   @IBOutlet weak var backToHomeBottomImageView: UIImageView!
+  @IBOutlet weak var backToHomeTopCoverView: UIView!
   @IBOutlet weak var backToHomeTopView: UIView!
   @IBOutlet weak var backToHomeTopImageView: UIImageView!
   @IBOutlet weak var contactView: UIView!
@@ -55,6 +57,8 @@ class ContainerViewController: PROViewController {
   var isPanningContent = false
   var isPanningIndex = false
   var isDataReady = false
+  var isGoingHome = false
+  var shouldGoHome = false
 
   var panDx: CGFloat = 0
   var panDy: CGFloat = 0
@@ -82,6 +86,9 @@ class ContainerViewController: PROViewController {
     loadingLogoImageView.image = loadingLogoImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
     mailIconImageView.image = mailIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
 
+    backToHomeBottomCoverView.layer.cornerRadius = backToHomeBottomCoverView.frame.width / 2
+    backToHomeTopCoverView.layer.cornerRadius = backToHomeTopCoverView.frame.width / 2
+
     contactViewTrailingConstraint.constant = Global.isContactOpen ? 0 : -contactView.frame.width
     indexViewLeadingConstraint.constant = Global.isIndexOpen ? 0 : -indexView.frame.width
     loadingProgressWidthConstraint.constant = 0
@@ -105,8 +112,10 @@ class ContainerViewController: PROViewController {
   }
 
   override func updateColors() {
+    backToHomeBottomCoverView.backgroundColor = UIColor.appInvertedPrimaryBackgroundColor()
     backToHomeBottomView.backgroundColor = UIColor.appInvertedPrimaryBackgroundColor()
     backToHomeBottomImageView.tintColor = UIColor.appInvertedPrimaryTextColor()
+    backToHomeTopCoverView.backgroundColor = UIColor.appInvertedPrimaryBackgroundColor()
     backToHomeTopView.backgroundColor = UIColor.appInvertedPrimaryBackgroundColor()
     backToHomeTopImageView.tintColor = UIColor.appInvertedPrimaryTextColor()
     indexIconImageView.tintColor = UIColor.appPrimaryTextColor()
@@ -460,6 +469,18 @@ class ContainerViewController: PROViewController {
     }
   }
 
+  func animateGoingHome() {
+    UIView.animateWithDuration(0.5, delay: 0, options: .BeginFromCurrentState, animations: { () -> Void in
+      self.backToHomeBottomCoverView.alpha = 0
+      self.backToHomeTopCoverView.alpha = 0
+    }) { (completed) -> Void in
+      if self.isGoingHome {
+        self.isGoingHome = false
+        self.shouldGoHome = true
+      }
+    }
+  }
+
   // ==================================================
   // CONTACT / INDEX
   // ==================================================
@@ -467,6 +488,8 @@ class ContainerViewController: PROViewController {
   func snapContent(animated: Bool) {
     let duration = animated ? 0.3 : 0
     let menuIconsAlpha: CGFloat = currentIndex == homeIndex ? 1 : 0
+    isGoingHome = false
+    shouldGoHome = false
     view.layoutIfNeeded()
     UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
       self.scrollView.setContentOffset(CGPoint(x: 0, y: self.view.frame.height * CGFloat(self.currentIndex)), animated: false)
@@ -474,6 +497,8 @@ class ContainerViewController: PROViewController {
       self.backToHomeTopViewTopConstraint.constant = -Global.BackToHomeThreshold
       self.indexIconContainerView.alpha = menuIconsAlpha
       self.mailIconContainerView.alpha = menuIconsAlpha
+      self.backToHomeBottomCoverView.alpha = 1
+      self.backToHomeTopCoverView.alpha = 1
       self.view.layoutIfNeeded()
     }, completion: nil)
   }
@@ -616,11 +641,14 @@ class ContainerViewController: PROViewController {
 
       if isPanningContent {
         let newOffsetY: CGFloat = scrollView.contentOffset.y - dy
-        let endOffsetY = contentView.frame.height - view.frame.height + Global.BackToHomeThreshold
+        let endOffsetY = contentView.frame.height - view.frame.height
 
-        if newOffsetY <= -Global.BackToHomeThreshold || newOffsetY >= endOffsetY {
-          currentIndex = homeIndex
-          currentStage = 0
+        if newOffsetY < 0 || newOffsetY > endOffsetY {
+          if shouldGoHome {
+            shouldGoHome = false
+            currentIndex = homeIndex
+            currentStage = 0
+          }
         } else if dyThreshold {
           if currentIndex == homeIndex {
             if currentDirection == .Up {
@@ -723,9 +751,17 @@ class ContainerViewController: PROViewController {
         if newOffsetY <= -Global.BackToHomeThreshold {
           scrollView.setContentOffset(CGPoint(x: 0, y: -Global.BackToHomeThreshold), animated: false)
           backToHomeTopViewTopConstraint.constant = 0
+          if !isGoingHome {
+            isGoingHome = true
+            animateGoingHome()
+          }
         } else if newOffsetY >= endOffsetY {
           scrollView.setContentOffset(CGPoint(x: 0, y: endOffsetY), animated: false)
           backToHomeBottomViewBottomConstaint.constant = 0
+          if !isGoingHome {
+            isGoingHome = true
+            animateGoingHome()
+          }
         } else {
           scrollView.setContentOffset(CGPoint(x: 0, y: newOffsetY), animated: false)
           if newOffsetY < 0 {
