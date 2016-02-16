@@ -238,10 +238,14 @@ class ItemViewController: PROViewController {
       delegate.currentIndex - 1 == index ||
       delegate.currentIndex == index {
         if itemView.photoImageView.image == nil || modeChanged {
+          itemView.photoImageView.alpha = 0
+          itemView.photoGrayscaleImageView.alpha = 0
           let photoUrl = Global.mode == .Light ? data["day_photo_url"].stringValue : data["night_photo_url"].stringValue
           if let imageUrl = NSURL(string: photoUrl) {
             itemView.photoImageView.af_setImageWithURL(imageUrl, placeholderImage: nil, filter: nil, imageTransition: .CrossDissolve(0.3), runImageTransitionIfCached: false, completion: { [unowned self] (response) -> Void in
               self.itemView.photoGrayscaleImageView.image = response.result.value?.tintedImage(UIColor.appPrimaryTextColor(), tintAlpha: 1, tintBlendMode: .Color)
+              self.itemView.photoImageView.alpha = self.delegate.currentStage == 0 ? 1 : 0
+              self.itemView.photoGrayscaleImageView.alpha = self.delegate.currentStage == 1 ? 1 : 0
             })
           }
         }
