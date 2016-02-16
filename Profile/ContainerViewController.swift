@@ -22,15 +22,23 @@ class ContainerViewController: PROViewController {
   @IBOutlet weak var backToHomeTopImageView: UIImageView!
   @IBOutlet weak var contactView: UIView!
   @IBOutlet weak var contentView: UIView!
+  @IBOutlet weak var indexIconContainerView: UIView!
+  @IBOutlet weak var indexIconImageView: UIImageView!
+  @IBOutlet weak var indexIconDottedBorderImageView: DottedBorderImageView!
   @IBOutlet weak var indexView: UIView!
   @IBOutlet weak var loadingView: UIView!
   @IBOutlet weak var loadingLogoImageView: UIImageView!
   @IBOutlet weak var loadingProgressView: UIView!
+  @IBOutlet weak var mailIconContainerView: UIView!
+  @IBOutlet weak var mailIconImageView: UIImageView!
+  @IBOutlet weak var mailIconDottedBorderImageView: DottedBorderImageView!
   @IBOutlet weak var scrollView: UIScrollView!
 
   @IBOutlet weak var backToHomeBottomViewBottomConstaint: NSLayoutConstraint!
   @IBOutlet weak var backToHomeTopViewTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var contactIconTrailingConstraint: NSLayoutConstraint!
   @IBOutlet weak var contactViewTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet weak var indexIconLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var indexViewLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var loadingProgressWidthConstraint: NSLayoutConstraint!
   @IBOutlet weak var scrollViewLeadingConstraint: NSLayoutConstraint!
@@ -70,7 +78,9 @@ class ContainerViewController: PROViewController {
 
     backToHomeTopImageView.image = backToHomeTopImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
     backToHomeBottomImageView.image = backToHomeBottomImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+    indexIconImageView.image = indexIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
     loadingLogoImageView.image = loadingLogoImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+    mailIconImageView.image = mailIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
 
     contactViewTrailingConstraint.constant = Global.isContactOpen ? 0 : -contactView.frame.width
     indexViewLeadingConstraint.constant = Global.isIndexOpen ? 0 : -indexView.frame.width
@@ -99,9 +109,13 @@ class ContainerViewController: PROViewController {
     backToHomeBottomImageView.tintColor = UIColor.appInvertedPrimaryTextColor()
     backToHomeTopView.backgroundColor = UIColor.appInvertedPrimaryBackgroundColor()
     backToHomeTopImageView.tintColor = UIColor.appInvertedPrimaryTextColor()
+    indexIconImageView.tintColor = UIColor.appPrimaryTextColor()
+    indexIconDottedBorderImageView.dotColor = UIColor.appPrimaryTextColor()
     loadingView.backgroundColor = UIColor.appPrimaryBackgroundColor()
     loadingLogoImageView.tintColor = UIColor.appPrimaryTextColor()
     loadingProgressView.backgroundColor = UIColor.appPrimaryTextColor()
+    mailIconImageView.tintColor = UIColor.appPrimaryTextColor()
+    mailIconDottedBorderImageView.dotColor = UIColor.appPrimaryTextColor()
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
     for (_, continueArrowView) in continueArrowViews {
       continueArrowView.arrowHeadImageView.tintColor = UIColor.appPrimaryTextColor()
@@ -436,11 +450,14 @@ class ContainerViewController: PROViewController {
 
   func snapContent(animated: Bool) {
     let duration = animated ? 0.3 : 0
+    let menuIconsAlpha: CGFloat = currentIndex == homeIndex ? 1 : 0
     view.layoutIfNeeded()
     UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
       self.scrollView.setContentOffset(CGPoint(x: 0, y: self.view.frame.height * CGFloat(self.currentIndex)), animated: false)
       self.backToHomeBottomViewBottomConstaint.constant = -Global.BackToHomeThreshold
       self.backToHomeTopViewTopConstraint.constant = -Global.BackToHomeThreshold
+      self.indexIconContainerView.alpha = menuIconsAlpha
+      self.mailIconContainerView.alpha = menuIconsAlpha
       self.view.layoutIfNeeded()
     }, completion: nil)
   }
@@ -451,6 +468,7 @@ class ContainerViewController: PROViewController {
     view.layoutIfNeeded()
     UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
       self.contactViewTrailingConstraint.constant = open ? -self.SideMenuOffset : -self.contactView.frame.width
+      self.indexIconLeadingConstraint.constant = open ? -self.contactView.frame.width + self.SideMenuOffset : 0
       self.scrollViewLeadingConstraint.constant = open ? -self.contactView.frame.width + self.SideMenuOffset : 0
       self.scrollViewTrailingConstraint.constant = open ? self.contactView.frame.width - self.SideMenuOffset : 0
       self.view.layoutIfNeeded()
@@ -462,6 +480,7 @@ class ContainerViewController: PROViewController {
     Global.isIndexOpen = open
     view.layoutIfNeeded()
     UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: { () -> Void in
+      self.contactIconTrailingConstraint.constant = open ? -self.indexView.frame.width + self.SideMenuOffset : 0
       self.indexViewLeadingConstraint.constant = open ? -self.SideMenuOffset : -self.indexView.frame.width
       self.scrollViewLeadingConstraint.constant = open ? self.indexView.frame.width - self.SideMenuOffset : 0
       self.scrollViewTrailingConstraint.constant = open ? -self.indexView.frame.width + self.SideMenuOffset : 0
@@ -479,9 +498,25 @@ class ContainerViewController: PROViewController {
     let panGesture = UIPanGestureRecognizer(target: self, action: "panned:")
     view.addGestureRecognizer(panGesture)
 
+    let contactTapGesture = UITapGestureRecognizer(target: self, action: "contactTapped:")
+    mailIconContainerView.addGestureRecognizer(contactTapGesture)
+
+    let indexTapGesture = UITapGestureRecognizer(target: self, action: "indexTapped:")
+    indexIconContainerView.addGestureRecognizer(indexTapGesture)
+
     scrollViewTapGesture = UITapGestureRecognizer(target: self, action: "scrollViewTapped:")
     scrollViewTapGesture.enabled = false
     scrollView.addGestureRecognizer(scrollViewTapGesture)
+  }
+
+  func contactTapped(notification: NSNotification) {
+    let notificationName = Global.isContactOpen ? Global.CloseContactNotification : Global.OpenContactNotification
+    NSNotificationCenter.defaultCenter().postNotificationName(notificationName, object: nil)
+  }
+
+  func indexTapped(notification: NSNotification) {
+    let notificationName = Global.isIndexOpen ? Global.CloseIndexNotification : Global.OpenIndexNotification
+    NSNotificationCenter.defaultCenter().postNotificationName(notificationName, object: nil)
   }
 
   func panned(gesture: UIPanGestureRecognizer) {
@@ -675,20 +710,28 @@ class ContainerViewController: PROViewController {
         }
         view.layoutIfNeeded()
     }
+
+    UIView.animateWithDuration(0.1, animations: { () -> Void in
+      self.indexIconContainerView.alpha = 0
+      self.mailIconContainerView.alpha = 0
+    })
   }
 
   func panContactView(dx: CGFloat) {
     let newConstant: CGFloat = contactViewTrailingConstraint.constant - dx
     if newConstant >= 0 {
       contactViewTrailingConstraint.constant = 0
+      indexIconLeadingConstraint.constant = -contactView.frame.width
       scrollViewLeadingConstraint.constant = -contactView.frame.width
       scrollViewTrailingConstraint.constant = contactView.frame.width
     } else if newConstant <= -contactView.frame.width {
       contactViewTrailingConstraint.constant = -contactView.frame.width
+      indexIconLeadingConstraint.constant = 0
       scrollViewLeadingConstraint.constant = 0
       scrollViewTrailingConstraint.constant = 0
     } else {
       contactViewTrailingConstraint.constant -= dx
+      indexIconLeadingConstraint.constant += dx
       scrollViewLeadingConstraint.constant += dx
       scrollViewTrailingConstraint.constant -= dx
     }
@@ -698,14 +741,17 @@ class ContainerViewController: PROViewController {
   func panIndexView(dx: CGFloat) {
     let newConstant: CGFloat = indexViewLeadingConstraint.constant + dx
     if newConstant >= 0 {
+      contactIconTrailingConstraint.constant = -contactView.frame.width
       indexViewLeadingConstraint.constant = 0
       scrollViewLeadingConstraint.constant = indexView.frame.width
       scrollViewTrailingConstraint.constant = -indexView.frame.width
     } else if newConstant <= -indexView.frame.width {
+      contactIconTrailingConstraint.constant = 0
       indexViewLeadingConstraint.constant = -indexView.frame.width
       scrollViewLeadingConstraint.constant = 0
       scrollViewTrailingConstraint.constant = 0
     } else {
+      contactIconTrailingConstraint.constant -= dx
       indexViewLeadingConstraint.constant += dx
       scrollViewLeadingConstraint.constant += dx
       scrollViewTrailingConstraint.constant -= dx
@@ -801,10 +847,30 @@ class ContainerViewController: PROViewController {
 
   func contactStateChanged(notification: NSNotification) {
     scrollViewTapGesture.enabled = Global.isContactOpen
+
+    let newImageIcon = Global.isContactOpen ? UIImage(named: "closeIcon") : UIImage(named: "mailIcon")
+    UIView.animateWithDuration(0.3, animations: { () -> Void in
+      self.mailIconImageView.alpha = 0
+    }) { (completed) -> Void in
+      self.mailIconImageView.image = newImageIcon?.imageWithRenderingMode(.AlwaysTemplate)
+      UIView.animateWithDuration(0.3, animations: { () -> Void in
+        self.mailIconImageView.alpha = 1
+      })
+    }
   }
 
   func indexStateChanged(notification: NSNotification) {
     scrollViewTapGesture.enabled = Global.isIndexOpen
+
+    let newImageIcon = Global.isIndexOpen ? UIImage(named: "closeIcon") : UIImage(named: "hamburgerIcon")
+    UIView.animateWithDuration(0.3, animations: { () -> Void in
+      self.indexIconImageView.alpha = 0
+    }) { (completed) -> Void in
+      self.indexIconImageView.image = newImageIcon?.imageWithRenderingMode(.AlwaysTemplate)
+      UIView.animateWithDuration(0.3, animations: { () -> Void in
+        self.indexIconImageView.alpha = 1
+      })
+    }
   }
 
   func openContact(notification: NSNotification) {

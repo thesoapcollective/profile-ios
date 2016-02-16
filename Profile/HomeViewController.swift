@@ -19,13 +19,7 @@ class HomeViewController: PROViewController {
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var radialGradientContainerView: UIView!
   @IBOutlet weak var radialGradientView: RadialGradientView!
-  @IBOutlet weak var indexIconContainerView: UIView!
-  @IBOutlet weak var indexIconImageView: UIImageView!
-  @IBOutlet weak var indexIconDottedBorderImageView: DottedBorderImageView!
   @IBOutlet weak var logoImageView: ParallaxImageView!
-  @IBOutlet weak var mailIconContainerView: UIView!
-  @IBOutlet weak var mailIconImageView: UIImageView!
-  @IBOutlet weak var mailIconDottedBorderImageView: DottedBorderImageView!
   @IBOutlet weak var topGradientView: LinearGradientView!
 
   @IBOutlet weak var radialGradientTopConstraint: NSLayoutConstraint!
@@ -49,8 +43,6 @@ class HomeViewController: PROViewController {
 
     descriptionContainerView.layer.borderWidth = 1
     logoImageView.image = logoImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
-    indexIconImageView.image = indexIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
-    mailIconImageView.image = mailIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
 
     setModeDependentAttributes()
   }
@@ -77,11 +69,7 @@ class HomeViewController: PROViewController {
     bottomGradientView.toColor = UIColor.appPrimaryBackgroundColor()
     descriptionLabel.textColor = UIColor.appPrimaryTextColor()
     descriptionContainerView.layer.borderColor = UIColor.appPrimaryTextColor().colorWithAlphaComponent(0.75).CGColor
-    indexIconImageView.tintColor = UIColor.appPrimaryTextColor()
-    indexIconDottedBorderImageView.dotColor = UIColor.appPrimaryTextColor()
     logoImageView.tintColor = UIColor.appPrimaryTextColor()
-    mailIconImageView.tintColor = UIColor.appPrimaryTextColor()
-    mailIconDottedBorderImageView.dotColor = UIColor.appPrimaryTextColor()
     radialGradientView.fromColor = UIColor.appInvertedPrimaryBackgroundColor()
     radialGradientView.toColor = UIColor.appInvertedPrimaryBackgroundColor().colorWithAlphaComponent(0)
     topGradientView.fromColor = UIColor.appPrimaryBackgroundColor()
@@ -132,31 +120,15 @@ class HomeViewController: PROViewController {
   // ==================================================
 
   func setupGestures() {
-    let contactTapGesture = UITapGestureRecognizer(target: self, action: "contactTapped:")
-    mailIconContainerView.addGestureRecognizer(contactTapGesture)
-
     descriptionTapGesture = UITapGestureRecognizer(target: self, action: "descriptionTapped:")
     descriptionContainerView.addGestureRecognizer(descriptionTapGesture)
-
-    let indexTapGesture = UITapGestureRecognizer(target: self, action: "indexTapped:")
-    indexIconContainerView.addGestureRecognizer(indexTapGesture)
 
     logoTapGesture = UITapGestureRecognizer(target: self, action: "logoTapped:")
     logoImageView.addGestureRecognizer(logoTapGesture)
   }
 
-  func contactTapped(notification: NSNotification) {
-    let notificationName = Global.isContactOpen ? Global.CloseContactNotification : Global.OpenContactNotification
-    NSNotificationCenter.defaultCenter().postNotificationName(notificationName, object: nil)
-  }
-
   func descriptionTapped(notification: NSNotification) {
     toggleDescription()
-  }
-
-  func indexTapped(notification: NSNotification) {
-    let notificationName = Global.isIndexOpen ? Global.CloseIndexNotification : Global.OpenIndexNotification
-    NSNotificationCenter.defaultCenter().postNotificationName(notificationName, object: nil)
   }
 
   func logoTapped(notification: NSNotification) {
@@ -197,16 +169,6 @@ class HomeViewController: PROViewController {
       logoTapGesture.enabled = true
       addParallaxToViews()
     }
-
-    let newImageIcon = Global.isContactOpen ? UIImage(named: "closeIcon") : UIImage(named: "mailIcon")
-    UIView.animateWithDuration(0.3, animations: { () -> Void in
-      self.mailIconImageView.alpha = 0
-    }) { (completed) -> Void in
-      self.mailIconImageView.image = newImageIcon?.imageWithRenderingMode(.AlwaysTemplate)
-      UIView.animateWithDuration(0.3, animations: { () -> Void in
-        self.mailIconImageView.alpha = 1
-      })
-    }
   }
 
   func indexPanning(notification: NSNotification) {
@@ -222,16 +184,6 @@ class HomeViewController: PROViewController {
       descriptionTapGesture.enabled = true
       logoTapGesture.enabled = true
       addParallaxToViews()
-    }
-
-    let newImageIcon = Global.isIndexOpen ? UIImage(named: "closeIcon") : UIImage(named: "hamburgerIcon")
-    UIView.animateWithDuration(0.3, animations: { () -> Void in
-      self.indexIconImageView.alpha = 0
-    }) { (completed) -> Void in
-      self.indexIconImageView.image = newImageIcon?.imageWithRenderingMode(.AlwaysTemplate)
-      UIView.animateWithDuration(0.3, animations: { () -> Void in
-        self.indexIconImageView.alpha = 1
-      })
     }
   }
 
@@ -253,9 +205,7 @@ class HomeViewController: PROViewController {
       alpha = 1 - (threshold - abs(panDy)) / threshold
     }
 
-    indexIconContainerView.alpha = alpha
     logoImageView.alpha = alpha
-    mailIconContainerView.alpha = alpha
     radialGradientContainerView.alpha = alpha
 
     if currentDirection == .Up {
@@ -292,9 +242,7 @@ class HomeViewController: PROViewController {
 
     UIView.animateWithDuration(0.3, animations: { () -> Void in
       self.bottomGradientView.alpha = 0
-      self.indexIconContainerView.alpha = alpha
       self.logoImageView.alpha = alpha
-      self.mailIconContainerView.alpha = alpha
       self.radialGradientContainerView.alpha = alpha
       self.topGradientView.alpha = 0
     })
