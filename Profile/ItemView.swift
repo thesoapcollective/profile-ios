@@ -37,6 +37,15 @@ class ItemView: UIView {
   @IBOutlet weak var shortTitleLabelLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var topGradientTopConstraint: NSLayoutConstraint!
 
+  @IBOutlet weak var photoImageViewTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var photoImageViewBottomConstraint: NSLayoutConstraint!
+  @IBOutlet weak var photoImageViewLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet weak var photoImageViewTrailingConstraint: NSLayoutConstraint!
+  @IBOutlet weak var photoGrayscaleImageViewTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var photoGrayscaleImageViewBottomConstraint: NSLayoutConstraint!
+  @IBOutlet weak var photoGrayscaleImageViewLeadingConstraint: NSLayoutConstraint!
+  @IBOutlet weak var photoGrayscaleImageViewTrailingConstraint: NSLayoutConstraint!
+
   var photoImage: UIImage?
 
   // ==================================================
@@ -50,6 +59,26 @@ class ItemView: UIView {
     descriptionContainerView.layer.borderWidth = 1
     websiteButton.titleLabel?.adjustsFontSizeToFitWidth = true
     websiteButton.titleLabel?.minimumScaleFactor = 10.0 / 14.0
+
+    if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+      photoImageViewTopConstraint.constant = -25
+      photoImageViewBottomConstraint.constant = -25
+      photoImageViewLeadingConstraint.constant = -25
+      photoImageViewTrailingConstraint.constant = -25
+      photoGrayscaleImageViewTopConstraint.constant = -25
+      photoGrayscaleImageViewBottomConstraint.constant = -25
+      photoGrayscaleImageViewLeadingConstraint.constant = -25
+      photoGrayscaleImageViewTrailingConstraint.constant = -25
+    } else {
+      photoImageViewTopConstraint.constant = -50
+      photoImageViewBottomConstraint.constant = -50
+      photoImageViewLeadingConstraint.constant = -50
+      photoImageViewTrailingConstraint.constant = -50
+      photoGrayscaleImageViewTopConstraint.constant = -50
+      photoGrayscaleImageViewBottomConstraint.constant = -50
+      photoGrayscaleImageViewLeadingConstraint.constant = -50
+      photoGrayscaleImageViewTrailingConstraint.constant = -50
+    }
   }
 
 }

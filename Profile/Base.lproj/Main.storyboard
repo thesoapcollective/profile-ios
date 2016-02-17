@@ -446,6 +446,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                     </subviews>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstItem="fwz-yJ-pDA" firstAttribute="centerX" secondItem="1Ol-TO-VbA" secondAttribute="centerX" id="Eph-Jd-12I"/>
                                                                         <constraint firstAttribute="bottom" secondItem="9fF-6e-h6h" secondAttribute="bottom" id="Et5-4k-Yri"/>

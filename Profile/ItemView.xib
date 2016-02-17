@@ -181,7 +181,15 @@
                 <outlet property="descriptionPositionView" destination="GLe-YH-9b1" id="0Qc-nx-BxQ"/>
                 <outlet property="descriptionTopConstraint" destination="mce-f8-1p5" id="rHM-Ts-mdE"/>
                 <outlet property="photoGrayscaleImageView" destination="CnB-Q8-KfY" id="XxL-Cd-4ev"/>
+                <outlet property="photoGrayscaleImageViewBottomConstraint" destination="Gob-jk-zIG" id="enm-oa-KPs"/>
+                <outlet property="photoGrayscaleImageViewLeadingConstraint" destination="ayI-Bi-acM" id="cBs-k0-zfb"/>
+                <outlet property="photoGrayscaleImageViewTopConstraint" destination="V73-ZL-wjV" id="mc6-1y-dQo"/>
+                <outlet property="photoGrayscaleImageViewTrailingConstraint" destination="SjG-bC-vxA" id="oNT-cT-wi2"/>
                 <outlet property="photoImageView" destination="FvV-YE-QHT" id="Dcd-Rb-r9F"/>
+                <outlet property="photoImageViewBottomConstraint" destination="JNo-Zb-NNF" id="E9H-Qw-DJq"/>
+                <outlet property="photoImageViewLeadingConstraint" destination="CLb-i1-b8j" id="hve-Tf-Oew"/>
+                <outlet property="photoImageViewTopConstraint" destination="je7-cg-ANr" id="FUc-Oi-TkW"/>
+                <outlet property="photoImageViewTrailingConstraint" destination="dZG-Tl-ZKS" id="rey-6D-55L"/>
                 <outlet property="shortTitleLabel" destination="7Xf-tI-I4g" id="zso-RH-OrU"/>
                 <outlet property="shortTitleLabelLeadingConstraint" destination="z5O-xO-4Vj" id="2ph-6q-98a"/>
                 <outlet property="shortTitleLabelTopConstraint" destination="OQs-DF-SbO" id="oOK-wV-K8E"/>
@@ -190,6 +198,7 @@
                 <outlet property="topGradientView" destination="d1s-NS-sLd" id="7lA-zr-2mA"/>
                 <outlet property="websiteButton" destination="JIr-lM-Txw" id="4Ok-KL-6Nc"/>
             </connections>
+            <point key="canvasLocation" x="375" y="339"/>
         </view>
     </objects>
     <resources>

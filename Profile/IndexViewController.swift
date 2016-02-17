@@ -171,6 +171,8 @@ extension IndexViewController: UITableViewDataSource {
     let cell = tableView.dequeueReusableCellWithIdentifier("IndexTableViewCell", forIndexPath: indexPath) as! IndexTableViewCell
     let item = items[indexPath.row]
 
+    cell.backgroundColor = UIColor.clearColor()
+
     cell.titleLabel.text = item["index_title"].stringValue
     let iconUrl = Global.mode == .Light ? item["day_icon_url"].stringValue : item["night_icon_url"].stringValue
     if indexPath.row == delegate.homeIndex {
