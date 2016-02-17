@@ -68,6 +68,26 @@ class ContactViewController: PROViewController {
     UIApplication.sharedApplication().openURL(url)
   }
 
+  func transitionToDarkMode() {
+    UIView.animateWithDuration(0.3, animations: { () -> Void in
+      self.view.alpha = 0
+    }) { (completed) -> Void in
+      UIView.animateWithDuration(0.5, delay: 1, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
+        self.view.alpha = 1
+      }, completion: nil)
+    }
+  }
+
+  func transitionToLightMode() {
+    UIView.animateWithDuration(0.3, animations: { () -> Void in
+      self.view.alpha = 0
+    }) { (completed) -> Void in
+      UIView.animateWithDuration(0.5, delay: 1, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
+        self.view.alpha = 1
+      }, completion: nil)
+    }
+  }
+
   // ==================================================
   // NOTIFICATIONS
   // ==================================================
@@ -81,26 +101,16 @@ class ContactViewController: PROViewController {
     switch UIDevice.currentDevice().orientation {
     case .Portrait:
       if Global.mode != .Light {
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-          self.view.alpha = 0
-        }) { (completed) -> Void in
-          UIView.animateWithDuration(0.5, delay: 1, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
-            self.view.alpha = 1
-          }, completion: nil)
-        }
+        transitionToLightMode()
       }
       break
+
     case .PortraitUpsideDown:
       if Global.mode != .Dark {
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-          self.view.alpha = 0
-        }) { (completed) -> Void in
-          UIView.animateWithDuration(0.5, delay: 1, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
-            self.view.alpha = 1
-          }, completion: nil)
-        }
+        transitionToDarkMode()
       }
       break
+
     default:
       break
     }

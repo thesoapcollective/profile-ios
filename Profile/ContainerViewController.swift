@@ -104,7 +104,7 @@ class ContainerViewController: PROViewController {
   }
 
   override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-    return .All
+    return [.Portrait, .PortraitUpsideDown]
   }
 
   override func shouldAutorotate() -> Bool {
@@ -478,6 +478,36 @@ class ContainerViewController: PROViewController {
         self.isGoingHome = false
         self.shouldGoHome = true
       }
+    }
+  }
+
+  func doDeviceRotation() {
+    Global.shouldRotate = true
+    UIViewController.attemptRotationToDeviceOrientation()
+    Global.shouldRotate = false
+  }
+
+  func transitionToDarkMode() {
+    UIView.animateWithDuration(0.3, animations: { () -> Void in
+      self.view.alpha = 0
+    }) { (completed) -> Void in
+      Global.mode = .Dark
+      self.doDeviceRotation()
+      UIView.animateWithDuration(0.5, delay: 1, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
+        self.view.alpha = 1
+      }, completion: nil)
+    }
+  }
+
+  func transitionToLightMode() {
+    UIView.animateWithDuration(0.3, animations: { () -> Void in
+      self.view.alpha = 0
+    }) { (completed) -> Void in
+      Global.mode = .Light
+      self.doDeviceRotation()
+      UIView.animateWithDuration(0.5, delay: 1, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
+        self.view.alpha = 1
+      }, completion: nil)
     }
   }
 
@@ -965,34 +995,16 @@ class ContainerViewController: PROViewController {
     switch UIDevice.currentDevice().orientation {
     case .Portrait:
       if Global.mode != .Light {
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-          self.view.alpha = 0
-        }) { (completed) -> Void in
-          Global.mode = .Light
-          Global.shouldRotate = true
-          UIViewController.attemptRotationToDeviceOrientation()
-          Global.shouldRotate = false
-          UIView.animateWithDuration(0.5, delay: 1, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
-            self.view.alpha = 1
-          }, completion: nil)
-        }
+        transitionToLightMode()
       }
       break
+
     case .PortraitUpsideDown:
       if Global.mode != .Dark {
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-          self.view.alpha = 0
-        }) { (completed) -> Void in
-          Global.mode = .Dark
-          Global.shouldRotate = true
-          UIViewController.attemptRotationToDeviceOrientation()
-          Global.shouldRotate = false
-          UIView.animateWithDuration(0.5, delay: 1, options: UIViewAnimationOptions(rawValue: 0), animations: { () -> Void in
-            self.view.alpha = 1
-          }, completion: nil)
-        }
+        transitionToDarkMode()
       }
       break
+
     default:
       break
     }
