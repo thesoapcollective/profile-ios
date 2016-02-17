@@ -120,7 +120,9 @@
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="bHG-zd-Mfc" firstAttribute="width" secondItem="GLe-YH-9b1" secondAttribute="width" multiplier="0.6" id="4f9-kA-yxu"/>
+                                <constraint firstItem="bHG-zd-Mfc" firstAttribute="width" secondItem="GLe-YH-9b1" secondAttribute="width" multiplier="0.6" id="4f9-kA-yxu">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="-150"/>
+                                </constraint>
                                 <constraint firstItem="bHG-zd-Mfc" firstAttribute="centerY" secondItem="GLe-YH-9b1" secondAttribute="centerY" id="Q6v-fm-Baf"/>
                                 <constraint firstItem="bHG-zd-Mfc" firstAttribute="centerX" secondItem="GLe-YH-9b1" secondAttribute="centerX" id="qPx-s8-Lrz"/>
                             </constraints>
