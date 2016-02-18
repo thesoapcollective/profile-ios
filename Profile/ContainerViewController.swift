@@ -16,10 +16,8 @@ class ContainerViewController: PROViewController {
   // PROPERTIES
   // ==================================================
 
-  @IBOutlet weak var backToHomeBottomCoverView: UIView!
   @IBOutlet weak var backToHomeBottomView: UIView!
   @IBOutlet weak var backToHomeBottomImageView: UIImageView!
-  @IBOutlet weak var backToHomeTopCoverView: UIView!
   @IBOutlet weak var backToHomeTopView: UIView!
   @IBOutlet weak var backToHomeTopImageView: UIImageView!
   @IBOutlet weak var contactView: UIView!
@@ -92,9 +90,6 @@ class ContainerViewController: PROViewController {
     loadingLogoImageView.image = loadingLogoImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
     mailIconImageView.image = mailIconImageView.image?.imageWithRenderingMode(.AlwaysTemplate)
 
-    backToHomeBottomCoverView.layer.cornerRadius = backToHomeBottomCoverView.frame.width / 2
-    backToHomeTopCoverView.layer.cornerRadius = backToHomeTopCoverView.frame.width / 2
-
     noInternetDescriptionContainerView.layer.borderWidth = 1
 
     contactViewTrailingConstraint.constant = Global.isContactOpen ? 0 : -contactView.frame.width
@@ -129,10 +124,8 @@ class ContainerViewController: PROViewController {
   }
 
   override func updateColors() {
-    backToHomeBottomCoverView.backgroundColor = UIColor.appInvertedPrimaryBackgroundColor()
     backToHomeBottomView.backgroundColor = UIColor.appInvertedPrimaryBackgroundColor()
     backToHomeBottomImageView.tintColor = UIColor.appInvertedPrimaryTextColor()
-    backToHomeTopCoverView.backgroundColor = UIColor.appInvertedPrimaryBackgroundColor()
     backToHomeTopView.backgroundColor = UIColor.appInvertedPrimaryBackgroundColor()
     backToHomeTopImageView.tintColor = UIColor.appInvertedPrimaryTextColor()
     indexIconImageView.tintColor = UIColor.appPrimaryTextColor()
@@ -493,8 +486,8 @@ class ContainerViewController: PROViewController {
 
   func animateGoingHome() {
     UIView.animateWithDuration(0.5, delay: 0, options: .BeginFromCurrentState, animations: { () -> Void in
-      self.backToHomeBottomCoverView.alpha = 0
-      self.backToHomeTopCoverView.alpha = 0
+      self.backToHomeBottomImageView.alpha = 1
+      self.backToHomeTopImageView.alpha = 1
     }) { (completed) -> Void in
       if self.isGoingHome {
         self.isGoingHome = false
@@ -586,8 +579,8 @@ class ContainerViewController: PROViewController {
       self.backToHomeTopViewTopConstraint.constant = -Global.BackToHomeThreshold
       self.indexIconContainerView.alpha = menuIconsAlpha
       self.mailIconContainerView.alpha = menuIconsAlpha
-      self.backToHomeBottomCoverView.alpha = 1
-      self.backToHomeTopCoverView.alpha = 1
+      self.backToHomeBottomImageView.alpha = 0
+      self.backToHomeTopImageView.alpha = 0
       self.view.layoutIfNeeded()
     }, completion: nil)
   }
