@@ -146,6 +146,8 @@ class HomeViewController: PROViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "contactStateChanged:", name: Global.ContactStateChanged, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "indexPanning:", name: Global.IndexPanningNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "indexStateChanged:", name: Global.IndexStateChanged, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "internetReachable:", name: Global.InternetReachableNotification, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "internetNotReachable:", name: Global.InternetNotReachableNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollChanged:", name: Global.ScrollChangedNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "scrollEnded:", name: Global.ScrollEndedNotification, object: nil)
   }
@@ -185,6 +187,16 @@ class HomeViewController: PROViewController {
       logoTapGesture.enabled = true
       addParallaxToViews()
     }
+  }
+
+  func internetReachable(notification: NSNotification) {
+    descriptionTapGesture.enabled = true
+    logoTapGesture.enabled = true
+  }
+
+  func internetNotReachable(notification: NSNotification) {
+    descriptionTapGesture.enabled = false
+    logoTapGesture.enabled = false
   }
 
   func scrollChanged(notification: NSNotification) {

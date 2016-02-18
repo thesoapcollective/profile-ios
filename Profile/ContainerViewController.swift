@@ -34,6 +34,9 @@ class ContainerViewController: PROViewController {
   @IBOutlet weak var mailIconContainerView: UIView!
   @IBOutlet weak var mailIconImageView: UIImageView!
   @IBOutlet weak var mailIconDottedBorderImageView: DottedBorderImageView!
+  @IBOutlet weak var noInternetContainerView: UIView!
+  @IBOutlet weak var noInternetDescriptionContainerView: ParallaxView!
+  @IBOutlet weak var noInternetDescriptionLabel: UILabel!
   @IBOutlet weak var scrollView: UIScrollView!
 
   @IBOutlet weak var backToHomeBottomViewBottomConstaint: NSLayoutConstraint!
@@ -46,6 +49,7 @@ class ContainerViewController: PROViewController {
   @IBOutlet weak var scrollViewLeadingConstraint: NSLayoutConstraint!
   @IBOutlet weak var scrollViewTrailingConstraint: NSLayoutConstraint!
 
+  let networkManager = NetworkReachabilityManager(host: Global.apiUrl)
   let SideMenuOffset: CGFloat = 10
 
   var currentDirection: UIPanGestureRecognizerDirection = .None
@@ -59,6 +63,7 @@ class ContainerViewController: PROViewController {
   var isDataReady = false
   var isGoingHome = false
   var shouldGoHome = false
+  var shouldCheckForInternet = false
 
   var panDx: CGFloat = 0
   var panDy: CGFloat = 0
@@ -71,6 +76,7 @@ class ContainerViewController: PROViewController {
   var continueArrowConstraints = [String: NSLayoutConstraint]()
 
   var loadingTimer: NSTimer?
+  var scrollViewPanGesture: UIPanGestureRecognizer!
   var scrollViewTapGesture: UITapGestureRecognizer!
 
   // ==================================================
@@ -89,9 +95,20 @@ class ContainerViewController: PROViewController {
     backToHomeBottomCoverView.layer.cornerRadius = backToHomeBottomCoverView.frame.width / 2
     backToHomeTopCoverView.layer.cornerRadius = backToHomeTopCoverView.frame.width / 2
 
+    noInternetDescriptionContainerView.layer.borderWidth = 1
+
     contactViewTrailingConstraint.constant = Global.isContactOpen ? 0 : -contactView.frame.width
     indexViewLeadingConstraint.constant = Global.isIndexOpen ? 0 : -indexView.frame.width
     loadingProgressWidthConstraint.constant = 0
+
+    networkManager?.listener = { [unowned self] status in
+      if status == .NotReachable {
+        self.showNotInternetView()
+      } else {
+        self.hideNoInternetView()
+      }
+    }
+    networkManager?.startListening()
   }
 
   override func viewDidAppear(animated: Bool) {
@@ -125,6 +142,9 @@ class ContainerViewController: PROViewController {
     loadingProgressView.backgroundColor = UIColor.appPrimaryTextColor()
     mailIconImageView.tintColor = UIColor.appPrimaryTextColor()
     mailIconDottedBorderImageView.dotColor = UIColor.appPrimaryTextColor()
+    noInternetContainerView.backgroundColor = UIColor.appPrimaryBackgroundColor()
+    noInternetDescriptionContainerView.layer.borderColor = UIColor.appPrimaryTextColor().colorWithAlphaComponent(0.75).CGColor
+    noInternetDescriptionLabel.textColor = UIColor.appPrimaryTextColor()
     view.backgroundColor = UIColor.appPrimaryBackgroundColor()
     for (_, continueArrowView) in continueArrowViews {
       continueArrowView.arrowHeadImageView.tintColor = UIColor.appPrimaryTextColor()
@@ -173,7 +193,7 @@ class ContainerViewController: PROViewController {
 
   func downloadData() {
     let env = NSProcessInfo.processInfo().environment
-    let baseUrl = env["API_BASE_URL"] != nil ? env["API_BASE_URL"]! : "https://soap-profile.herokuapp.com"
+    let baseUrl = env["API_BASE_URL"] != nil ? env["API_BASE_URL"]! : Global.apiUrl
     print("Using: \(baseUrl)")
 
     Alamofire.request(.GET, "\(baseUrl)/data.json").validate().responseJSON { [unowned self] response in
@@ -239,7 +259,9 @@ class ContainerViewController: PROViewController {
 
   func downloadDataError() {
     let alertViewController = UIAlertController(title: "Oops!", message: "Something went wrong downloading data. Want to try again?", preferredStyle: .Alert)
-    alertViewController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+    alertViewController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { [unowned self] (alertAction) -> Void in
+      self.shouldCheckForInternet = true
+    }))
     alertViewController.addAction(UIAlertAction(title: "Try Again", style: .Default, handler: { [unowned self] (alertAction) -> Void in
       self.downloadData()
       self.startLoadingAnimation()
@@ -511,6 +533,43 @@ class ContainerViewController: PROViewController {
     }
   }
 
+  func showNotInternetView() {
+    NSNotificationCenter.defaultCenter().postNotificationName(Global.CloseContactNotification, object: nil)
+    NSNotificationCenter.defaultCenter().postNotificationName(Global.CloseIndexNotification, object: nil)
+    NSNotificationCenter.defaultCenter().postNotificationName(Global.InternetNotReachableNotification, object: nil)
+
+    noInternetContainerView.hidden = false
+    if scrollViewPanGesture != nil {
+      scrollViewPanGesture.enabled = false
+    }
+
+    UIView.animateWithDuration(0.3, delay: 0, options: .BeginFromCurrentState, animations: { () -> Void in
+      self.noInternetContainerView.alpha = 1
+    }, completion: { (completed) -> Void in
+      self.noInternetDescriptionContainerView.addParallax(Global.ParallaxOffset1)
+    })
+  }
+
+  func hideNoInternetView() {
+    NSNotificationCenter.defaultCenter().postNotificationName(Global.InternetReachableNotification, object: nil)
+
+    if shouldCheckForInternet && !isDataReady {
+      shouldCheckForInternet = false
+      downloadData()
+      startLoadingAnimation()
+    }
+
+    UIView.animateWithDuration(0.3, delay: 0, options: .BeginFromCurrentState, animations: { () -> Void in
+      self.noInternetContainerView.alpha = 0
+    }, completion: { (completed) -> Void in
+      if self.scrollViewPanGesture != nil {
+        self.scrollViewPanGesture.enabled = true
+      }
+      self.noInternetDescriptionContainerView.removeParallax()
+      self.noInternetContainerView.hidden = true
+    })
+  }
+
   // ==================================================
   // CONTACT / INDEX
   // ==================================================
@@ -576,8 +635,8 @@ class ContainerViewController: PROViewController {
   // ==================================================
 
   func setupGestures() {
-    let panGesture = UIPanGestureRecognizer(target: self, action: "panned:")
-    view.addGestureRecognizer(panGesture)
+    scrollViewPanGesture = UIPanGestureRecognizer(target: self, action: "panned:")
+    view.addGestureRecognizer(scrollViewPanGesture)
 
     let contactTapGesture = UITapGestureRecognizer(target: self, action: "contactTapped:")
     mailIconContainerView.addGestureRecognizer(contactTapGesture)

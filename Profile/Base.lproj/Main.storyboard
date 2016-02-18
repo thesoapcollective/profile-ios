@@ -14,6 +14,7 @@
             <string>FuturaPT-Book</string>
             <string>FuturaPT-Book</string>
             <string>FuturaPT-Book</string>
+            <string>FuturaPT-Book</string>
         </mutableArray>
         <mutableArray key="FuturaPT-BookOblique.otf">
             <string>FuturaPT-BookObl</string>
@@ -180,6 +181,47 @@
                                     <constraint firstItem="ULL-Zl-Deh" firstAttribute="top" secondItem="Sd3-Rj-JoE" secondAttribute="top" id="uUj-Ta-Ral"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1LF-eu-OF1">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KN2-ti-JRO" customClass="ParallaxView" customModule="Profile" customModuleProvider="target">
+                                        <rect key="frame" x="120" y="256" width="360" height="68"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="avb-dJ-Vxb" userLabel="Description Padding View">
+                                                <rect key="frame" x="16" y="16" width="328" height="36"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile requires an internet connection. Please connect to wifi or your cellular network and reload the app." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zT0-K9-Aoc">
+                                                        <rect key="frame" x="0.0" y="0.0" width="328" height="36"/>
+                                                        <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="14"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="zT0-K9-Aoc" firstAttribute="leading" secondItem="avb-dJ-Vxb" secondAttribute="leading" id="I7b-RP-kbp"/>
+                                                    <constraint firstAttribute="trailing" secondItem="zT0-K9-Aoc" secondAttribute="trailing" id="ORK-gN-Yxg"/>
+                                                    <constraint firstItem="zT0-K9-Aoc" firstAttribute="top" secondItem="avb-dJ-Vxb" secondAttribute="top" id="Ybm-d9-VzJ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="zT0-K9-Aoc" secondAttribute="bottom" id="o7x-c1-dct"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="avb-dJ-Vxb" firstAttribute="leading" secondItem="KN2-ti-JRO" secondAttribute="leading" constant="16" id="7Ou-KI-Rme"/>
+                                            <constraint firstAttribute="trailing" secondItem="avb-dJ-Vxb" secondAttribute="trailing" constant="16" id="KOw-Be-ewt"/>
+                                            <constraint firstItem="avb-dJ-Vxb" firstAttribute="top" secondItem="KN2-ti-JRO" secondAttribute="top" constant="16" id="do9-tB-aaI"/>
+                                            <constraint firstAttribute="bottom" secondItem="avb-dJ-Vxb" secondAttribute="bottom" constant="16" id="hMR-2G-NrY"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="KN2-ti-JRO" firstAttribute="width" secondItem="1LF-eu-OF1" secondAttribute="width" multiplier="0.6" id="FYG-va-Zk3">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-150"/>
+                                    </constraint>
+                                    <constraint firstItem="KN2-ti-JRO" firstAttribute="centerY" secondItem="1LF-eu-OF1" secondAttribute="centerY" id="nRj-7G-wlD"/>
+                                    <constraint firstItem="KN2-ti-JRO" firstAttribute="centerX" secondItem="1LF-eu-OF1" secondAttribute="centerX" id="oQd-Gk-knR"/>
+                                </constraints>
+                            </view>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vOJ-lL-zqu">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
@@ -210,11 +252,13 @@
                             <constraint firstAttribute="trailing" secondItem="lYe-vb-7tD" secondAttribute="trailing" constant="-10" id="0Zb-HD-ZU8"/>
                             <constraint firstItem="kdA-sB-O3b" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-10" id="2O0-W2-QGJ"/>
                             <constraint firstAttribute="trailing" secondItem="fHM-ZB-i5b" secondAttribute="trailing" id="2s7-Qu-enQ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1LF-eu-OF1" secondAttribute="bottom" id="6gK-QP-hTz"/>
                             <constraint firstItem="a7z-s1-1ab" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="9gA-iP-HJy"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="vOJ-lL-zqu" secondAttribute="bottom" id="AZD-xG-8f6"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kdA-sB-O3b" secondAttribute="bottom" id="Esk-Pp-DHF"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Nkz-v4-tph" secondAttribute="bottom" id="EtG-5l-e51"/>
                             <constraint firstAttribute="trailing" secondItem="Nkz-v4-tph" secondAttribute="trailing" id="KJy-s6-zED"/>
+                            <constraint firstItem="1LF-eu-OF1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="SLD-n0-hXq"/>
                             <constraint firstAttribute="trailing" secondItem="NA5-6u-7jx" secondAttribute="trailing" id="Stg-bb-kzC"/>
                             <constraint firstItem="lCc-hZ-xXw" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="12" id="WcC-UF-AMD"/>
                             <constraint firstAttribute="bottom" secondItem="fHM-ZB-i5b" secondAttribute="bottom" constant="-54" id="XjO-8V-yaX"/>
@@ -230,6 +274,8 @@
                             <constraint firstItem="NA5-6u-7jx" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="-54" id="mFB-2Q-ca0"/>
                             <constraint firstAttribute="trailing" secondItem="vOJ-lL-zqu" secondAttribute="trailing" id="ob3-IH-4RM"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lYe-vb-7tD" secondAttribute="bottom" id="unX-SU-G6I"/>
+                            <constraint firstItem="1LF-eu-OF1" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="vOD-zZ-geV"/>
+                            <constraint firstAttribute="trailing" secondItem="1LF-eu-OF1" secondAttribute="trailing" id="wd9-hV-sSn"/>
                             <constraint firstItem="lYe-vb-7tD" firstAttribute="leading" secondItem="Sd3-Rj-JoE" secondAttribute="trailing" id="xpX-DN-qkz"/>
                         </constraints>
                     </view>
@@ -259,6 +305,9 @@
                         <outlet property="mailIconContainerView" destination="Sd3-Rj-JoE" id="fkc-pF-Nwt"/>
                         <outlet property="mailIconDottedBorderImageView" destination="QPP-zx-mNr" id="Fw9-AF-Qd2"/>
                         <outlet property="mailIconImageView" destination="ULL-Zl-Deh" id="P4V-je-sf9"/>
+                        <outlet property="noInternetContainerView" destination="1LF-eu-OF1" id="NRG-eu-ue1"/>
+                        <outlet property="noInternetDescriptionContainerView" destination="KN2-ti-JRO" id="SeH-ej-rnJ"/>
+                        <outlet property="noInternetDescriptionLabel" destination="zT0-K9-Aoc" id="UPD-Bw-MKY"/>
                         <outlet property="scrollView" destination="Nkz-v4-tph" id="hWH-Cb-Hvn"/>
                         <outlet property="scrollViewLeadingConstraint" destination="beS-cu-DEE" id="Hl9-Na-98C"/>
                         <outlet property="scrollViewTrailingConstraint" destination="KJy-s6-zED" id="Vx5-Ge-CGE"/>
@@ -326,13 +375,13 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1l-ln-reQ" customClass="ParallaxView" customModule="Profile" customModuleProvider="target">
-                                <rect key="frame" x="120" y="230" width="361" height="140"/>
+                                <rect key="frame" x="120" y="230" width="360" height="140"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i5M-N7-gpf" userLabel="Description Padding View">
-                                        <rect key="frame" x="16" y="16" width="329" height="108"/>
+                                        <rect key="frame" x="16" y="16" width="328" height="108"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="221-Rw-ftk">
-                                                <rect key="frame" x="0.0" y="0.0" width="329" height="108"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="328" height="108"/>
                                                 <string key="text">Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</string>
                                                 <fontDescription key="fontDescription" name="FuturaPT-Book" family="Futura PT" pointSize="14"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -372,7 +421,9 @@
                             <constraint firstItem="6Tk-FA-ad5" firstAttribute="height" secondItem="gFa-hb-b4T" secondAttribute="height" multiplier="173/667" id="iAe-vW-Wod"/>
                             <constraint firstItem="Cdk-tx-w7e" firstAttribute="top" secondItem="8Fl-WL-qpH" secondAttribute="bottom" id="jFT-31-0oL"/>
                             <constraint firstItem="Y5r-de-PYV" firstAttribute="centerX" secondItem="gFa-hb-b4T" secondAttribute="centerX" id="mzl-CI-VrO"/>
-                            <constraint firstItem="c1l-ln-reQ" firstAttribute="width" secondItem="gFa-hb-b4T" secondAttribute="width" multiplier="0.6" constant="1" id="s8B-lG-HPf"/>
+                            <constraint firstItem="c1l-ln-reQ" firstAttribute="width" secondItem="gFa-hb-b4T" secondAttribute="width" multiplier="0.6" id="s8B-lG-HPf">
+                                <variation key="heightClass=regular-widthClass=regular" constant="-150"/>
+                            </constraint>
                             <constraint firstItem="6Tk-FA-ad5" firstAttribute="top" secondItem="DoL-OU-1td" secondAttribute="bottom" id="u62-PN-z90"/>
                         </constraints>
                     </view>

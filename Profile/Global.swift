@@ -25,6 +25,8 @@ struct Global {
   static let DataLoaded = "DataLoaded"
   static let IndexPanningNotification = "IndexPanningNotification"
   static let IndexStateChanged = "IndexStateChanged"
+  static let InternetNotReachableNotification = "InternetNotReachableNotification"
+  static let InternetReachableNotification = "InternetNotReachableNotification"
   static let OpenContactNotification = "OpenContactNotification"
   static let OpenIndexNotification = "OpenIndexNotification"
   static let ProfileModeChangedNotification = "ProfileModeChangedNotification"
@@ -40,6 +42,8 @@ struct Global {
 
   static let SwipeThreshold: CGFloat = 30
   static let BackToHomeThreshold: CGFloat = 54
+
+  static let apiUrl = "https://soap-profile.herokuapp.com"
 
   static var defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
   static var isAppBooted = false
